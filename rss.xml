@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Fan's life]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://onlyzf.com/</link><generator>RSS for Node</generator><lastBuildDate>Sat, 13 Jul 2019 10:28:18 GMT</lastBuildDate><item><title><![CDATA[《SRE Google运维解密》]]></title><description><![CDATA[SRE 方法论 确保长期关注研发工作 Google 将 SRE 团队的运维工作限制在 50%以内。 SRE 处理运维工作的一项准则是：在每 8-12 小时的 on-call…]]></description><link>https://onlyzf.com//2019/sre/</link><guid isPermaLink="false">https://onlyzf.com//2019/sre/</guid><pubDate>Sat, 13 Jul 2019 08:53:00 GMT</pubDate><content:encoded>&lt;h2&gt;SRE 方法论&lt;/h2&gt;
+&lt;h3&gt;确保长期关注研发工作&lt;/h3&gt;
+&lt;p&gt;Google 将 SRE 团队的运维工作限制在 50%以内。&lt;/p&gt;
+&lt;p&gt;SRE 处理运维工作的一项准则是：在每 8-12 小时的 on-call 轮值期间最多只处理两个紧急事件。&lt;/p&gt;
+&lt;p&gt;所有的产品事故都应该有对应的事后总结，无论有没有触发报警。事后总结应该包括以下内容：事故发生、发现、解决的全过程，事故的根本原因，预防或者优化的解决方案。事后总结的目标是尽早发现和堵住漏洞，而不是通过流程去绕过和掩盖它们。&lt;/p&gt;
+&lt;h3&gt;在保障服务 SLO 的前提下最大化迭代速度&lt;/h3&gt;
+&lt;p&gt;正确的可靠性目标，必须考虑以下几个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于用户的使用习惯，服务器可靠性要达到什么程度用户才会满意？&lt;/li&gt;
+&lt;li&gt;如果这项服务的可靠性程度不够，用户是否有其他的替代选择？&lt;/li&gt;
+&lt;li&gt;服务的可靠程度是否会影响用户对这项服务的使用模式？&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>
