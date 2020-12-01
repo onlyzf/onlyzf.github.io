@@ -1,0 +1,1291 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Fan's life]]></title><description><![CDATA[衰退程序员的人生]]></description><link>https://onlyzf.com</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 01 Dec 2020 04:39:41 GMT</lastBuildDate><item><title><![CDATA[Structure of the Python Repository]]></title><description><![CDATA[Sample Repository The Actual Module Location ./sample/ or ./sample.py Your module package is the core focus of the repository. It should not…]]></description><link>https://onlyzf.com/snippets/py_struct/</link><guid isPermaLink="false">https://onlyzf.com/snippets/py_struct/</guid><pubDate>Thu, 05 Nov 2020 06:30:59 GMT</pubDate><content:encoded>&lt;h2&gt;Sample Repository&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;README.rst
+LICENSE
+setup.py
+requirements.txt
+sample/__init__.py
+sample/core.py
+sample/helpers.py
+docs/conf.py
+docs/index.rst
+tests/test_basic.py
+tests/test_advanced.py&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;The Actual Module&lt;/h2&gt;
+&lt;h3&gt;Location ./sample/ or ./sample.py&lt;/h3&gt;
+&lt;p&gt;Your module package is the core focus of the repository. It should not be tucked away:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;./sample/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If your module consists of only a single file, you can place it directly in the root of your repository:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;./sample.py&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Your library does not belong in an ambiguous src or python subdirectory.&lt;/p&gt;
+&lt;h2&gt;Test Suite&lt;/h2&gt;
+&lt;h3&gt;Location ./test_sample.py or ./tests&lt;/h3&gt;
+&lt;p&gt;Starting out, a small test suite will often exist in a single file:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;./test_sample.py&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once a test suite grows, you can move your tests to a directory, like so:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;tests/test_basic.py
+tests/test_advanced.py&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Obviously, these test modules must import your packaged module to test it. You can do this a few ways:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Expect the package to be installed in site-packages.&lt;/li&gt;
+&lt;li&gt;Use a simple (but explicit) path modification to resolve the package properly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I highly recommend the latter. Requiring a developer to run setup.py develop to test an actively changing codebase also requires them to have an isolated environment setup for each instance of the codebase.&lt;/p&gt;
+&lt;p&gt;To give the individual tests import context, create a tests/context.py file:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;py&quot;&gt;&lt;pre class=&quot;language-py&quot;&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; os
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; sys
+sys&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;path&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;insert&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; os&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;path&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;abspath&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;os&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;path&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;join&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;os&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;path&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;dirname&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;..&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; sample&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, within the individual test modules, import the module like so:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;py&quot;&gt;&lt;pre class=&quot;language-py&quot;&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;context &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; sample&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will always work as expected, regardless of installation method.&lt;/p&gt;
+&lt;p&gt;Some people will assert that you should distribute your tests within your module itself – I disagree. It often increases complexity for your users; many test suites often require additional dependencies and runtime contexts.&lt;/p&gt;
+&lt;h2&gt;setup.py example&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# Download the setup.py file:&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;#  download with wget&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;wget&lt;/span&gt; https://raw.githubusercontent.com/navdeep-G/setup.py/master/setup.py -O setup.py
+
+&lt;span class=&quot;token comment&quot;&gt;#  download with curl&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;curl&lt;/span&gt; -O https://raw.githubusercontent.com/navdeep-G/setup.py/master/setup.py&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[企业发展战略思考]]></title><description><![CDATA[…]]></description><link>https://onlyzf.com/2019/strategy/strategy/</link><guid isPermaLink="false">https://onlyzf.com/2019/strategy/strategy/</guid><pubDate>Wed, 01 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;“不要用战术上的勤奋掩盖战略上的懒惰” ——雷军&lt;/p&gt;
+&lt;p&gt;“多数人为了逃避真正的思考，愿意做任何事” ——王兴&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;天下大势&lt;/h2&gt;
+&lt;p&gt;各个国际国内形势可以说对移动游戏颇为不利。&lt;/p&gt;
+&lt;h3&gt;中美&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“话说天下大势，分久必合，合久必分。周末七国分争，并入于秦。及秦灭之后，楚、汉分争，又并入于汉。汉朝自高祖斩白蛇而起义，一统天下，后来光武中兴，传至献帝，遂分为三国。” ——罗贯中 《三国演义》&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;中美之间很可能进入了长期的经济科技对抗阶段，很难再回到以前的互助合作局面。&lt;/p&gt;
+&lt;p&gt;任何行业都可能受到中美关系的影响，尤其是对美国市场依赖较严重的行业，比如：海外游戏市场。&lt;/p&gt;
+&lt;h3&gt;中国移动游戏出海&lt;/h3&gt;
+&lt;p&gt;出海企业越来越多，国内重量级玩家悉数进入这个相对国内而言的增量市场。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/14a5e383e9fb50b1ec43b6ecbec971fe/74dae/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 59.49367088607595%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAACeElEQVQoz22T2U8aURSH+TebPrSxNX3TNk3jEpvWNq0xfehD+0Bam9YuLhGNUNywkoJWrIqyOAiCwyAgMhgW2QQGvg4oCrF3cnIm557z3Xvu/V0NLaNWqzV8uVwmncmQSCTYC0X5K4axS1EicRlZljk5OWnktNY0h6YV1pyse6Vabfzb5DxfPVGmpBTpshqrKpQVpS33BrAdpha15Gwnc4yH0syGs8SLylW8Ws//D1RzA1ZPVr/loxgDnjSDu4e8dscYW/fy3h5EKxwTKhQuoY0iak2oaprmQk1YJithtg8wuGGgcytF18oB3SsCT0w+OpYO6LSKODaeUT3+frGJtg5rzTO82OF5JYZ1v49v+vuMLGh5ZbTRb9zhwW6ajukgXb8lDOIi8bWHrM895lScbmu57jRSwoT76HMjYPZ9YHy9n3lrH0ubj9GLFrQmOzpXiInDEpMuL2HHU1x/egms94H7NuQdVMtnnEk/VGIZjSOoxezqJVfys+LuZss5xNZqL9a9d4ihWcyLS8zZPUzui/hDW8Q9U3hsLyjs3sMy1U0u8BaKAcKb6gK1AppI0oIo/+QgOoHReocN/3MCsU94fEYCQR2O0BqTuxLLXoGsc4SkX8+he4ai5xFfxt4g7AxDwU4htqACS9c6tIeG0Dl70AsvMQdnMNgMuDw6Aidz/HIacNpGCVqG8blG8W5+JCP0oAi38K7eRUlZr1SiqVQqFIs5xKiV/bCJoGxBkEV8ySMKeZHT9CFyKojk30bybRBV54TjY5LxHfVS5slH56AUvtZhKpUiEomQkNPkzkoNU0oVqnWrXmq3/TFcy6WhWbXjc4Vs9oyCqs9/1ZdieV5rQtAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2019年中国移动游戏出海研运市场企业图谱&quot;
+        title=&quot;2019年中国移动游戏出海研运市场企业图谱&quot;
+        src=&quot;/static/14a5e383e9fb50b1ec43b6ecbec971fe/f058b/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png&quot;
+        srcset=&quot;/static/14a5e383e9fb50b1ec43b6ecbec971fe/c26ae/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png 158w,
+/static/14a5e383e9fb50b1ec43b6ecbec971fe/6bdcf/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png 315w,
+/static/14a5e383e9fb50b1ec43b6ecbec971fe/f058b/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png 630w,
+/static/14a5e383e9fb50b1ec43b6ecbec971fe/40601/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png 945w,
+/static/14a5e383e9fb50b1ec43b6ecbec971fe/78612/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png 1260w,
+/static/14a5e383e9fb50b1ec43b6ecbec971fe/74dae/2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E7%A0%94%E8%BF%90%E5%B8%82%E5%9C%BA%E4%BC%81%E4%B8%9A%E5%9B%BE%E8%B0%B1.png 2494w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;中国移动游戏出海市场规模虽然还有两位数增长，但是增长率已经在缓慢下降了。&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/25cdbcdc7073129ecb5b5d798a127342/ea964/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 93.0379746835443%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAADyUlEQVQ4y21US2/jVBjN/4AFArFAggVILGAPGnZIaFYIxB6WLBEjxI630KCRkJhFpxLiUSH1oem0GZUOLa36SlKapJ4kdpzYTvx2HL9j5/Ddm4Z2UC0d38/3+3x87nevT2k6nYJd9XodR0dHkLpd7O/v4+DwEFtbW9jc3MTCvXtYXV3F2toalpdXsLGxgZWVFZTLZSwtLWFxcRGDwYDzlOaEiqJAkiSYuo52u42OKOJcEFBvNLCzs4tKtYqTkwrhBNVajT83Gk3+4b29PXjeaEbIbnPSMIowsGxMJhMEngcUOaKxjzxNKC6QxRGvy6IQ00nGkYYBn/MdG2EYzhRyPrqFkwJCmEOJMlScCGqYounFHArFNTeGSrkzN4LoJ2gR6m6IXpCg4QWYkgCu8KpKdk0oHBdARAgvwOJxzsYpH2fzJILe85Mc8jBAluVPLnmmlsu9AK7EU+C/XMHHMakKvRxh0sdx9xa8qHMd4SUxx//U53kBx4qQUVslaxnNwQKM8QF+PnkKQ3/neoWXKtleFPRcII5TeE6IJA3wj3Ibpl/Fcf8TPDi/AXN8hKXaS9D9vfmmTJ9QwcgKajDT5zguoqCg4gPstj6GGwlYPnsVjeEPONW+xsPHNznh79UXZoRXWJAmEyRxjizNYBoO7RpQU79Ac/gjFG8dv1WfhxVUsN58C4Jxl+fKwjtEeHhJyJSlSUZnbwp7JEMzGxjHCnY6H1GTW/iz9S622x9gMHqEP05fhh1Ucb/xBgT9p+sJWY90swt/FKKp30b58duwwxp+rTwHbbSFv8UPsUvQRttE+AoR1kjhDSK8i1P1SzwUbl708MUZYV6keCC8iYb+HeqD76k/r/Fl/VJ5hhNut98jvA/VK9NHnqXcMVbOXqc23EFF+ZyTG+N92uWnaZf/YoT0V8hfQbbWobrbqPW/hR/3cCB9Cic4hzBcgEBHww6aOJQ+gx/JqPa+odpH6Fr3cabegReKvN4L27MeWoZP/2HCl23oHhLqqT7wkKYTynl07sbw/QADzcGYjzYdIR+25cE2fZ7TFAsRcZTYaZnkKZerDptotzrkOiJEqYNuV4IsS+Q8bR4bho7hcEimkEJOCtR1G2JLgGGaBJ0EpCgxh2BFtqtD1RQikNHrydzO+v0+z3XJI9mzpml8ZHOyqkFWVFJpwbZtOq8OXNdFaTQacR/s95kfdrkXMrRaLXQ6HYjki3OwOQZWL9NHRMpbRMjADNb3fZTiOKalGDBNgyswST4riMgbkyThYEuZxwxZliEIAgzJjBkRU8zeZQr/BbDMaDPvjrRCAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;中国移动游戏出海市场规模&quot;
+        title=&quot;中国移动游戏出海市场规模&quot;
+        src=&quot;/static/25cdbcdc7073129ecb5b5d798a127342/f058b/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+        srcset=&quot;/static/25cdbcdc7073129ecb5b5d798a127342/c26ae/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 158w,
+/static/25cdbcdc7073129ecb5b5d798a127342/6bdcf/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 315w,
+/static/25cdbcdc7073129ecb5b5d798a127342/f058b/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 630w,
+/static/25cdbcdc7073129ecb5b5d798a127342/40601/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 945w,
+/static/25cdbcdc7073129ecb5b5d798a127342/78612/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1260w,
+/static/25cdbcdc7073129ecb5b5d798a127342/ea964/%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%87%BA%E6%B5%B7%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1312w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;全球移动游戏用户规模更是趋近饱和&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/361534eda5134b32015ace07e83b528a/4c4e7/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49.36708860759494%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYnAAAWJQEEmoX7AAACGElEQVQoz22SO29TQRCF/YtoaKAAREdJgURBAwUgqOgRFBRI8A+QoEII0URRSCIgJAQSEgRRIBATJbHjxPa1c/f6vn3fj4+xg7GEstLsmZ3ZPXt2dirIKMuSEQZRRCZouZ6YS1cZdHVFU9NodbpDG8TSoiBIkiGGcfTvfGXklEcOvX6ImxV0/RAnydD7EVacCob0whgjjFBBiJ2kQ3TTHDs8jrAshoRpmcutJZnEM7llhDljK/7GBpjKlOaMCUfP/X9kaUw5eE5kUhQJlv+bINZQ7jcOnS8Y3ldq+ivM/jprB/fJinB4bqgwTm16XlVq0qWqPcWJdliq3eTQW+HDzhUa5gRL9etsaI9Za97l894ttvQnzG1fZN+cZPLnSZLMHhN23AXebF0QXGRi4wRtZ47p6hma9gzz25eoGy9Zrt8Qwkestx6w2rjDrnrOx9pV2TPLTPU8Se6OCY8IztJxFnm9eRrNmZdN52haM7wXFTXjBZ/q1/jRfigK77HSuM22/oyFncscWFNMbZ4Shc6YMIgP2VfviFKDPX1WUNFQb6UEHQ7UAm64T6u3jOH+Qre/o5mrWP1dyS1KrsluZ5pc6jxolUqeZ/IBBZmsY2mPLIYoDrBsA6WbGMrF7DkEXoJ0Cqaf4dohaXL8Z1Ycx6HdbtPWWiilYxgKZehi3eH6yFf4vke/7+MJep6LL34qnTAQFMeh5H2CIOAPC/PirIq0YvMAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;全球移动游戏用户规模&quot;
+        title=&quot;全球移动游戏用户规模&quot;
+        src=&quot;/static/361534eda5134b32015ace07e83b528a/f058b/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png&quot;
+        srcset=&quot;/static/361534eda5134b32015ace07e83b528a/c26ae/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png 158w,
+/static/361534eda5134b32015ace07e83b528a/6bdcf/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png 315w,
+/static/361534eda5134b32015ace07e83b528a/f058b/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png 630w,
+/static/361534eda5134b32015ace07e83b528a/40601/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png 945w,
+/static/361534eda5134b32015ace07e83b528a/78612/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png 1260w,
+/static/361534eda5134b32015ace07e83b528a/4c4e7/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E7%94%A8%E6%88%B7%E8%A7%84%E6%A8%A1.png 2623w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;全球移动游戏市场规模增长率也在快速下降，很快就只有个位数增长&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5a75468cd292368650906ae070e3939e/5df5d/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 97.46835443037975%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAADlElEQVQ4y41US28bVRT272GBVETFAvHYI2ADUkEqYouEgD0StHRRJB7lsUOIJYvS0qSN1cZp00SiEcVp6/ihjD2243hm7HneedszmRl/nHsTOwkFiSt9Oufee853v3NfJVCbzWYCvA2HQ9RqNXS7XdR2dlCtVrGxuYn7GxtYKZextnYXd1ZXcW99HZVKRfSvXb8O3TBEfumfhL7nwbVMxGFA1oBr23AMHbZpwBqPYIw0AVsfwyYSXVVg6Toi30NRFCcIDx2Ekyn23BB6NEXbcsGSDD0WwCbbZyFUP4IeJxh4EQyyXcdHSMk9iyFJ00PCOSlvGWF0ANgHMwxTwM1m2E9msKivpjMYZE0aUynGOigopiDiFB0nxWR6cKxwYYX/b8DCL1Jiy3JMwxihHSMKXCijLXjB+Ok95LY42oJjmsP5nOQXOVVg7EE3Neh+FdX9z+BN27jZeh6aXzld8mzOQC3PC2SkIklSeGyKCZWl6DV4vo3W+Ac83P8E++wWbtTPwI4eY6l+Foq7itJJdWIPs0yclk9lGKQiiGw01Z/BIhmb3fNo6T+irn2Fu+23BEG59SoR1rDcOAuVEx4dLqEQcJgNZtNJ+g9wXz4HNmlgqXGG1CxjQz6P+uhrNEdXaO4dIryDleZLTxPmeQ7mBHSXgLbxC7aVT8XqN+rPiXJWmi9jyMqk8D00Rt8KrHfO/Tchb4+Uz9G3r4rgivQ6VG8Nt5ovUvATYYds5Yjwm/9HWJHewGPlC0jGTyJYO0F4rPB9IrtCJX9HJb8rCMutV+AQ4c3GC0RYOU34RL2E5vh7rEqvUfBt/L7zLKxoW5zkgC3hXudt7GiXCV9iTXpTqF4S2/II12rPYOiWT5Q8vAjZ/BUDZ5n8CzCDKh70P4Qbd7DV/4gOaQs19TI9sau0Nb9RNZdgBA+xtfcxvImMP3ofUM5fxxfbsQL6GCKEQQzL9BHTW7bMAGmawdA9BPSGTcOFQ2/XMl2MRwwuI9/w4XkBxpojchcKi3wGO96GYv2JwUCh70sm24eqqmi3d6HRD6PzH8axSUEOKc4gjU0M+jLdV5MWsuj+5igFQQDGGOI4hkkTBn1JHNw3RaCzGJ+PWZZFqlxSdJjrui5c6kdRhJKmaej1euC21WoJtNtt7O7uotPpQJIkyLIsLB+bzw0GA1KsL8DzBSFXaNMnysFV8NW5qjAMhWqOyWRyyk+SBDyPE80V81w+/zeoG142l3PKiwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;全球移动游戏市场规模&quot;
+        title=&quot;全球移动游戏市场规模&quot;
+        src=&quot;/static/5a75468cd292368650906ae070e3939e/f058b/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+        srcset=&quot;/static/5a75468cd292368650906ae070e3939e/c26ae/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 158w,
+/static/5a75468cd292368650906ae070e3939e/6bdcf/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 315w,
+/static/5a75468cd292368650906ae070e3939e/f058b/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 630w,
+/static/5a75468cd292368650906ae070e3939e/40601/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 945w,
+/static/5a75468cd292368650906ae070e3939e/78612/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1260w,
+/static/5a75468cd292368650906ae070e3939e/5df5d/%E5%85%A8%E7%90%83%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1572w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;综合以上各个数据不难看出，全球移动游戏市场即将进入增量博弈时代，天花板即将到来，大家都是在竞争对手嘴里抢食吃。叠加马太效应，可以预见几年之后全球移动游戏的企业数量会剧减，大部分收入由少数几家头部企业瓜分，中小企业只能分点儿汤苟延残喘（此场景中国移动游戏市场已经出现了）。&lt;/p&gt;
+&lt;p&gt;和趋势抗衡势不可为，唯有遵循规律，成为头部企业中的一员。&lt;/p&gt;
+&lt;h3&gt;中国国内市场&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;中国游戏市场规模已超过美国成为全球第一，同时移动终端占比也是全球第一，因此任何移动游戏想要成功都不能忽略中国市场。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/94770a0dd27fd97d0ac88b901d9f5f87/5d6a0/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 97.46835443037975%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWKQHl52v8AAADFklEQVQ4y52UTU8TQRjH+wk0IRxMJIJvR7+B3k00HNCDAaMHjd/Bl4uJ6Ek9e9UmtCRNCFaxFoqUA+GtgEJpt4VA6Xa7fe/udrfb7fbvPFO6gGCCbvJk/jPPM795ZmfmcbVaLdCXkUREIksIz4YRDocRDH7H+Pg4Jicn4fP5HB0IBDAxMYFQKAS/3w+v1wtZljmDWK4OUK9ZUJUG6vUGNE2DqqpQFIVbpVLhY9Vqlfd1XYdhGDyGxizLOgCSsFsW0oV5bElB6GYB//N1EuPARlNBMN4P72ovJGWmHQBa1eaBp7EjGRJwMn4HoytXkVVmuVOpGDCNVmd9p+1M/tt3CDjAgJchq3OoN6qIpjzYK4Q5xLZtNJvWkUz+1Me2TEBv5CIKWgSZ6jRGIucwJQxwoKbqkCSZQe0TIAdG3ROAy5CqYa6nhUEOWE2/4X6xMuX8X5Y313WjgVJRgWlaf8+QgJ5IH0LCPR70I3Ef7sVuJPNu3i/kFGiKyXVU+oCv67chyO7TA2e3njBfH3aKY6hbRcxvv8Da3nu2RRtLqWdwL3VhVXz9L8DHGFnuQarkR1mPMl8P/Bs32DwVK+lX8CxfwK/M26PAqfhddspX9oGzTF/CdGLQydAT6WXAL6joAnxr1xDYvAWrWWsDme8Y8NvmTZZ6N/LaIj/lT4tdCMb6edB0YggfF85ipzTGMtxk2Z7H5/XrsGyNbfk5851hBzd8CGhpWE69xEzyIcq1OArqGtMP2OrD7A628FN8x6HZ6hwUYxfh5CMs7D5l82pI5Nzs0IawlR9tA53ioFnIpIvOtUrt5thrqTuFI53KOw+mXNShVs39a9PkPqvRnujqPJmmbcGo684T0vUaNEOGnBMhiiKERBxZOcurjcxaim9fcpvFas7zdJmmyUtTrVZDuVzmRiWJxhS1BDGzh2w2y2teJpNBLpfjMeSnstaJLZVKvKS5aGB7exuCIGBjYwOxWIxbNBpFPBZHIpHgmvzUJpNJFItFvgDBqSWjhKguukiQg0ySJEfT1joFtdOSUTz1KZYyp6xJk4+KyG/f7GBmSSHo7AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2018年全球重点国家地区游戏市场规模.png&quot;
+        title=&quot;2018年全球重点国家地区游戏市场规模.png&quot;
+        src=&quot;/static/94770a0dd27fd97d0ac88b901d9f5f87/f058b/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+        srcset=&quot;/static/94770a0dd27fd97d0ac88b901d9f5f87/c26ae/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 158w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/6bdcf/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 315w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/f058b/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 630w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/40601/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 945w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/78612/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1260w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/5d6a0/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1580w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;中国移动游戏在各个终端中也是占比最高的，相反美国、欧洲的移动游戏占比反而不高，更有增量的空间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/2a88d98bd9381ac944c3c786d299b942/9f9a4/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 97.46835443037975%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAAETklEQVQ4y02Ua4hUZRjHl6BvfRKK+hAVElpB5VZYtmqghVEoGQlZFIWBaB8i6WsYRIVpUSGCma2Vedm19ZJbjeZldWfJVXd2rjv3nRnncnbnfj1nzjnz6zlnXN0DL8+88/zf3/P8z3l4e5CnVquTy1VIpwsEpkIEA37CPi/hgI+JiQkCHjexKT9Bvw+vx0M6HrP37kmXaANE/V4ickZVVXroQKac5afgXvaH9lLTFBxlWOVV+WS6bdXjy7TBco/GYN6gKfr1AY1X/RppSZ+rdFgpuW1xnVqjeRNYDLHjch+fXXiaRsPDviz0/FtkxUQds9Nhg69Bz9kSXydVyrrJov/KPDRWZqphcFTRWHCpyCueOpU5YLYU4cdrb7J7fAONpp+DM7Dgcpl1noYNfDcgwgsVvrthAeGxqwYPjxuEpN2B2Q53j5ms9XMbmBHgTudqPh9ZTr3h47AAHxir8IZ0pgtwa6jFvc4qe9I6db3B6jEHK0aHmW7W+EeJ0Xv+AFvdZ8RyowucKYc55FrBz1eXoqte+nNw58Uia9w1u8MPgk3uulTm+7SI9RT9V9dwYHwVpWYcX+4kX51fyKHJt6WZKj0dE/KVEMO+Zfzhfgo0D/sFeMdIixfdOsITy3WxXGRXSsTmDQbdzzPgWkJdjeJVzvLN2Msc9m2TDisC7HSBp7zLODb5JKoWZTTnZNOFjeya/AI6BhunTAGq7EjJJzdTDHmkuGgbWgxXbphPzz3KAdcm6bB2u8PT/pUcdz8jomk8uVP84Oxj0LNFLOt8GzjGaxe3cyJ1RYCzHPcsFeAT1FSZx8Ip+scX4gi9IxNyCxjmTHAdf/lfEmACn3KSnZcXMeB9XyybOIIfs8e5GFe6H92o4phay9+BNVTVOIniCY5cv5+LkY3zgZbl525WTZAoDDEw8aCI3rKBY/GPOHjtPqaUfbQFeFIsD7l7qbZiJIunxdlSRmObxXKlCyxUw2K5TxK91KXDVGmYP30v4Ix/KMA211PbpWAfkfzvtE0Bep8V4BIpHhftaQZdj3Ap9p7McK07NrmCn6HJXo5eX0yxFiGUO8xvV+7BEXgdTdMYCW/mlysL8NzYTaNVYHDicY5cWySNBAkrA/wq2jOB9VSr5e5XVrU609lRYukRtHaDWjNHKHWWTN6FrusoJbkYkg7K9RTttkpCccoaFW1dtMotbbvdtoAd+wJoNUwq5RbWXm+bZOXmaTUNO6eqBulUHkO3tzQtbUXDNDuYIink67S1bs4GWi+++xjkZmPE49NylVlD17HHplTPkcmkUWYUW9WW/+P5IvFohFQqJWAdQ5blpsd6R5lMRu7DHNFolEQiaYvmr3gsbsdkMkksFmN2dlbclMnn8xQKBTvOrR7L99zBSCQiwGk7WvBwOCzdxm/9tqIFnJmZIZvNoiiKDbcaqlQqXcuGYdjdWcn5IquQaZpY+flxblkAC2SdsaJ1rlQq8T/CPyACXG0dvAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2018年全球重点国家地区游戏市场规模按终端划分&quot;
+        title=&quot;2018年全球重点国家地区游戏市场规模按终端划分&quot;
+        src=&quot;/static/2a88d98bd9381ac944c3c786d299b942/f058b/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png&quot;
+        srcset=&quot;/static/2a88d98bd9381ac944c3c786d299b942/c26ae/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png 158w,
+/static/2a88d98bd9381ac944c3c786d299b942/6bdcf/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png 315w,
+/static/2a88d98bd9381ac944c3c786d299b942/f058b/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png 630w,
+/static/2a88d98bd9381ac944c3c786d299b942/40601/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png 945w,
+/static/2a88d98bd9381ac944c3c786d299b942/78612/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png 1260w,
+/static/2a88d98bd9381ac944c3c786d299b942/9f9a4/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1%E6%8C%89%E7%BB%88%E7%AB%AF%E5%88%92%E5%88%86.png 1560w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;互联网娱乐进入规范发展轨道，短视频用户使用率近八成，网络游戏用户规模最低，用户娱乐时间进一步被抢占：截至 2018 年 12 月，网络视频、网络音乐和网络游戏的用户规模分别为 6.12 亿、5.76 亿和 4.84 亿，使用率分别为 73.9%、69.5%和 58.4%。短视频用户规模达 6.48 亿，用户使用率为 78.2%。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;综上，国内移动游戏市场不但被大厂主导，也在被其他互联网娱乐挤占。形势非常严峻。&lt;/p&gt;
+&lt;h2&gt;思考：移动游戏市场内忧外患之下，我们如何生存发展？&lt;/h2&gt;
+&lt;h2&gt;我们的优势&lt;/h2&gt;
+&lt;h3&gt;成都发展势态良好&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;恒大研究院最新的研究报告将成都列为仅次于北上广深的第 5 名，高于杭州
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8035d55d195659d4a19047ef06d9d1dd/72f09/2019%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%B8%82%E5%8F%91%E5%B1%95%E6%BD%9C%E5%8A%9B%E6%8E%92%E5%90%8D.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 91.13924050632912%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAASABQDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAIBAwX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAAB9fOhIWJ0UD//xAAYEAADAQEAAAAAAAAAAAAAAAAAAhIBIP/aAAgBAQABBQKFIUnO/wD/xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAEDAQE/AR//xAAVEQEBAAAAAAAAAAAAAAAAAAARIP/aAAgBAgEBPwFj/8QAFhABAQEAAAAAAAAAAAAAAAAAMQAg/9oACAEBAAY/AiI3/8QAFxABAAMAAAAAAAAAAAAAAAAAARARIP/aAAgBAQABPyFs0mJ//9oADAMBAAIAAwAAABAsPwD/xAAXEQADAQAAAAAAAAAAAAAAAAAAAREQ/9oACAEDAQE/EIiLf//EABgRAAIDAAAAAAAAAAAAAAAAAAARARBR/9oACAECAQE/EG0c3//EAB4QAQABBAIDAAAAAAAAAAAAAAEAESEx0VFhkaHB/9oACAEBAAE/EFL7dzp+XcDx7O45jiUl61iHEQq2n//Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2019中国城市发展潜力排名.jpg&quot;
+        title=&quot;2019中国城市发展潜力排名.jpg&quot;
+        src=&quot;/static/8035d55d195659d4a19047ef06d9d1dd/828fb/2019%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%B8%82%E5%8F%91%E5%B1%95%E6%BD%9C%E5%8A%9B%E6%8E%92%E5%90%8D.jpg&quot;
+        srcset=&quot;/static/8035d55d195659d4a19047ef06d9d1dd/ff44c/2019%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%B8%82%E5%8F%91%E5%B1%95%E6%BD%9C%E5%8A%9B%E6%8E%92%E5%90%8D.jpg 158w,
+/static/8035d55d195659d4a19047ef06d9d1dd/a6688/2019%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%B8%82%E5%8F%91%E5%B1%95%E6%BD%9C%E5%8A%9B%E6%8E%92%E5%90%8D.jpg 315w,
+/static/8035d55d195659d4a19047ef06d9d1dd/828fb/2019%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%B8%82%E5%8F%91%E5%B1%95%E6%BD%9C%E5%8A%9B%E6%8E%92%E5%90%8D.jpg 630w,
+/static/8035d55d195659d4a19047ef06d9d1dd/72f09/2019%E4%B8%AD%E5%9B%BD%E5%9F%8E%E5%B8%82%E5%8F%91%E5%B1%95%E6%BD%9C%E5%8A%9B%E6%8E%92%E5%90%8D.jpg 886w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;同时 2018 年中国独角兽只有一家在成都
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 573px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/acdfcf5768e80f1a33c8a8e47c16fdb9/eda93/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%8B%AC%E8%A7%92%E5%85%BD%E5%9C%B0%E5%9F%9F%E5%88%86%E5%B8%83.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.88607594936708%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAIDBf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/9oADAMBAAIQAxAAAAHbaNUYUX//xAAYEAADAQEAAAAAAAAAAAAAAAAAARESIf/aAAgBAQABBQKK5RC9rNH/xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/AT//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/AT//xAAXEAEAAwAAAAAAAAAAAAAAAAAQABEx/9oACAEBAAY/Aphb/8QAGhABAQACAwAAAAAAAAAAAAAAAQAhURARYf/aAAgBAQABPyERCGON01OcXkRsX//aAAwDAQACAAMAAAAQrw//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAaEAEBAQEAAwAAAAAAAAAAAAABEQAhMUFh/9oACAEBAAE/EF8uO7osODIRkLYyJhAfJ9yNhR9O/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2018年中国独角兽地域分布.jpg&quot;
+        title=&quot;2018年中国独角兽地域分布.jpg&quot;
+        src=&quot;/static/acdfcf5768e80f1a33c8a8e47c16fdb9/eda93/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%8B%AC%E8%A7%92%E5%85%BD%E5%9C%B0%E5%9F%9F%E5%88%86%E5%B8%83.jpg&quot;
+        srcset=&quot;/static/acdfcf5768e80f1a33c8a8e47c16fdb9/ff44c/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%8B%AC%E8%A7%92%E5%85%BD%E5%9C%B0%E5%9F%9F%E5%88%86%E5%B8%83.jpg 158w,
+/static/acdfcf5768e80f1a33c8a8e47c16fdb9/a6688/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%8B%AC%E8%A7%92%E5%85%BD%E5%9C%B0%E5%9F%9F%E5%88%86%E5%B8%83.jpg 315w,
+/static/acdfcf5768e80f1a33c8a8e47c16fdb9/eda93/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%8B%AC%E8%A7%92%E5%85%BD%E5%9C%B0%E5%9F%9F%E5%88%86%E5%B8%83.jpg 573w&quot;
+        sizes=&quot;(max-width: 573px) 100vw, 573px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可以看出，成都发展势态很不错，对包括人才在内的各种资源的的吸引力一定会持续提升。成都本土还没有成长出一家真正的大企业，既是困难也是机遇：困难是没有好的大企业管理、人力可借鉴学习，机遇是我们有可能成为成都本土的大厂。&lt;/p&gt;
+&lt;h3&gt;公司优势&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;出海经验丰富：针对海外市场，不论发行运营还是研发都比大部分厂商领先&lt;/li&gt;
+&lt;li&gt;在成都移动游戏领域属于龙头企业，对本地产业及人才起到了促进作用，在成都有较好的行业知名度及竞争力&lt;/li&gt;
+&lt;li&gt;数据分析驱动游戏运营具有领先优势，增加产品成功概率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;我们的不足&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;对欧美市场依赖过大，对其他市场开拓不足：前文分析过，随着中美关系的变化，出海企业都会受到一定影响，移动游戏领域也不会例外。而事实上移动游戏在中国和日本的游戏市场占比最大，我们对这两个市场的耕耘都远远不够，日本可以说几乎为零。&lt;/li&gt;
+&lt;li&gt;分发导流模式单一：海外移动应用分发方式主要是两种，通过传统媒体、广告及用户流量平台的市场化分发，以及通过应用内嵌广告的方式实现应用间的导流。在分发模式的倚重度上来看，多数海外移动应 用市场会更注重应用间相互推广、导流的分发模式。其中，在应用中内嵌的交互式广告在美国、日本、东南亚等移动游戏 热点地区都有着令人满意的游戏内容分发效果。我们对应用见相互推广、导流这种分发模式使用较少，公司内部游戏都没有专门做互相推荐。&lt;/li&gt;
+&lt;li&gt;研发优势不明显：研发效率不高导致优势的发行、运营无法充分发力，创新成本大、试错成本高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;我们的战略&lt;/h2&gt;
+&lt;h3&gt;何为战略&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;问：照你的意见，这次解放战争，主要的战略方针是什么？&lt;/p&gt;
+&lt;p&gt;答：我们的战略方针，应该是使用我们的主力在很长的变动不定的战线上作战。&lt;/p&gt;
+&lt;p&gt;……&lt;/p&gt;
+&lt;p&gt;除了调动有训练的军队进行运动战之外，还要在农民中组织很多的游击队。&lt;/p&gt;
+&lt;p&gt;……&lt;/p&gt;
+&lt;p&gt;这样，日本在中国抗战的长期消耗下，它的经济行将崩溃；在无数战争的消磨中，它的士气行将颓靡。中国方面，则抗战的潜伏力一天一天地奔腾高涨，大批的革命民众不断地倾注到前线去，为自由而战争。所有这些因素和其他的因素配合起来，就使我们能够对日本占领地的堡垒和根据地，作最后的致命的攻击，驱逐日本侵略军出中国。（斯诺：《西北印象记》）&lt;/p&gt;
+&lt;p&gt;——毛泽东《论持久战》&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我们认为，企业战略就是一定时期内对企业发展方向、发展速度与质量、发展点及发展能力的重大选择、规划及策略。企业战略可以帮助企业指引长远发展方向，明确发展目标，指明发展点，并确定企业需要的发展能力，战略的真正目的就是要解决企业的发展问题，实现企业快速、健康、持续发展。&lt;/p&gt;
+&lt;p&gt;发展战略的本质就是要实现企业的发展，企业如何来发展呢？通常来说，企业要实现发展，就需要思考四个问题：&lt;/p&gt;
+&lt;p&gt;（1）企业未来要发展成为什么样子？（发展方向）&lt;/p&gt;
+&lt;p&gt;（2）企业未来以什么样的速度与质量来实现发展？（发展速度与质量）&lt;/p&gt;
+&lt;p&gt;（3）企业未来从哪些发展点来保证这种速度与质量？（发展点）&lt;/p&gt;
+&lt;p&gt;（4）企业未来需要哪些发展能力支撑？（发展能力）&lt;/p&gt;
+&lt;p&gt;这四个问题是以企业发展为导向，关于这四个问题的回答就能系统解决企业的发展问题，它们分别解决企业的发展方向、发展速度与质量、发展点和发展能力。如果这四个问题都能有效解决，那么企业的发展问题就能得到系统的、有效的解决。在这四个问题的思考上，我们最终形成了系统解决企业发展问题的一个战略解决方案。&lt;/p&gt;
+&lt;p&gt;在发展战略理论关于战略定义的基础上，我们形成了一个系统解决企业发展问题的战略框架，即发展战略框架，也曾称东方战略框架。发展战略由愿景、战略目标、业务战略和职能战略四大部分组成。&lt;/p&gt;
+&lt;h3&gt;愿景：企业未来要成为一个什么样的企业？&lt;/h3&gt;
+&lt;p&gt;腾讯？网易？Supercell？&lt;/p&gt;
+&lt;p&gt;腾讯：立足于绝对优势的分发能力，显然我们无此优势，也不可能通过游戏本身造个平台出来。&lt;/p&gt;
+&lt;p&gt;网易：依赖绝对领先的策划和游戏开发运营技术，持续不断的创新。这个是我们的可能成为的企业类型之一。&lt;/p&gt;
+&lt;p&gt;Supercell：通过几款爆款的成功，让自己在身价较高时卖给大厂。这也不失为一个可行的方案，大树底下好乘凉。&lt;/p&gt;
+&lt;h3&gt;战略目标：企业未来要达到一个什么样的发展目标？&lt;/h3&gt;
+&lt;p&gt;当前的主要目标应该是在移动游戏出海市场杀成一片血海之前找到一个稳定的位置，进可攻退可守，不要被后浪拍死在沙滩上。&lt;/p&gt;
+&lt;h3&gt;业务战略：企业未来需要哪些发展点？要在哪些产业、哪些区域、哪些客户、哪些产品发展？怎样发展？&lt;/h3&gt;
+&lt;h3&gt;职能战略：企业未来需要什么样的发展能力？需要在市场营销、技术研发、生产制造、人力资源、财务投资等方面采取什么样的策略和措施以支持企业愿景、战略目标、业务战略的实现？&lt;/h3&gt;
+&lt;h3&gt;战略层面&lt;/h3&gt;
+&lt;p&gt;定位
+跟随大势
+夯实基础
+强化核心竞争力、利益绑定
+提前布局
+拓展新市场&lt;/p&gt;
+&lt;h3&gt;拓展新市场&lt;/h3&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d0073b5dd73e9f2eca2df18b51530b0f/ed84e/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.26582278481012%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAACQUlEQVQoz12S/UuTURTHn7+zyJ8kf4klQoo6HIQiGIYvYBhCpnNBGDgr84VVzrnZzDkXY1mN3OZ06uaae3netn06z2NT6MDh3nvuPd/zPd97lGazie1cW2stFov4fD5WVlZY9nrJZrPkzs/J5fNk02kCm5sEQyE++zcxJb+4H7VjCi3TNBq1GnqlYh/3o1H6+/sZHBzkfkcHqtxRuoJUmnpoh2HHQ5y9vXTcuUv99xHoOolEAuXy8pKCVC6enGDkcpiyIqA1YRgV0K3AFp65OaqFAtrHT2gf1lBX14jPzrH/cp7o8lt2vMt8EbYpYa5MjI8zOTlJj7BJvHsPPkmKHrAXDLK7u8tBLAZXZczTHGogiHZ6SkXADauTapXs1z16+vpwuVwMDQ2hjI2N8XR0FEdnJyfxuNUr6sUFj4eHGRgYoL29nbPDH5i/ktQ2fNQFWJ9/hR5P2DKcHR/zbGqKmZkZPB4PSkGq5UXoP9Jiy5qiZ8zvJyIMI5EI5XIZVWKZVIo3i4v89G+RlLaNgxhNVeP59DTjExM4HI7bT7F+9ViqpTIZCqIFgW34fnhdoNGgIe6XIo+6u3nQ1YXL6YR0Bk3Yv34xi1vYPRkZuQV0u904Rcd7bW2EtwXsKI0pRRpyZ4FhGPa4rG9ssL66Sigctj/P+CYylSs33SmtOQzLA+/SEu6FBbLJJPpFHkPi/JtR683/Zuda7E3zpgulVCpxLmNj6Whrpaq2V6W6JrrV6/UbNyXREKaWW/tW3Dpbb3WZxb87sL4Z5SnhfwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2018年中国移动游戏海外区域热度图&quot;
+        title=&quot;2018年中国移动游戏海外区域热度图&quot;
+        src=&quot;/static/d0073b5dd73e9f2eca2df18b51530b0f/f058b/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png&quot;
+        srcset=&quot;/static/d0073b5dd73e9f2eca2df18b51530b0f/c26ae/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png 158w,
+/static/d0073b5dd73e9f2eca2df18b51530b0f/6bdcf/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png 315w,
+/static/d0073b5dd73e9f2eca2df18b51530b0f/f058b/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png 630w,
+/static/d0073b5dd73e9f2eca2df18b51530b0f/40601/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png 945w,
+/static/d0073b5dd73e9f2eca2df18b51530b0f/78612/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png 1260w,
+/static/d0073b5dd73e9f2eca2df18b51530b0f/ed84e/2018%E5%B9%B4%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%B5%B7%E5%A4%96%E5%8C%BA%E5%9F%9F%E7%83%AD%E5%BA%A6%E5%9B%BE.png 2656w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/94770a0dd27fd97d0ac88b901d9f5f87/5d6a0/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 97.46835443037975%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWKQHl52v8AAADFklEQVQ4y52UTU8TQRjH+wk0IRxMJIJvR7+B3k00HNCDAaMHjd/Bl4uJ6Ek9e9UmtCRNCFaxFoqUA+GtgEJpt4VA6Xa7fe/udrfb7fbvPFO6gGCCbvJk/jPPM795ZmfmcbVaLdCXkUREIksIz4YRDocRDH7H+Pg4Jicn4fP5HB0IBDAxMYFQKAS/3w+v1wtZljmDWK4OUK9ZUJUG6vUGNE2DqqpQFIVbpVLhY9Vqlfd1XYdhGDyGxizLOgCSsFsW0oV5bElB6GYB//N1EuPARlNBMN4P72ovJGWmHQBa1eaBp7EjGRJwMn4HoytXkVVmuVOpGDCNVmd9p+1M/tt3CDjAgJchq3OoN6qIpjzYK4Q5xLZtNJvWkUz+1Me2TEBv5CIKWgSZ6jRGIucwJQxwoKbqkCSZQe0TIAdG3ROAy5CqYa6nhUEOWE2/4X6xMuX8X5Y313WjgVJRgWlaf8+QgJ5IH0LCPR70I3Ef7sVuJPNu3i/kFGiKyXVU+oCv67chyO7TA2e3njBfH3aKY6hbRcxvv8Da3nu2RRtLqWdwL3VhVXz9L8DHGFnuQarkR1mPMl8P/Bs32DwVK+lX8CxfwK/M26PAqfhddspX9oGzTF/CdGLQydAT6WXAL6joAnxr1xDYvAWrWWsDme8Y8NvmTZZ6N/LaIj/lT4tdCMb6edB0YggfF85ipzTGMtxk2Z7H5/XrsGyNbfk5851hBzd8CGhpWE69xEzyIcq1OArqGtMP2OrD7A628FN8x6HZ6hwUYxfh5CMs7D5l82pI5Nzs0IawlR9tA53ioFnIpIvOtUrt5thrqTuFI53KOw+mXNShVs39a9PkPqvRnujqPJmmbcGo684T0vUaNEOGnBMhiiKERBxZOcurjcxaim9fcpvFas7zdJmmyUtTrVZDuVzmRiWJxhS1BDGzh2w2y2teJpNBLpfjMeSnstaJLZVKvKS5aGB7exuCIGBjYwOxWIxbNBpFPBZHIpHgmvzUJpNJFItFvgDBqSWjhKguukiQg0ySJEfT1joFtdOSUTz1KZYyp6xJk4+KyG/f7GBmSSHo7AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2018年全球重点国家地区游戏市场规模.png&quot;
+        title=&quot;2018年全球重点国家地区游戏市场规模.png&quot;
+        src=&quot;/static/94770a0dd27fd97d0ac88b901d9f5f87/f058b/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png&quot;
+        srcset=&quot;/static/94770a0dd27fd97d0ac88b901d9f5f87/c26ae/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 158w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/6bdcf/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 315w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/f058b/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 630w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/40601/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 945w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/78612/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1260w,
+/static/94770a0dd27fd97d0ac88b901d9f5f87/5d6a0/2018%E5%B9%B4%E5%85%A8%E7%90%83%E9%87%8D%E7%82%B9%E5%9B%BD%E5%AE%B6%E5%9C%B0%E5%8C%BA%E6%B8%B8%E6%88%8F%E5%B8%82%E5%9C%BA%E8%A7%84%E6%A8%A1.png 1580w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;东南亚：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;战术层面&lt;/h3&gt;
+&lt;p&gt;提前布局&lt;/p&gt;
+&lt;p&gt;游戏渠道/分发商
+如下图所示，虽然不同国家地区在应用分发模式上会稍有出入，但总体而言游戏 APP 的分发流程仍主要分为两部分:通过 传统媒体、广告及用户流量平台的市场化分发，以及通过应用内嵌广告的方式实现应用间的导流。 从产业链构成上来看，移动游戏在海外市场的分发模式与国内大相径庭。但在分发模式的倚重度上来看，多数海外移动应 用市场会更注重应用间相互推广、导流的分发模式。其中，在应用中内嵌的交互式广告在美国、日本、东南亚等移动游戏 热点地区都有着令人满意的游戏内容分发效果。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Defining Main Functions in Python]]></title><description><![CDATA[from Defining Main Functions in Python Summary of Python Main Function Best Practices Here are four key best practices about main() in…]]></description><link>https://onlyzf.com/snippets/py_main/</link><guid isPermaLink="false">https://onlyzf.com/snippets/py_main/</guid><pubDate>Wed, 28 Aug 2019 17:00:00 GMT</pubDate><content:encoded>&lt;p&gt;from &lt;a href=&quot;https://realpython.com/python-main-function/&quot;&gt;Defining Main Functions in Python&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Summary of Python Main Function Best Practices&lt;/h2&gt;
+&lt;p&gt;Here are four key best practices about main() in Python that you just saw:&lt;/p&gt;
+&lt;p&gt;Put code that takes a long time to run or has other effects on the computer in a function or class, so you can control exactly when that code is executed.&lt;/p&gt;
+&lt;p&gt;Use the different values of _&lt;strong&gt;_name__&lt;/strong&gt; to determine the context and change the behavior of your code with a conditional statement.&lt;/p&gt;
+&lt;p&gt;You should name your entry point function main() in order to communicate the intention of the function, even though Python does not assign any special significance to a function named main().&lt;/p&gt;
+&lt;p&gt;If you want to reuse functionality from your code, define the logic in functions outside main() and call those functions within main().&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; time &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; sleep
+
+&lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;This is my file to demonstrate best practices.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;process_data&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Beginning data processing...&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    modified_data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot; that has been modified&quot;&lt;/span&gt;
+    sleep&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Data processing finished.&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; modified_data
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;read_data_from_web&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Reading data from the Web&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Data from the web&quot;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; data
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;write_data_to_database&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Writing data to a database&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; read_data_from_web&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    modified_data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; process_data&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    write_data_to_database&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;modified_data&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; __name__ &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    main&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——时光侦探]]></title><description><![CDATA[B 当我们有单个任务要做的时候，情况还比较简单；当我们有很多任务要做时，计划可以很好地帮助我们清除地知道各种任务及它们需要的时间，严格按照计划执行，可充分利用你的时间。
+时间银行每天给你 8640…]]></description><link>https://onlyzf.com/2019/time/</link><guid isPermaLink="false">https://onlyzf.com/2019/time/</guid><pubDate>Sun, 18 Aug 2019 11:33:00 GMT</pubDate><content:encoded>&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;当我们有单个任务要做的时候，情况还比较简单；当我们有很多任务要做时，计划可以很好地帮助我们清除地知道各种任务及它们需要的时间，严格按照计划执行，可充分利用你的时间。
+时间银行每天给你 86400 元，不管你拿这些钱干什么，第二天都会重置，你也不能贷款，也不能交易。
+没错，偷走我们时间的正是因为没列计划而没有条理的任务。
+只要列一个计划并严格去做，相信我，你的生活会更加充实的。
+计划分为时刻时长和任务，时刻就是你完成任务开始和结束的时刻，时长的你完成这个任务需要的时间，任务就是你到底要干什么。有了这“计划三要素”，加上你严格的按照计划做就可以节省很多时间。
+如果你开始做一项任务估时长估少了，就直接跳过这个任务干下一个，不要因为这个任务造成恶性循环。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——单车的隐患]]></title><description><![CDATA[B…]]></description><link>https://onlyzf.com/2019/bicycle/</link><guid isPermaLink="false">https://onlyzf.com/2019/bicycle/</guid><pubDate>Sat, 17 Aug 2019 20:48:00 GMT</pubDate><content:encoded>&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;这次我们完成了自创挑战，是把停在盲道上和乱停乱放的自行车摆好。随着共享单车的普及，越来越多的人习惯了这项新的交通工具，可是一个隐患也随之诞生了，那就是共享单车的停放问题。现在有一些不道德的人，只顾及自己的方便，但是却没有考虑到其他人，比如说把车停在盲道上。才体验了盲人与哑巴生活的我们有深刻的感受。总之，我觉得成都需要积极宣传，改进一些不道德的人的行为。&lt;/p&gt;
+&lt;h2&gt;F&lt;/h2&gt;
+&lt;p&gt;参加活动的第一天我们就讨论了自创挑战应该做什么，由于我们家人从共享单车开始出现在市场就非常的关注，OFO 和摩拜的补贴大战导致了巨量的单车被投放在大街小巷。虽然方便了大家，但是也由此产生了很多不文明行为。时光荏苒，一晃两年多过去了，曾经的共享单车大战还历历在目。现在这些单车的命运如何了呢？我们再次走上街头，观察共享单车的现状。原来遍布大街小巷的小黄车已经不见了，多出了哈罗、美团等待单车。我们在地铁附近看到的单车很多，摆放也很整齐，在其他地方就要差很多，有乱停乱放的，有占道的，有被推倒的。希望大家能够更加文明的对待这些为我们服务的单车。&lt;/p&gt;
+&lt;h2&gt;W&lt;/h2&gt;
+&lt;p&gt;共享单车一度成为人们关注的热点。这次完成城市创变者的自创挑战，我们启明心团队注意到共享单车已变成人们生活不可分割的一部分，在给大家带来方便的同时，还在存在一些隐患。比如停车不规范。有些人还是没有养成把单车停在指定停车区域的习惯。首先乱七八糟的停放不美观，其次有些单车直接停在盲道上，威胁到了盲人朋友们的安全，还有一些单车都已经坏了，公司也并未回收维修，久了就变成阻碍交通的垃圾。也有用车不规范的情况：把小孩子放在前面的车筐中，未满 12 岁的小朋友骑车等，这些因为涉及保护未成年人，我没有上传照片。我想呼吁的是：规范用车，规范管理，和谐社会，需要你我共同努力 💪&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——曾经的梦想]]></title><description><![CDATA[W…]]></description><link>https://onlyzf.com/2019/dream/</link><guid isPermaLink="false">https://onlyzf.com/2019/dream/</guid><pubDate>Fri, 16 Aug 2019 20:59:00 GMT</pubDate><content:encoded>&lt;h2&gt;W&lt;/h2&gt;
+&lt;p&gt;曾经的梦想：采访目标：我最亲爱的妈妈。妈妈出生在天津，随着祖国的一声号召——支援大西北，跟着我的姥姥姥爷义无反顾地去了祖国的边疆。由于当时的历史条件，妈妈没有上成大学，这也是她的遗憾。但是勤奋好学的妈妈在退休后加入了老年大学，报名参加了她喜爱的书法学习，从楷书，到隶书、行书……妈妈已经坚持学习了三年。真的要给妈妈点赞，为她对梦想的坚持，对生活的乐观。祝我最亲爱的妈咪健健康康，快快乐乐！我是您最坚强的后盾，妈妈！我爱您！&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——向死而生]]></title><description><![CDATA[F 如果我明天就要死去，我希望能不影响任何人悄悄的离开，不用有任何的葬礼，也不用专门通知大家。在我的朋友圈写一句“2019 年 8 月 17 日 Fan…]]></description><link>https://onlyzf.com/2019/death/</link><guid isPermaLink="false">https://onlyzf.com/2019/death/</guid><pubDate>Fri, 16 Aug 2019 15:51:00 GMT</pubDate><content:encoded>&lt;h2&gt;F&lt;/h2&gt;
+&lt;p&gt;如果我明天就要死去，我希望能不影响任何人悄悄的离开，不用有任何的葬礼，也不用专门通知大家。在我的朋友圈写一句“2019 年 8 月 17 日 Fan 离世”。正如《寻梦环游记》中表现的，爱我的人自然会记得我，不需要我的人听到我离世了最多也就是表示一下遗憾。
+很久以前当老罗还没有做手机的时候，他在一次单口相声大会上讲过，“将每一天都当作最后一天过”，是他的努力的信念。我深以为然。
+人生在世不过短短百年，虽然不愿承认，但是如我们这样非顶层阶层能产生的影响不可能很大。流芳百世非常困难，遗臭万年也不容易。我所希望的就是能在我的影响范围内给大家持续正面的乐观的影响，能让我的家人有幸福感，能让我的后代尽可能的高起点并且有追求，这就是我最基本的价值所在。
+在此基础上，能产生的更多影响就只有做出一个有很多人使用的产品了，例如张小龙之微信。这对于普通人讲毕竟是个可遇不可求的奢望，不过在互联网时代还是有一丝可能性的。由于目前我的心思一直在财务自由上，所以对于这样的产品还没有想太多，也许有一天我会想到吧。
+所以如果我离世了话，我的墓志铭应该是这样的：“爱妻子的丈夫、爱孩子的父亲、爱父母却做得很不好的儿子，因为没做到财务自由而失败了的程序员，谢谢大家对我的宽容”。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——存在的意义]]></title><description><![CDATA[B 这次我们做的任务叫“存在的意义”，要采访…]]></description><link>https://onlyzf.com/2019/meaning_of_life/</link><guid isPermaLink="false">https://onlyzf.com/2019/meaning_of_life/</guid><pubDate>Thu, 15 Aug 2019 18:52:00 GMT</pubDate><content:encoded>&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;这次我们做的任务叫“存在的意义”，要采访 5 位路人问他们三个问题，结果只采访到一位本地居住的老奶奶，说明现在很多老人都害怕被骗。
+恰巧采访到了一位和我同校，明年开学上二年级的师弟。
+五位路人，有年轻人到老人，都为成都贡献出自己力所能及的一份，努力的想让成都变好，相信成都在这些人的努力下会变得更加繁荣、美好！&lt;/p&gt;
+&lt;h2&gt;F&lt;/h2&gt;
+&lt;p&gt;我们团队都是内敛的人，不太擅长跟陌生人打交道，这次我们鼓足了勇气，经历了几次挫折之后，终于成功的完成了采访。
+通过这次采访，我深深的感受到成都人的幸福感爆棚。大家对意义的认同也很相近，都是希望让家人健康、幸福、快乐。似乎生活在成都没有什么大不了的事。要为成都做些什么呢，保护环境，和谐稳定发展，这就是辛福感的由来吧。&lt;/p&gt;
+&lt;h2&gt;W&lt;/h2&gt;
+&lt;p&gt;每个人的存在都是有意义的。就是看你有没有深入思考。拿到题目后，我也认真思考过这个问题，把自己的日子过好，带给身边的人爱和快乐。迈出采访的第一步，本来以为可以采访到曾经写下“世界那么大，我想去看看”辞职信的网红小姐姐，可是不巧，她又出门去看世界了。有点小遗憾！于是采访了值班小妹妹。了解了她的想法想赚大钱 ，想成都的物价降低一点。是的，小小的愿望，体现的事她对美好生活的追求和向往。印象深刻的是采访了一位二年级的小学生，要当解放军，从小就立志保家卫国。也许每个人的想法是在随着年纪和心境变化，但是在这个和谐社会里，我感受的是每个人都消化照顾好家人，每天快乐，健健康康，实现自己的人生价值。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——垃圾卫士]]></title><description><![CDATA[B…]]></description><link>https://onlyzf.com/2019/trash/</link><guid isPermaLink="false">https://onlyzf.com/2019/trash/</guid><pubDate>Thu, 15 Aug 2019 18:52:00 GMT</pubDate><content:encoded>&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;我们周围的垃圾分类，虽然已经开始实施了，但是做到的很不到位，我们小区没有分类的垃圾桶。周围有很多个小区，但是只有一个小区有几个垃圾分类的垃圾桶。我们投垃圾时，我开始还以为塑料袋是可回收垃圾，再采访一个比我们还了解垃圾分类的人之后才知道是其它垃圾。我也觉得非常有必要用罚款的方法，让市民自觉做到垃圾分类，虽然开始会遇到很多阻挠，但总有一天会成功的。我们家小区有很多垃圾桶贴着不明显的标签，虽然贴了这些标签，但是居民往往不仔细观察，只管打包一起扔，却不分类。&lt;/p&gt;
+&lt;h2&gt;F&lt;/h2&gt;
+&lt;p&gt;查阅了很多垃圾分类的信息，包括日本的做法和上海现在的状况，以及成都本地的垃圾分类方案。《成都市生活垃圾管理条例（草案）》明确了成都市生活垃圾分类标准，按照可回收物、有害垃圾、餐厨垃圾、其他垃圾四类分别处置。对未按规定投放生活垃圾的，由城市管理部门责令改正；拒不改正的，对个人处 50 元以上 200 元以下罚款，对单位处 5000 元以上 5 万元以下罚款。成都将逐步推行生活垃圾分类投放信息纳入单位和个人信用信息系统，城市管理部门应加强生活垃圾清扫、收集、运输、处置工作的监督检查，定期考核评估相关单位的履约情况，并将履约情况纳入城市管理信用评价监管系统，进行累计记分管理。&lt;/p&gt;
+&lt;h2&gt;W&lt;/h2&gt;
+&lt;p&gt;我们只有一个 ☝️ 地球 🌍！爱护我们自己的生活家园是每个人的职责。经过调研，成都从 2018 年开始推进垃圾分类工作，但是截至到一年后的今天，想要找到垃圾分类的垃圾桶都不是一件容易的事。或者即使设置了分类垃圾桶，但是人们还没有学习到位，没有养成垃圾分类的习惯。我认为宣传力度还需要增强，尤其是落实小区物业管理职责，在居民区设置垃圾桶。或者采取一些小礼物等激励方式，让大家深刻认识重要性，并能从分类中获取一点家中必须的小礼物，这样能最大限度的提高积极性。总之，垃圾分类从我做起！&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——日行一善]]></title><description><![CDATA[BB…]]></description><link>https://onlyzf.com/2019/do_good/</link><guid isPermaLink="false">https://onlyzf.com/2019/do_good/</guid><pubDate>Wed, 14 Aug 2019 23:25:00 GMT</pubDate><content:encoded>&lt;h2&gt;BB&lt;/h2&gt;
+&lt;p&gt;世界上有很多人需要我们伸出援助之手，世界上有很多问题需要我们去改进，每天做一件善事，使我的世界变得更加美好。
+我做的第一件事是收拾洗手台旁，因没有垃圾桶，大家随手扔下的擦手纸，我把它们装进一个垃圾袋里，把他们扔进了楼下的垃圾桶，这虽然是一个小善举，但却给了洗手间美观。
+第二件好事，是把停在盲道上的自行车摆好，给盲人提供了一些安全与便捷。
+我做的第三件好事是，帮助一个腿脚不方便的奶奶刷公交卡，顺便帮她把东西提到车下，这带给这位老奶奶方便与感动。
+三件事虽然都很小，但让世界变得更美好，每个人如果都能这样想这样做，那么成都一定会越来越好。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——长辈的黑客生活]]></title><description><![CDATA[B…]]></description><link>https://onlyzf.com/2019/geeklife/</link><guid isPermaLink="false">https://onlyzf.com/2019/geeklife/</guid><pubDate>Tue, 13 Aug 2019 19:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;今天我完成了“长辈的生活黑客”，教了姥姥如何回看电视节目，在我跟她说了主要的方法和强调了要注意的技巧后，姥姥终于学会了。
+这时候，姥爷走过来问我，微信上怎么看到别人发的名片，自己却发不了，以前我也不知道，尝试了一下后我找到了方法，又把它告诉了姥爷。
+其实，我们的学习能力之所以比老年人的强，是因为我们勇于尝试。我们在尝试的过程中不断的总结学习，才能不停的进步。
+今天我帮长辈学会了他们不擅长但是很有用的技能，希望能提升他们的幸福感。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——盲人与哑巴]]></title><description><![CDATA[WW…]]></description><link>https://onlyzf.com/2019/blind_dumb/</link><guid isPermaLink="false">https://onlyzf.com/2019/blind_dumb/</guid><pubDate>Tue, 13 Aug 2019 18:52:00 GMT</pubDate><content:encoded>&lt;h2&gt;WW&lt;/h2&gt;
+&lt;p&gt;盲人与哑巴感想：接到任务前，从来没考虑过自己如果是这种情况，将会遇到什么困难。觉得这个任务很有意义，我们团队三人不约而同的选择了它。孩子扮演哑巴，我扮演盲人的过程中，盲目的开始后，发现盲人和哑巴完全无法交流。于是停下约定了用捏手指以及拍背，揪耳朵等方式来发信号交流。在哑巴带着我走的时候，我由刚开始完全不敢迈步到后来给予完全的信任，跟着他的脚步一直找到了目标任务，作为一和成年人的我都兴奋了好一阵。这个任务我发现几个问题：大街上虽然走盲道，但是走着走着就断了；盲道被一些人忽略了它对盲人的重要性，自行车，汽车占道问题严重，为此我们移动了很多占道的共享单车；作为五星级公园的浣花溪公园，虽然是无障碍公园，但是完全没有盲道，这样盲人就失去了这项逛公园的权利。关注残障人士，用我们的关心和帮助，让他们和正常人一样感受到生活的美好。&lt;/p&gt;
+&lt;h2&gt;F&lt;/h2&gt;
+&lt;p&gt;盲人与哑巴的生活是什么样的，我从来也没有想过，直到做了这任务，真正体会到了盲人和哑巴的不方便。任务的设定是盲人和哑巴互相扶持共同找一个字，然而只有哑巴知道字是什么，却说不出来，盲人只能在哑巴的带领下慢慢摸索。进浣花溪公园的路没有盲道，本来我戴着眼罩探着盲道还能自己走两步，一离开盲道就像无头苍蝇样不辨方向，一步也不敢迈出。怪不得公园里基本上看不到盲人。想想我们的社会对于残障人士还是太不友好了，希望随着社会的进步，盲人能够真正的自由逛公园。&lt;/p&gt;
+&lt;h2&gt;BB&lt;/h2&gt;
+&lt;p&gt;在 8 月 10 日那天，我们完成了盲人与哑巴的任务，浣花溪公园没有盲道，哑巴要扶着盲人走，一边还要寻宝。我主要当的是哑巴，妈妈主要当盲人，爸爸主要当守护者。哑巴和盲人很难交流，于是我们趁休息时间讨论了交流方法，从简单的“是否”到“停走”再到“左转右转”，最后是“上楼梯，下楼梯”。回去的时候，我们发现盲道上停着一些自行车和汽车，这些人停车只顾自己方便而不顾及他人，应该好好反省了。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——迟到的感谢]]></title><description><![CDATA[WW 迟到的感谢感想：我们的社会能如此和谐，少不了各行各业的社会服务者。我们团队边走边找目标，很快发现了警察、交通指挥员、快递员、公交司机、河道清洁工等目标人物。经过简单的交流，每个职业每天的工作时间都很长，短的八小时，长的竟然长达 1…]]></description><link>https://onlyzf.com/2019/thanks/</link><guid isPermaLink="false">https://onlyzf.com/2019/thanks/</guid><pubDate>Tue, 13 Aug 2019 18:45:00 GMT</pubDate><content:encoded>&lt;h2&gt;WW&lt;/h2&gt;
+&lt;p&gt;迟到的感谢感想：我们的社会能如此和谐，少不了各行各业的社会服务者。我们团队边走边找目标，很快发现了警察、交通指挥员、快递员、公交司机、河道清洁工等目标人物。经过简单的交流，每个职业每天的工作时间都很长，短的八小时，长的竟然长达 14 小时，而且风雨无阻，有了他们，我们生活的环境才干净整洁，社会稳定安全，交通有条不紊，生活美满幸福。在孩子鞠躬的瞬间，我看到了他们眼里闪现的泪光，他们太需要被理解，被关注了。很遗憾的是因为河道清洁工作人员太忙，我们没有追上他的脚步，但是我们在心底为他的无私奉献点赞，我们每个人如果都能换位思考，也许他们的工作会稍微轻松一些。呼吁有更多的人参与进来，感谢这些默默为社会付出的践行者。&lt;/p&gt;
+&lt;h2&gt;F&lt;/h2&gt;
+&lt;p&gt;人的生命中总会有各种各样的匆匆过客，我们从来没有想过他们对于我们有什么帮助。这次城市创变者的这个任务让我深深的感到歉意。我们周围有那么多默默无闻，无私奉献的劳动者。有为我们清理公共卫生的环卫工人，有为保障我们的生命财产安全昼夜值班的警察，有为了让城市交通便利在座位上工作 14 个小时的公交司机。没有他们我们的生活将多么的不安全和不方便啊。迟到的感谢让我终于明白了人就是要互相帮助互相扶持才能互相成就。&lt;/p&gt;
+&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;世界上有很多职业，比如警察，清洁工，公交司机，快递员，保安，做这些职业的人默默无闻的给我们共同生活的城市贡献着一份份力量。虽然这些职业并不耀眼，但是我们应该对这些任劳任怨，愿意付出的人表示感谢。这次做城市创变者“迟到的感谢”任务，要求我们用语言去表达对他们的感谢，但却引发了我们从心底深处感受到他们的辛苦，他们无私的奉献带给我的一份安宁。在这个过程中，我们还采访了他们的工作时间，最少的也有八个小时，最多的竟然是十四个小时，我们只是在户外完成了五个小时任务，就已经热得快中暑了，更何况他们呀。所以我们应该对从事这些职业的奉献者们深表敬意。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[城市创变者挑战赛——成都70年]]></title><description><![CDATA[WW 成都七十年感想：今年是建国 70 周年，我是一个把成都作为第二故乡的朋友，来到成都已经 21 周年，来到了这座“来了，就走不脱的城市”。虽然不及 70 年那么有沧桑感，但还是很深刻的感受到成都翻天覆地的变化。经常带孩子在峨影看电影，在接到这个任务后，想到通过对比峨影的 6…]]></description><link>https://onlyzf.com/2019/cd70/</link><guid isPermaLink="false">https://onlyzf.com/2019/cd70/</guid><pubDate>Mon, 12 Aug 2019 19:25:00 GMT</pubDate><content:encoded>&lt;h2&gt;WW&lt;/h2&gt;
+&lt;p&gt;成都七十年感想：今年是建国 70 周年，我是一个把成都作为第二故乡的朋友，来到成都已经 21 周年，来到了这座“来了，就走不脱的城市”。虽然不及 70 年那么有沧桑感，但还是很深刻的感受到成都翻天覆地的变化。经常带孩子在峨影看电影，在接到这个任务后，想到通过对比峨影的 61 周年巨变，感受我们的祖国从建国以来的巨大发展。从拍摄电影、放电影的老机器，从古老、破旧的电影院到花园式影城，从排队买票到网络购票，刷脸支付……都体现了科技进步给我们带来的福利，人们不光在物质生活，而且精神生活水平得到了极大的提高，国家强大，人民幸福，真诚的祝我的祖国七十岁生日快乐，我为您骄傲！&lt;/p&gt;
+&lt;h2&gt;F&lt;/h2&gt;
+&lt;p&gt;峨眉电影制片厂建于 1958 年，坐落在成都市青羊区清江东路 360 号。已经成为当代中国电影的重要基地之一。几十年来，峨影先后共摄制了各种类型影片、电视剧共计 400 余部（集）。先后计有 20 余部故事片、电视剧及科教片在国际、国内获得过 50 余次奖项。
+我们经常去峨影看电影，对它的了解仅仅是这是峨眉电影制片厂的原址，这次活动让我们更加深入了解到峨影的历史。原来峨影的历史如此古老、制作了如此之多的著名影片，它的历史就犹如成都历史乃至中国历史的缩影。
+在峨影的放映厅门口，有当年的老照片，各种放映厅的前世今生、各种古老的制作设备放映设备让我们深深的体会到中国巨大的前进。如今峨影是成都比较热闹的电影院，不仅仅在于它先进的设备，还在于它代表了文化代表了历史，我们对它的感情就想对祖国一样，敬佩、激动。&lt;/p&gt;
+&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;今天是建国 70 周年，我们去了“峨眉电影制片厂”1958，虽然不是 70 年，但 61 年的“高龄”也在成都的名胜古迹中排名靠前。
+我们看了很多个厅以前的情况，发现好的以前是给领导人看的，当时最差的尽然是别人的房子！不禁想起老师的口头语：“同在一个班上，差异那么大！”
+现在却不一样了，虽然还是珍藏了一些老的摄像机、放映机做展览，但大部分新的还是覆盖了老的，电影厅不一样了，门外多了抓娃娃机和餐馆，还有自助取票机。
+成都是一座现代化、高科技的城市，但有一缺点——不重视传统文化。希望我们能重视传统文化，让成都变为科技之都、文化古城。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[《SRE Google运维解密》]]></title><description><![CDATA[SRE 方法论 确保长期关注研发工作 Google 将 SRE 团队的运维工作限制在 50%以内。 SRE 处理运维工作的一项准则是：在每 8-12 小时的 on-call…]]></description><link>https://onlyzf.com/2019/sre/</link><guid isPermaLink="false">https://onlyzf.com/2019/sre/</guid><pubDate>Sat, 13 Jul 2019 08:53:00 GMT</pubDate><content:encoded>&lt;h2&gt;SRE 方法论&lt;/h2&gt;
+&lt;h3&gt;确保长期关注研发工作&lt;/h3&gt;
+&lt;p&gt;Google 将 SRE 团队的运维工作限制在 50%以内。&lt;/p&gt;
+&lt;p&gt;SRE 处理运维工作的一项准则是：在每 8-12 小时的 on-call 轮值期间最多只处理两个紧急事件。&lt;/p&gt;
+&lt;p&gt;所有的产品事故都应该有对应的事后总结，无论有没有触发报警。事后总结应该包括以下内容：事故发生、发现、解决的全过程，事故的根本原因，预防或者优化的解决方案。事后总结的目标是尽早发现和堵住漏洞，而不是通过流程去绕过和掩盖它们。&lt;/p&gt;
+&lt;h3&gt;在保障服务 SLO 的前提下最大化迭代速度&lt;/h3&gt;
+&lt;p&gt;一般来说，任何软件系统都不应该一味地追求 100%可靠
+正确的可靠性目标，必须考虑以下几个方面：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于用户的使用习惯，服务器可靠性要达到什么程度用户才会满意？&lt;/li&gt;
+&lt;li&gt;如果这项服务的可靠性程度不够，用户是否有其他的替代选择？&lt;/li&gt;
+&lt;li&gt;服务的可靠程度是否会影响用户对这项服务的使用模式？&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[容器及编排]]></title><description><![CDATA[docker enable debug in container]]></description><link>https://onlyzf.com/snippets/container/</link><guid isPermaLink="false">https://onlyzf.com/snippets/container/</guid><pubDate>Mon, 17 Jun 2019 19:07:00 GMT</pubDate><content:encoded>&lt;h2&gt;docker&lt;/h2&gt;
+&lt;h3&gt;enable debug in container&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;docker run --cap-add&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;SYS_PTRACE --security-opt &lt;span class=&quot;token assign-left variable&quot;&gt;seccomp&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;unconfined&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[《Docker —— 从入门到实践》]]></title><description><![CDATA[Docker 项目的目标是实现轻量级的操作系统虚拟化解决方案。 Docker 的基础是 Linux 容器（LXC）等技术。 在 LXC 的基础上 Docker 进行了进一步的封装，让用户不需要去关心容器的管理，使得操作更为简便。用户操作 Docker…]]></description><link>https://onlyzf.com/2019/docker/</link><guid isPermaLink="false">https://onlyzf.com/2019/docker/</guid><pubDate>Sun, 05 May 2019 09:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Docker 项目的目标是实现轻量级的操作系统虚拟化解决方案。&lt;/p&gt;
+&lt;p&gt;Docker 的基础是 Linux 容器（LXC）等技术。&lt;/p&gt;
+&lt;p&gt;在 LXC 的基础上 Docker 进行了进一步的封装，让用户不需要去关心容器的管理，使得操作更为简便。用户操作 Docker 的容器就像操作一个快速轻量级的虚拟机一样简单。&lt;/p&gt;
+&lt;p&gt;首先，Docker 容器的启动可以在秒级实现，这相比传统的虚拟机方式要快得多。 其次，Docker 对系统资源的利用率很高，一台主机上可以同时运行数千个 Docker 容器。&lt;/p&gt;
+&lt;p&gt;开发者可以使用一个标准的镜像来构建一套开发容器，开发完成之后，运维人员可以直接使用这个容器来部署代码。&lt;/p&gt;
+&lt;h2&gt;Docker 镜像&lt;/h2&gt;
+&lt;p&gt;Docker 镜像就是一个只读的模板。&lt;/p&gt;
+&lt;p&gt;例如：一个镜像可以包含一个完整的 ubuntu 操作系统环境，里面仅安装了 Apache 或用户需要的其它应用程序。&lt;/p&gt;
+&lt;p&gt;镜像可以用来创建 Docker 容器。&lt;/p&gt;
+&lt;h2&gt;Docker 容器&lt;/h2&gt;
+&lt;p&gt;Docker 利用容器来运行应用。&lt;/p&gt;
+&lt;p&gt;容器是从镜像创建的运行实例。它可以被启动、开始、停止、删除。每个容器都是相互隔离的、保证安全的平台。&lt;/p&gt;
+&lt;p&gt;可以把容器看做是一个简易版的 Linux 环境（包括 root 用户权限、进程空间、用户空间和网络空间等）和运行在其中的应用程序。&lt;/p&gt;
+&lt;p&gt;*注：镜像是只读的，容器在启动的时候创建一层可写层作为最上层。&lt;/p&gt;
+&lt;h2&gt;Docker 仓库&lt;/h2&gt;
+&lt;p&gt;仓库是集中存放镜像文件的场所。&lt;/p&gt;
+&lt;h2&gt;获取镜像&lt;/h2&gt;
+&lt;p&gt;可以使用 docker pull 命令来从仓库获取所需要的镜像。&lt;/p&gt;
+&lt;h2&gt;列出本地镜像&lt;/h2&gt;
+&lt;p&gt;使用 docker images 显示本地已有的镜像。
+利用 Dockerfile 来创建镜像&lt;/p&gt;
+&lt;h2&gt;镜像的实现原理&lt;/h2&gt;
+&lt;p&gt;Docker 镜像是怎么实现增量的修改和维护的？ 每个镜像都由很多层次构成，Docker 使用 Union FS 将这些不同的层结合到一个镜像中去。&lt;/p&gt;
+&lt;p&gt;通常 Union FS 有两个用途, 一方面可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下，另一个更常用的就是将一个只读的分支和一个可写的分支联合在一起，Live CD 正是基于此方法可以允许在镜像不变的基础上允许用户在其上进行一些写操作。 Docker 在 AUFS 上构建的容器也是利用了类似的原理。&lt;/p&gt;
+&lt;h2&gt;新建并启动&lt;/h2&gt;
+&lt;p&gt;所需要的命令主要为 docker run。&lt;/p&gt;
+&lt;p&gt;其中，-t 选项让 Docker 分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上， -i 则让容器的标准输入保持打开。&lt;/p&gt;
+&lt;h3&gt;守护态运行&lt;/h3&gt;
+&lt;p&gt;更多的时候，需要让 Docker 容器在后台以守护态（Daemonized）形式运行。此时，可以通过添加 -d 参数来实现。&lt;/p&gt;
+&lt;h2&gt;终止容器&lt;/h2&gt;
+&lt;p&gt;可以使用 docker stop 来终止一个运行中的容器。
+此外，当 Docker 容器中指定的应用终结时，容器也自动终止。&lt;/p&gt;
+&lt;h2&gt;进入容器&lt;/h2&gt;
+&lt;p&gt;attach 命令&lt;/p&gt;
+&lt;h2&gt;删除容器&lt;/h2&gt;
+&lt;p&gt;可以使用 docker rm 来删除一个处于终止状态的容器。&lt;/p&gt;
+&lt;h2&gt;自动创建&lt;/h2&gt;
+&lt;p&gt;自动创建（Automated Builds）功能对于需要经常升级镜像内程序来说，十分方便。&lt;/p&gt;
+&lt;p&gt;有时候，用户创建了镜像，安装了某个软件，如果软件发布新版本则需要手动更新镜像。&lt;/p&gt;
+&lt;p&gt;而自动创建允许用户通过 Docker Hub 指定跟踪一个目标网站（目前支持 GitHub 或 BitBucket）上的项目，一旦项目发生新的提交，则自动执行创建。&lt;/p&gt;
+&lt;h2&gt;Docker 数据管理&lt;/h2&gt;
+&lt;p&gt;数据卷容器&lt;/p&gt;
+&lt;h2&gt;Docker 中的网络功能&lt;/h2&gt;
+&lt;h3&gt;外部访问容器&lt;/h3&gt;
+&lt;p&gt;容器中可以运行一些网络应用，要让外部也可以访问这些应用，可以通过 -P 或 -p 参数来指定端口映射。&lt;/p&gt;
+&lt;h3&gt;容器互联&lt;/h3&gt;
+&lt;p&gt;Docker 通过 2 种方式为容器公开连接信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;环境变量&lt;/li&gt;
+&lt;li&gt;更新 /etc/hosts 文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当 Docker 启动时，会自动在主机上创建一个 docker0 虚拟网桥，实际上是 Linux 的一个 bridge，可以理解为一个软件交换机。它会在挂载到它的网口之间进行转发。&lt;/p&gt;
+&lt;p&gt;如果在企业内部应用，或者做多个物理主机的集群，可能需要将多个物理主机的容器组到一个物理网络中来，那么就需要将这个网桥桥接到我们指定的网卡上。&lt;/p&gt;
+&lt;h2&gt;安全&lt;/h2&gt;
+&lt;h3&gt;内核名字空间&lt;/h3&gt;
+&lt;h3&gt;控制组&lt;/h3&gt;
+&lt;p&gt;终极目标是改进 2 个重要的安全特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将容器的 root 用户映射到本地主机上的非 root 用户，减轻容器和主机之间因权限提升而引起的安全问题；&lt;/li&gt;
+&lt;li&gt;允许 Docker 服务端在非 root 权限下运行，利用安全可靠的子进程来代理执行需要特权权限的操作。这些子进程将只允许在限定范围内进行操作，例如仅仅负责虚拟网络设定或文件系统管理、配置操作等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最后，建议采用专用的服务器来运行 Docker 和相关的管理服务（例如管理服务比如 ssh 监控和进程监控、管理工具 nrpe、collectd 等）。其它的业务服务都放到容器中去运行。&lt;/p&gt;
+&lt;h2&gt;Dockerfile&lt;/h2&gt;
+&lt;h3&gt;ONBUILD&lt;/h3&gt;
+&lt;h2&gt;底层实现&lt;/h2&gt;
+&lt;p&gt;Docker 底层的核心技术包括 Linux 上的名字空间（Namespaces）、控制组（Control groups）、Union 文件系统（Union file systems）和容器格式（Container format）。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Game Development]]></title><description><![CDATA[…]]></description><link>https://onlyzf.com/2018/2018-10-30-game-development/</link><guid isPermaLink="false">https://onlyzf.com/2018/2018-10-30-game-development/</guid><pubDate>Tue, 30 Oct 2018 06:58:22 GMT</pubDate><content:encoded>&lt;h2&gt;应聘&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;招聘应聘的重点是在于双方需求的匹配&lt;/li&gt;
+&lt;li&gt;了解清楚招聘方的需求————需要什么样技能的人、额外要求的能力还有什么，自己是否能满足这些要求&lt;/li&gt;
+&lt;li&gt;想清楚自己的需求————想在这份工作中得到什么&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;简历注意事项&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;不要所有公司、岗位都用同样的简历。了解投递的岗位，简历上针对性的选择重点。&lt;/li&gt;
+&lt;li&gt;简历一定要突出重点，不用大而全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;面试注意事项——可分为“有经验”和“无经验”的人群&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;社招主要是关注已有工作经验并从中挖掘出技术的广度和深度&lt;/li&gt;
+&lt;li&gt;校招或应届生主要关注基础（数学、逻辑、数据结构、算法、操作系统、计算机网络）和成长性，一般来说各个方面都很积极主动的人成长的会很快。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;游戏研发必备的品质和技能+学习渠道&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;对游戏的热爱是加分项，如果有非常便于需求理解&lt;/li&gt;
+&lt;li&gt;基础知识：数学、逻辑、计算机图形学、数据结构、算法、操作系统、计算机网络&lt;/li&gt;
+&lt;li&gt;coursera.org&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;可以在工作之前做的准备（加分项）&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ACM竞赛&lt;/li&gt;
+&lt;li&gt;Unity自己制作上线的游戏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;行业情况：国内游戏行业管理越来越严、收入越来越困难，出海成为必选项&lt;/li&gt;
+&lt;li&gt;技术和Web技术有区别，线上项目很容易达到上万同时在线，比大多数产品用户人多，非常适合技术提升。&lt;/li&gt;
+&lt;li&gt;做好吃苦的心理准备&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[可分享的主题]]></title><description><![CDATA[设计模式、游戏开发中的实践 系统架构设计师指引 云计算概念、分布式系统、高可用系统 https://www.coursera.org/learn/cloud-computing https://coolshell.cn/articles/10910.html https…]]></description><link>https://onlyzf.com/2018/topic/</link><guid isPermaLink="false">https://onlyzf.com/2018/topic/</guid><pubDate>Sat, 20 Oct 2018 05:58:41 GMT</pubDate><content:encoded>&lt;h2&gt;设计模式、游戏开发中的实践&lt;/h2&gt;
+&lt;h2&gt;系统架构设计师指引&lt;/h2&gt;
+&lt;h2&gt;云计算概念、分布式系统、高可用系统&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.coursera.org/learn/cloud-computing&quot;&gt;https://www.coursera.org/learn/cloud-computing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://coolshell.cn/articles/10910.html&quot;&gt;https://coolshell.cn/articles/10910.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://coolshell.cn/articles/17459.html&quot;&gt;https://coolshell.cn/articles/17459.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://coolshell.cn/articles/17416.html&quot;&gt;https://coolshell.cn/articles/17416.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/cd/A91202_01/901_doc/rac.901/a89867/pshavdtl.htm&quot;&gt;https://docs.oracle.com/cd/A91202_01/901_doc/rac.901/a89867/pshavdtl.htm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;程序员的软实力&lt;/h2&gt;
+&lt;h2&gt;HTTP, HTTP/2, HTTPS, Web Services, RESTful, SOA, Microservices&lt;/h2&gt;
+&lt;h2&gt;MVC, MVP, MVVM, The Clean Architecture&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/googlesamples/android-architecture&quot;&gt;https://github.com/googlesamples/android-architecture&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html&quot;&gt;https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;性能测试及优化，游戏开发中的实践&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://coolshell.cn/articles/17381.html&quot;&gt;https://coolshell.cn/articles/17381.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://coolshell.cn/articles/7490.html&quot;&gt;https://coolshell.cn/articles/7490.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[macOS]]></title><description><![CDATA[Flushing your DNS cache on Mac OS X Show listen ports Bluetooth Devices Not Connecting to OSX Solution: Delete com.apple.Bluetooth.plist…]]></description><link>https://onlyzf.com/snippets/macOS/</link><guid isPermaLink="false">https://onlyzf.com/snippets/macOS/</guid><pubDate>Sat, 20 Oct 2018 07:22:02 GMT</pubDate><content:encoded>&lt;h2&gt;Flushing your DNS cache on Mac OS X&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;killall&lt;/span&gt; -HUP mDNSResponder&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;killall&lt;/span&gt; mDNSResponderHelper&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sudo&lt;/span&gt; dscacheutil -flushcache&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Show listen ports&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;lsof&lt;/span&gt; -nP -iTCP &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;grep&lt;/span&gt; LISTEN&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Bluetooth Devices Not Connecting to OSX&lt;/h2&gt;
+&lt;p&gt;Solution:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Delete com.apple.Bluetooth.plist. This file is found at HD/Library/Preferences.&lt;/li&gt;
+&lt;li&gt;Turn off Bluetooth on your Mac. This is done by clicking the Bluetooth icon in the menu bar and selecting ‘Turn Bluetooth Off’.&lt;/li&gt;
+&lt;li&gt;Unplug input-based USB devices (e.g. any USB mice, keyboards, Wacom tablets, etc).&lt;/li&gt;
+&lt;li&gt;Shut down computer. Do &lt;em&gt;not&lt;/em&gt; restart, but do a full shut down.&lt;/li&gt;
+&lt;li&gt;Turn off your Bluetooth devices.&lt;/li&gt;
+&lt;li&gt;Boot computer.&lt;/li&gt;
+&lt;li&gt;Turn Bluetooth on.&lt;/li&gt;
+&lt;li&gt;Begin pairing devices. This involves clicking: Bluetooth icon in menu bar &gt;&gt; Set up Bluetooth Device &gt;&gt; Select Bluetooth device &gt;&gt; Follow on-screen instructions. In the case of your keyboard, I would suggest pressing the ‘Enter/Return’ button several times after entering the passphrase shown on your screen.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This should result in your devices being reconnected.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[DNS]]></title><description><![CDATA[How to Check Domain’s Nameservers How to check DNS record chinadns]]></description><link>https://onlyzf.com/snippets/dns/</link><guid isPermaLink="false">https://onlyzf.com/snippets/dns/</guid><pubDate>Sat, 20 Oct 2018 07:01:12 GMT</pubDate><content:encoded>&lt;h2&gt;How to Check Domain’s Nameservers&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;nslookup&lt;/span&gt; -type&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;ns yourdomain.tld
+&lt;span class=&quot;token function&quot;&gt;dig&lt;/span&gt; ns yourdomain.tld&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;How to check DNS record&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;dig&lt;/span&gt; yourdomain.tld +nostats +nocomments +nocmd&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;chinadns&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;curl&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;grep&lt;/span&gt; ipv4 &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;grep&lt;/span&gt; CN &lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;awk&lt;/span&gt; -F&lt;span class=&quot;token punctuation&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;{ printf(&quot;%s/%d&lt;span class=&quot;token entity&quot; title=&quot;\n&quot;&gt;\n&lt;/span&gt;&quot;, &lt;span class=&quot;token variable&quot;&gt;$4&lt;/span&gt;, 32-log(&lt;span class=&quot;token variable&quot;&gt;$5&lt;/span&gt;)/log(2)) }&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; chnroute.txt
+chinadns -c chnroute.txt -s &lt;span class=&quot;token number&quot;&gt;223.5&lt;/span&gt;.5.5,119.29.29.29,208.67.222.222:443,8.8.8.8&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[极简Supervisor]]></title><description><![CDATA[Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems…]]></description><link>https://onlyzf.com/snippets/supervisor/</link><guid isPermaLink="false">https://onlyzf.com/snippets/supervisor/</guid><pubDate>Fri, 19 Oct 2018 08:22:49 GMT</pubDate><content:encoded>&lt;p&gt;Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems.&lt;/p&gt;
+&lt;p&gt;Supervisor 是比较简单的创建守护进程的工具，支持 linux 和 macOS 这些类 UNIX 系统。
+它的优势在于比较轻量、不需要 root 权限、配置简单、跨平台。开发时比较好用。&lt;/p&gt;
+&lt;p&gt;Supervisor 主要有 supervisord 和 supervisorctl，分别是服务和控制台工具。&lt;/p&gt;
+&lt;p&gt;详细文档参见：&lt;a href=&quot;http://supervisord.org/&quot;&gt;Supervisor&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;最简 supervisord.conf&lt;/h2&gt;
+&lt;p&gt;Environment variables that are present in the environment at the time that supervisord is started can be used in the configuration file using the Python string expression syntax %(ENV&lt;em&gt;X)s.
+supervisord 启动时的系统环境变量 X 用%(ENV&lt;/em&gt;X)s 可以取到。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://supervisord.org/configuration.html&quot;&gt;Configuration File&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ini&quot;&gt;&lt;pre class=&quot;language-ini&quot;&gt;&lt;code class=&quot;language-ini&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;; supervisord.conf&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;[include]&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; A space-separated sequence of file globs. Each file glob may be absolute or relative.&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; 这里配置的files是包含本地目录所有.conf.sample的文件，也就是每个服务可以单独建一个service.conf.sample&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; service.conf.sample见后&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; %(ENV_PWD)s/*.conf.sample&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;; The [rpcinterface:supervisor] section must remain in the configuration for the standard setup of supervisor to work properly.&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;[rpcinterface:supervisor]&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;supervisor.rpcinterface_factory&lt;/span&gt; &lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; supervisor.rpcinterface:make_main_rpcinterface&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;; The configuration file may contain settings for the supervisorctl interactive shell program.&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;[supervisorctl]&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; The URL that should be used to access the supervisord server, e.g. http://localhost:9001. For UNIX domain sockets, use unix:///absolute/path/to/file.sock.&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; supervisorctl连接supervisord的URL&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;serverurl&lt;/span&gt; &lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; unix:///tmp/supervisor.sock&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;; The supervisord.conf file contains a section named [supervisord] in which global settings related to the supervisord process should be inserted. These are as follows.&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;[supervisord]&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; When supervisord daemonizes, switch to this directory. This option can include the value %(here)s, which expands to the directory in which the supervisord configuration file was found.&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; supervisord切换至conf文件所在目录运行&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;directory&lt;/span&gt; &lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; %(here)s&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;; The supervisord.conf file contains a section named [unix_http_server] under which configuration parameters for an HTTP server that listens on a UNIX domain socket should be inserted. If the configuration file has no [unix_http_server] section, a UNIX domain socket HTTP server will not be started.&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;[unix_http_server]&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; A path to a UNIX domain socket (e.g. /tmp/supervisord.sock) on which supervisor will listen for HTTP/XML-RPC requests. supervisorctl uses XML-RPC to communicate with supervisord over this port.&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; supervisord监听的socket，supervisorctl需要连接此socket才能控制supervisord&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt; /tmp/supervisor.sock&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;最简 service.conf.sample&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://supervisord.org/configuration.html#program-x-section-settings&quot;&gt;[program:x] Section Settings&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ini&quot;&gt;&lt;pre class=&quot;language-ini&quot;&gt;&lt;code class=&quot;language-ini&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;; service.conf.sample&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; The configuration file must contain one or more program sections in order for supervisord to know which programs it should start and control. The header value is composite value. It is the word “program”, followed directly by a colon, then the program name.&lt;/span&gt;
+&lt;span class=&quot;token selector&quot;&gt;[program:service]&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; The command that will be run when this program is started. The command can be either absolute (e.g. /path/to/programname) or relative (e.g. programname). If it is relative, the supervisord’s environment $PATH will be searched for the executable.&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;%(ENV_PWD)s/service --port=8000&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; A list of key/value pairs in the form KEY=&quot;val&quot;,KEY2=&quot;val2&quot; that will be placed in the child process’ environment.&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;; 这里的配置是将子进程的时区设为UTC 0时区&lt;/span&gt;
+&lt;span class=&quot;token constant&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;TZ=&quot;UTC&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Git snippets]]></title><link>https://onlyzf.com/snippets/git/</link><guid isPermaLink="false">https://onlyzf.com/snippets/git/</guid><pubDate>Sat, 13 Oct 2018 07:11:09 GMT</pubDate><content:encoded></content:encoded></item><item><title><![CDATA[SSH config]]></title><description><![CDATA[~/.ssh/config]]></description><link>https://onlyzf.com/snippets/ssh/</link><guid isPermaLink="false">https://onlyzf.com/snippets/ssh/</guid><pubDate>Sat, 13 Oct 2018 06:30:59 GMT</pubDate><content:encoded>&lt;h2&gt;~/.ssh/config&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Host $SSHD_HOST
+    User $USER
+    IdentityFile $PRIVATE_KEY
+
+Host *
+    # Directs ssh to additionally check the host IP address in the known_hosts file.
+    CheckHostIP no
+    Compression yes
+    # Specifies whether the connection to the authentication agent will be forwarded to the remote machine.
+    ForwardAgent yes
+    # Specifies if ssh should never automatically add host keys to the ~/.ssh/known_hosts file, and refuses to connect to hosts whose host key has changed.
+    StrictHostKeyChecking no
+    TCPKeepAlive yes
+    # Specifies whether to verify the remote key using DNS and SSHFP resource records.
+    VerifyHostKeyDNS no&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Subversion snippets]]></title><description><![CDATA[Create a new directory under version control]]></description><link>https://onlyzf.com/snippets/svn/</link><guid isPermaLink="false">https://onlyzf.com/snippets/svn/</guid><pubDate>Sat, 13 Oct 2018 05:21:02 GMT</pubDate><content:encoded>&lt;h2&gt;Create a new directory under version control&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;svn &lt;span class=&quot;token function&quot;&gt;mkdir&lt;/span&gt; -m &lt;span class=&quot;token string&quot;&gt;&quot;Making a new dir.&quot;&lt;/span&gt; http://svn.red-bean.com/repos/newdir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Spring Config Server]]></title><link>https://onlyzf.com/snippets/spring-config-server/</link><guid isPermaLink="false">https://onlyzf.com/snippets/spring-config-server/</guid><pubDate>Wed, 13 Jun 2018 05:51:44 GMT</pubDate><content:encoded>&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;..&lt;/span&gt;/mvnw package -Dstart-class&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;org.springframework.cloud.config.server.ConfigServerApplication
+java -jar target/spring-cloud-config-server-2.0.0.BUILD-SNAPSHOT-exec.jar --spring.cloud.config.server.git.uri&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;file:///Users/user/projects/gm-config&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[GCC]]></title><description><![CDATA[Compiler Options We strongly recommend compiling with at least the following warning options: Recent versions of gcc also support an option…]]></description><link>https://onlyzf.com/snippets/cc/</link><guid isPermaLink="false">https://onlyzf.com/snippets/cc/</guid><pubDate>Sun, 01 Apr 2018 01:52:00 GMT</pubDate><content:encoded>&lt;h2&gt;Compiler Options&lt;/h2&gt;
+&lt;p&gt;We strongly recommend compiling with at least the following warning options:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;-Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Recent versions of gcc also support an option &lt;code class=&quot;language-text&quot;&gt;-fsanitize=address&lt;/code&gt; which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.&lt;/p&gt;
+&lt;h2&gt;Valgrind&lt;/h2&gt;
+&lt;p&gt;Run valgrind with &lt;code class=&quot;language-text&quot;&gt;--track-origins=yes&lt;/code&gt; to determine the source of the error.&lt;/p&gt;
+&lt;h2&gt;Practical Tips for Designing Test Cases&lt;/h2&gt;
+&lt;p&gt;Writing good tests cases requires a lot of thought: you need to think about a wide variety of things that can go wrong. Here are some suggestions to guide your thinking, as well as important lessons. First, some thoughts for testing error cases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make sure your tests cover every error case. Think about all the inputs that the program cannot handle, i.e., ones where you would expect to receive an error message. If the program requires a number, give it “xyz”, which is not a valid number. An even better test case might be “123xyz” which starts out as a number but isn’t entirely a number. How the program should handle this depends on the requirements of the program, but you want to make sure it handles it correctly.&lt;/li&gt;
+&lt;li&gt;Be sure to test “too many” as well as “too few”. If a program requires exactly N things, test it with at least one case greater than N and at least one case with fewer than N. For example, if a program requires a line of input with exactly 10 characters, test it with 9 and with 11.&lt;/li&gt;
+&lt;li&gt;Any given test case can only test one “error message and exit” condition. This means that if you want to test two different error conditions, you need two different test cases: one for each error condition. Suppose that our program requires a three letter string of lower-case letters. We might be tempted to test with “aBcD” to test two things at once, but this will only test one (and believing you tested both is problematic!) To see why this rule exists, think about the algorithm to check for these errors:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Debugging&lt;/h2&gt;
+&lt;p&gt;The Scientific Method&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 520px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/eae856ff46cfcc335f661a0b37a7d1e5/69902/debugging.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 34.810126582278485%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAACI0lEQVQoz2P4//8/ExAzQzGMzYpNfOf2zdbblzUX7V5SlgPCu5Y3FezZvcPi4KGjgkB5jj9//vAwnFqRvHBnj+H+1S0m24/OsD2xf0lOVkHzSpk9M/y2H5piumdPv/meI9OdTm2aW+fX396YsaPL8P/eLpX/O9qV/++fYPB//fLpGRp6FswfKhkYT2ydwMqwbUHxkTkNHq+m1Pg8WNYV9G3H0rrqY/f+C6+flnJvdbfPi8Vd3pdXT4+8NW/D/OD+TeucDky3/L+5Tev/hmat/wcmm//ftue41f//DAy3l5gx7Jzqx8AAZDPMBXpnFxAzgLwH5P+cBST//2cEYpZTLRPjrqen111JCau6XZoyZUtr+dXJfTXF/R1V6atm12++vCFj+p7pXk0n5ns3ndlQlsDQCDT+0T+gAYVRDAxBLAwMdkATeYG41Z+BEUjtKEm/sCvY8f/WMPf/O4Nd/u8pLro1Cyg+JVeUYdOilvaVbfb/lzbb/19Ub/F//YzsJwwgAAxQxuTpVX2Ofcn7PCdmbvGalLXVqy9jf11Pi8/Wnfu05ixf4dzUO9FjybKFNXvmRj3aO8lq/+5+0537ZgVfX7N6ZfmydftMduw9oXfu8l1VkGFgQ0umNW8La8/5Ed2Z/yqyM+9NXHfR1xmL5gQv3bqWYeFTO4Zt6+YznDi8w3zNxMhnK7oD3q/oDny/ekLEq0O715ptXreEYemKDQyz5y5iAAAtPDIGPrqgagAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;debugging&quot;
+        title=&quot;debugging&quot;
+        src=&quot;/static/eae856ff46cfcc335f661a0b37a7d1e5/69902/debugging.png&quot;
+        srcset=&quot;/static/eae856ff46cfcc335f661a0b37a7d1e5/c26ae/debugging.png 158w,
+/static/eae856ff46cfcc335f661a0b37a7d1e5/6bdcf/debugging.png 315w,
+/static/eae856ff46cfcc335f661a0b37a7d1e5/69902/debugging.png 520w&quot;
+        sizes=&quot;(max-width: 520px) 100vw, 520px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;Observe a Phenomenon&lt;/h3&gt;
+&lt;p&gt;The figure above shows a flow-chart of the scientific method. All science starts with observing some phenomenon. In the natural sciences this might be noticing that objects fall towards the ground when not supported by anything, realizing that finches in certain of the Galápagos Islands have different characteristics from other finches, or that the water level rises when you get into the bathtub.&lt;/p&gt;
+&lt;p&gt;In programming, our observation of phenomena relates to the behavior of our programs on certain inputs (“My program gives the wrong answer when I give it an input of 42!”). These observations typically arise from our test cases, but may happen under other circumstances (for example, the end user reports a problem that we did not discover in testing).&lt;/p&gt;
+&lt;p&gt;Ask a Question
+Once you have observed a phenomena, the next step in the scientific method is to ask a question. Asking a good question here is crucial to the success of the rest of our scientific endeavor. While a broad question such as “What is wrong with my program and how do I fix it?” may seem appealing, it may be quite difficult to answer. Instead, we should aim for more focused questions: “On which line of code does my program crash?” or “Why does my program call myFunction with x=3 and y=-42?”.&lt;/p&gt;
+&lt;p&gt;Answering one question often leads to an observation that leads to another question—restarting the scientific process all over again. Discovering what is wrong in this iterative fashion is perfectly fine, and in fact a great way to proceed. You start by asking “Which line does my program crash on?” then when you answer that, you ask “Why does it crash on this line?” the answer to that then leads you to ask “How is x=3 and y=-42?” which in turn leads you to ask another question, and so on. Eventually, your chain of questions and answers leads you to the discovery of the problem, even if it somewhat far removed from the visible symptom.&lt;/p&gt;
+&lt;p&gt;Gather Information, Apply Expert Knowledge
+Many people will say that forming a hypothesis is the next step of the scientific method. If you can form a hypothesis immediately, that is great. However, forming a good hypothesis is difficult, and forming one right away is often not possible.&lt;/p&gt;
+&lt;p&gt;The next step of the scientific method is actually to gather information and combine it with your expert knowledge. Going back to our example of visiting the doctor, the doctor gathers information by examining the patient, and combines it with her expert knowledge—years of training on symptoms of diseases and how the body works—to form a hypothesis.&lt;/p&gt;
+&lt;p&gt;In the case of debugging, you need to gather information about what is happening in your program, and combine this with your own expert knowledge on programming. Your expert knowledge comes in two parts here. One is your knowledge of programming in general—the rules for how to execute code by hand that we learned in previously (and will continue learning as we introduce more topics), and your domain knowledge of the particular program you are writing—the expected behaviors of each part of it.&lt;/p&gt;
+&lt;p&gt;Your expert knowledge will grow with practice in programming, and the domain for which you are writing programs. However, gathering information effectively is a skill of its own. The information gathering aspect of debugging is often conflated with the entirety of debugging—if you ask someone how they debug, they will often explain to you what techniques they use to gather information.&lt;/p&gt;
+&lt;p&gt;The simplest way to gather information is to insert print statements (in C, calls to printf) to display the values of various variables at various points in the program. The resulting output can give you information about the control flow of the program (which statements were executed, and in what order—as shown by what order your print statements print their output), and, of course the values of the variables that you print.&lt;/p&gt;
+&lt;p&gt;Gathering information by printing has the advantages that it is simple and requires no other knowledge or experience. However, it has several disadvantages as well. One is that changing what you print out requires recompiling and re-running your program. While this disadvantage may seem small, if your bug takes 15 minutes to manifest, restarting the program for each new piece of information you discover that you want can be quite time consuming. Another disadvantage is that the output may be overwhelming (i.e., thousands of lines of output to sift through) if your program executes for even a modest time before experiencing the problem. A third disadvantage is that it cannot replicate or replace many features that debuggers offer.&lt;/p&gt;
+&lt;p&gt;Another approach to information gathering is to use a debugger—a tool specifically designed to aid programmers in the debugging process. The debugger is in fact primarily aimed at this piece of the debugging process—gathering information (sadly, it does not offer you hypotheses or expert knowledge). One widely used debugger is gdb, which we cover in detail in the future. We strongly recommend that you learn it, and if you intend to become a serious programmer, become an expert in it. We will mention generally what you can do with it here, but leave the details until later as gdb has features which we relate to topics that we have not learned yet.&lt;/p&gt;
+&lt;p&gt;For now, we will discuss the high-level points of a debugger. When you run your program inside the debugger, you can give the debugger a variety of commands to control the execution of your program, and get information from it. Note that Emacs understands how to interact with gdb and using them together makes the entire process go much more smoothly.&lt;/p&gt;
+&lt;p&gt;For now, we will discuss the high-level points of a debugger. When you run your program inside the debugger, you can give the debugger a variety of commands to control the execution of your program, and get information from it. Note that Emacs understands how to interact with gdb and using them together makes the entire process go much more smoothly.&lt;/p&gt;
+&lt;p&gt;When you run your program inside of a debugger, it will run as normal until either (a) it exits (b) it crashes (c) it encounters a breakpoint (or watchpoint) that you have set. A breakpoint is set on a particular line of code, and instructs the debugger to stop the execution of your program whenever the execution arrow is on it. Breakpoints can be conditional—meaning you can specify that you only want to stop on some particular line when a conditional expression you specify is true. Watchpoints specify that you want to stop the program when a particular “box” changes.&lt;/p&gt;
+&lt;p&gt;Once your program is stopped, you can examine the state of the program by printing the values of expressions. The debugger will evaluate the expression, and print the result for you—giving you information about the state of the program. Most often, you will want to print the values of variables to see what is going on, though you may print much more complex expressions if you wish.&lt;/p&gt;
+&lt;p&gt;After printing some information, you will often want to continue executing in some fashion—either running until the debugger would stop naturally (as described above), or maybe just executing one more statement, then stopping. The debugger gives you the ability to choose either one. If you want to execute one statement at a time, and the current statement involves a function call, you have two options. You can either step over the call (asking the debugger to evaluate the entire function call, and stop on the next line of the current function), or you can step into the function call (asking the debugger to follow the execution arrow inside the function and let you explore what is happening inside it).&lt;/p&gt;
+&lt;p&gt;This approach to gathering information is more flexible than print statements—if you encounter one oddity, which suggests other things you need to explore, you can print them immediately. By contrast, if you print the value of a variable with a print statement, adding more print statements to investigate other variables requires recompiling and re-running the program.&lt;/p&gt;
+&lt;p&gt;The previous paragraph alludes to a common occurrence in the debugging process: recursive observations—gaining some information (e.g., seeing the value you printed for one variable) leads you to want some other information (e.g., to print some other variable). Often when you are investigating one phenomenon (“My program crashes when I enter 3…”), you observe some other phenomenon (“y is 0 on line 42..”) which itself leads to a question meriting investigation (“How did that happen?”). The investigation of this second phenomenon proceeds according to the scientific method. In such a case, you are recursively applying the scientific method. We will learn about recursion as a programming technique later, but for now it suffices to say that recursion is when an algorithm (in this case, the scientific method) has a step which calls for you to apply the same algorithm to “smaller” (by some metric) inputs. Here, investigating the second observation may immediately solve your problem, may give you useful information to allow you to proceed, or may prove to be a red-herring (something that was actually fine, but just surprised you—in which case, you just continue gathering information for your original question).&lt;/p&gt;
+&lt;p&gt;Form a Hypothesis
+The whole point of gathering all of this information is to help you form a hypothesis. Sometimes, you may be able to form a hypothesis right away—typically for problems that are simple relative to your experience level. However, forming a good hypothesis is generally hard, and requires significant information gathering.&lt;/p&gt;
+&lt;p&gt;Forming a good hypothesis is the key to proceeding effectively. A vague hypothesis is hard to test, and not so useful in identifying the problem. As an extreme example, the hypothesis “My program is broken” is easily verified, but rather useless. The hypothesis “My program is dividing by 0 on line 47 for certain inputs” is more useful, but could be improved. Even better would be “My program is dividing by 0 on line 47 if y is odd and z is a perfect square.” This (contrived) hypothesis is specific and clear—giving it two important characteristics for debugging.&lt;/p&gt;
+&lt;p&gt;The first characteristic of a good hypothesis that this exhibits is that it is testable. For a hypothesis to be testable, it must make specific predictions about the behavior of the program: when I give the program inputs that meet (condition), I will observe (behavior). For such a hypothesis, you can execute test cases to either refute this hypothesis (e.g., if the program’s behavior does not match the predictions that the hypothesis makes) or to become confident enough in our hypothesis that we accept it. The contrived hypothesis we presented at the end of the previous paragraph is quite testable: we specify a certain category of inputs (y is odd and z is a perfect square) and exactly what behavior we expect to observe (division by 0 on line 47).&lt;/p&gt;
+&lt;p&gt;The second characteristic of a good hypothesis for debugging is that it is actionable—if we convince ourselves that it is true, it provides us with an indication of either how to fix the error in our code, or what the next steps towards it are. In the case of our contrived hypothesis, confirmation would likely suggest a special case of the algorithm which we did not consider. The fact that our hypothesis is specific (with regards to what types of inputs trigger the error) identifies the corner cases for us, guiding us to the path to fixing the problem.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[TED's secret to great public speaking]]></title><description><![CDATA[Focus on one major idea. Give people a reason to care. Build your idea with familiar concepts. Make your idea worth sharing.]]></description><link>https://onlyzf.com/2017/2017-05-09-how-to-speech/</link><guid isPermaLink="false">https://onlyzf.com/2017/2017-05-09-how-to-speech/</guid><pubDate>Tue, 09 May 2017 00:00:00 GMT</pubDate><content:encoded>&lt;ul&gt;
+&lt;li&gt;Focus on one major idea.&lt;/li&gt;
+&lt;li&gt;Give people a reason to care.&lt;/li&gt;
+&lt;li&gt;Build your idea with familiar concepts.&lt;/li&gt;
+&lt;li&gt;Make your idea worth sharing.&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Linux开发经验教训——来自《Linux 内核开发报告2016版》]]></title><description><![CDATA[长达 25 年的经验教训一：快速发布，短发布周期很重要 长达 25 年的经验教训二：流程的扩展性需要分布式层级状的开发模式，全靠 Linus 一个会死人，职责分工明确才能提高效率 长达 25 年的经验教训三：工具很重要，迁移到 BitKeeper…]]></description><link>https://onlyzf.com/2016/2016-09-19-linux/</link><guid isPermaLink="false">https://onlyzf.com/2016/2016-09-19-linux/</guid><pubDate>Mon, 19 Sep 2016 00:00:00 GMT</pubDate><content:encoded>&lt;ul&gt;
+&lt;li&gt;长达 25 年的经验教训一：快速发布，短发布周期很重要&lt;/li&gt;
+&lt;li&gt;长达 25 年的经验教训二：流程的扩展性需要分布式层级状的开发模式，全靠 Linus 一个会死人，职责分工明确才能提高效率&lt;/li&gt;
+&lt;li&gt;长达 25 年的经验教训三：工具很重要，迁移到 BitKeeper 颠覆性的改善了工作方式，而至 Git 的迁移则进一步提升了工作效率&lt;/li&gt;
+&lt;li&gt;长达 25 年的经验教训四：认同性原则很重要。若某个改动有一个有经验受尊敬的开发者反对，那么便不会合并。这保证了不会有任何变动会以牺牲某个用户群体为代价。&lt;/li&gt;
+&lt;li&gt;长达 25 年的经验教训五：没有 Regression 原则很重要。尽管偶尔实践的不完美，但是保证了用户不会为内核升级而特别担忧。&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[功夫小子运营]]></title><description><![CDATA[简介 功夫小子是一款多人格斗竞技游戏，无成长，游戏中可切换武器，强调武器平衡及个人技术
+
+ 开发：盛大成都研发 运营：盛大上海（后转入成都锦天） 上线时间：2007 年 运营状态：alive…]]></description><link>https://onlyzf.com/2015/2015-03-04-kk/</link><guid isPermaLink="false">https://onlyzf.com/2015/2015-03-04-kk/</guid><pubDate>Wed, 04 Mar 2015 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;简介&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://kk.8yx.com/&quot;&gt;功夫小子&lt;/a&gt;是一款多人格斗竞技游戏，无成长，游戏中可切换武器，强调武器平衡及个人技术
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 78.48101265822784%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAQABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAECAwX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABzotloiP/xAAZEAADAQEBAAAAAAAAAAAAAAAAAQIREjH/2gAIAQEAAQUCbNZPmUc02z//xAAVEQEBAAAAAAAAAAAAAAAAAAAQEf/aAAgBAwEBPwGH/8QAFREBAQAAAAAAAAAAAAAAAAAAEBH/2gAIAQIBAT8Bp//EABgQAAIDAAAAAAAAAAAAAAAAAAAQESFB/9oACAEBAAY/AnhcL//EABoQAQEBAAMBAAAAAAAAAAAAAAEAESExQVH/2gAIAQEAAT8hwGyDqX1OHAoExn2GPl//2gAMAwEAAgADAAAAEBw//8QAFREBAQAAAAAAAAAAAAAAAAAAEBH/2gAIAQMBAT8Qg//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAgBAgEBPxCmv//EABwQAQACAgMBAAAAAAAAAAAAAAEAESExQVFhsf/aAAgBAQABPxAnJeuL4jREZ6GCm0+jXyV1Mlt0y4oXYNQCMMeT/9k=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;大厅&quot;
+        title=&quot;大厅&quot;
+        src=&quot;/static/75cd9e923be0ca0147cda7ff95cbeaf1/828fb/lobby.jpg&quot;
+        srcset=&quot;/static/75cd9e923be0ca0147cda7ff95cbeaf1/ff44c/lobby.jpg 158w,
+/static/75cd9e923be0ca0147cda7ff95cbeaf1/a6688/lobby.jpg 315w,
+/static/75cd9e923be0ca0147cda7ff95cbeaf1/828fb/lobby.jpg 630w,
+/static/75cd9e923be0ca0147cda7ff95cbeaf1/31be4/lobby.jpg 806w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 44.93670886075949%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAJABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAQX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/aAAwDAQACEAMQAAABnznNqWEof//EABkQAAMAAwAAAAAAAAAAAAAAAAABAhASMf/aAAgBAQABBQJVLKao3nFcP//EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oACAEDAQE/AUf/xAAWEQEBAQAAAAAAAAAAAAAAAAAAERL/2gAIAQIBAT8BrT//xAAYEAACAwAAAAAAAAAAAAAAAAABMQAgIf/aAAgBAQAGPwILIgK//8QAGhAAAgMBAQAAAAAAAAAAAAAAAAERITEQcf/aAAgBAQABPyFpGGpY0oTY7Hq9Nef/2gAMAwEAAgADAAAAENw//8QAFxEBAQEBAAAAAAAAAAAAAAAAAREAYf/aAAgBAwEBPxCKS473/8QAGBEBAAMBAAAAAAAAAAAAAAAAAQARITH/2gAIAQIBAT8QoI1HXJ//xAAeEAEAAgIBBQAAAAAAAAAAAAABABEhYRAxcaHh8f/aAAgBAQABPxA8D5CpXbcSUt3j7LgBdnueO4b0O0//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;战斗&quot;
+        title=&quot;战斗&quot;
+        src=&quot;/static/8474120cf10a40d79c0cb5520f7e6f5d/828fb/battle.jpg&quot;
+        srcset=&quot;/static/8474120cf10a40d79c0cb5520f7e6f5d/ff44c/battle.jpg 158w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/a6688/battle.jpg 315w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/828fb/battle.jpg 630w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/0ede0/battle.jpg 945w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/50055/battle.jpg 1012w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;开发：盛大成都研发&lt;/li&gt;
+&lt;li&gt;运营：盛大上海（后转入成都锦天）&lt;/li&gt;
+&lt;li&gt;上线时间：2007 年&lt;/li&gt;
+&lt;li&gt;运营状态：alive&lt;/li&gt;
+&lt;li&gt;盈利模式：免费卖道具的方式，主营是武器。由于一开始就卖了永久的武器，所以后来都不做限时武器了，全部是永久的。
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 601px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/0fca3f0fb9a3620752aa62f8b3cb6f8d/5ed3f/weapon.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 66.45569620253164%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAANABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAECAwT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAABwKZFgw//xAAbEAABBAMAAAAAAAAAAAAAAAASAAECECExMv/aAAgBAQABBQKocjkU2v/EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABcQAAMBAAAAAAAAAAAAAAAAAAABICH/2gAIAQEABj8CHk//xAAcEAACAgIDAAAAAAAAAAAAAAAAARExIUFRwdH/2gAIAQEAAT8hd9Ce1h8cG6d8F34LEFR//9oADAMBAAIAAwAAABAj/wD/xAAVEQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAwEBPxASf//EABYRAAMAAAAAAAAAAAAAAAAAAAEQEf/aAAgBAgEBPxCFf//EAB0QAQEAAgMAAwAAAAAAAAAAAAERACExUWGRsdH/2gAIAQEAAT8QUaOx1pt6+MEAVELNemQjyrp9xQ4pTPpk1Ubx0/cEgCmGf//Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;武器&quot;
+        title=&quot;武器&quot;
+        src=&quot;/static/0fca3f0fb9a3620752aa62f8b3cb6f8d/5ed3f/weapon.jpg&quot;
+        srcset=&quot;/static/0fca3f0fb9a3620752aa62f8b3cb6f8d/ff44c/weapon.jpg 158w,
+/static/0fca3f0fb9a3620752aa62f8b3cb6f8d/a6688/weapon.jpg 315w,
+/static/0fca3f0fb9a3620752aa62f8b3cb6f8d/5ed3f/weapon.jpg 601w&quot;
+        sizes=&quot;(max-width: 601px) 100vw, 601px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;最高时做到过盛大全公司收入前十&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;盛大特色&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;彩虹帮助：盛大要求所有游戏都必须在游戏内置彩虹帮助，让玩家可以直接联系查询常见问题以及联系客服
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 325px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d0a6c52265dc3b02047c10a419d73907/ff46a/help.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 34.810126582278485%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsTAAALEwEAmpwYAAABq0lEQVQoz43MzWvTABzG8fwR3udaX1CG69puc048KM4XWNukXVuSNLPB2DZ9mWxOKl2zNFlb1uFsZS9OhopD8Lod7V8g3jw4vPoXeBC8yL5G0YMg4g8+PA+/wyMUCyXcfJj1yhBrlRDb8ydwixcxsga3VBVVVtC8zCgq2g9qhlRKwa7O8qFvsV0Pc+akj1L5LpGpCQQzZ7KQCfFAO8WiOsTSrJ85ZZR0Io0YiSBGRaSY5BG9LpGMS5T1GziLCp/6j3lZv0TwrJ+iOcf0VW/wjmFQzOdprTis2BaO7WXDptVYounUabvLtFzrp7Zj0Wwus7tbwTQ0Xjcb7LdrbN3P0W3kiFy7gKBndVbdKh8P3wPfPEe//L6jP36Hn79SePuF+Vqeg57Gu4Mee+sm+881pqcmEcqlMtWFCpu9Djsbj3i61f2rnc0uz570WH24xj3LYcO+yauOSKem0X8R5c1eiutXvEFZ0UgmZSQpiSjOEIsl/ikuzZCORVGSCQq348iyiqlnKRg6lycDCGPDA5wfGWQi6Ptv40E/Y4FBRoe9HjhO+NwA4yM+QqeP8R23IUEjRsWrSwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;帮助&quot;
+        title=&quot;帮助&quot;
+        src=&quot;/static/d0a6c52265dc3b02047c10a419d73907/ff46a/help.png&quot;
+        srcset=&quot;/static/d0a6c52265dc3b02047c10a419d73907/c26ae/help.png 158w,
+/static/d0a6c52265dc3b02047c10a419d73907/6bdcf/help.png 315w,
+/static/d0a6c52265dc3b02047c10a419d73907/ff46a/help.png 325w&quot;
+        sizes=&quot;(max-width: 325px) 100vw, 325px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;快捷消费：要求所有游戏必须给玩家提供冲动消费的方式，有点儿类似亚马逊的一键下单。截图中最下面一行的道具都是直接花人民币的，都是一键使用。
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8474120cf10a40d79c0cb5520f7e6f5d/50055/battle.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 44.93670886075949%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAJABQDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAQX/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAv/aAAwDAQACEAMQAAABnznNqWEof//EABkQAAMAAwAAAAAAAAAAAAAAAAABAhASMf/aAAgBAQABBQJVLKao3nFcP//EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oACAEDAQE/AUf/xAAWEQEBAQAAAAAAAAAAAAAAAAAAERL/2gAIAQIBAT8BrT//xAAYEAACAwAAAAAAAAAAAAAAAAABMQAgIf/aAAgBAQAGPwILIgK//8QAGhAAAgMBAQAAAAAAAAAAAAAAAAERITEQcf/aAAgBAQABPyFpGGpY0oTY7Hq9Nef/2gAMAwEAAgADAAAAENw//8QAFxEBAQEBAAAAAAAAAAAAAAAAAREAYf/aAAgBAwEBPxCKS473/8QAGBEBAAMBAAAAAAAAAAAAAAAAAQARITH/2gAIAQIBAT8QoI1HXJ//xAAeEAEAAgIBBQAAAAAAAAAAAAABABEhYRAxcaHh8f/aAAgBAQABPxA8D5CpXbcSUt3j7LgBdnueO4b0O0//2Q==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;战斗&quot;
+        title=&quot;战斗&quot;
+        src=&quot;/static/8474120cf10a40d79c0cb5520f7e6f5d/828fb/battle.jpg&quot;
+        srcset=&quot;/static/8474120cf10a40d79c0cb5520f7e6f5d/ff44c/battle.jpg 158w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/a6688/battle.jpg 315w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/828fb/battle.jpg 630w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/0ede0/battle.jpg 945w,
+/static/8474120cf10a40d79c0cb5520f7e6f5d/50055/battle.jpg 1012w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;各种喇叭：这是从泡泡堂继承的有效的收入手段。小喇叭主要在聊天位置发所有玩家可见消息，大喇叭会在聊天位置发所有玩家可见消息，心情喇叭会在公告栏的位置发消息。玩家很买账，这是泡泡堂的主要收入来源。基本上所有的盛大游戏都有这个：
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/8950d03bd1d6189ff091012d12807192/a6d32/chat.jpg&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 70.88607594936708%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAOABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAIDBf/EABUBAQEAAAAAAAAAAAAAAAAAAAEC/9oADAMBAAIQAxAAAAHnXesshP/EABoQAAIDAQEAAAAAAAAAAAAAAAABAgMREyL/2gAIAQEAAQUCMi3zqI2JDu08s//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQMBAT8BP//EABQRAQAAAAAAAAAAAAAAAAAAABD/2gAIAQIBAT8BP//EABsQAAEFAQEAAAAAAAAAAAAAAAABAhEhMjNR/9oACAEBAAY/Ap8LWJNGELY05tP/xAAbEAACAgMBAAAAAAAAAAAAAAABEQAhMVGBYf/aAAgBAQABPyEpUyxuANQg7g7GC63Kra8jsJOmf//aAAwDAQACAAMAAAAQb8//xAAVEQEBAAAAAAAAAAAAAAAAAAABAP/aAAgBAwEBPxBAkv/EABcRAQADAAAAAAAAAAAAAAAAAAABESH/2gAIAQIBAT8Qi2v/xAAcEAEAAgMAAwAAAAAAAAAAAAABABEhMVGhsfH/2gAIAQEAAT8Q21KaQ4evsss0MqEIloQvt7khgdeM3wYuilGsojZNsP/Z&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;聊天&quot;
+        title=&quot;聊天&quot;
+        src=&quot;/static/8950d03bd1d6189ff091012d12807192/828fb/chat.jpg&quot;
+        srcset=&quot;/static/8950d03bd1d6189ff091012d12807192/ff44c/chat.jpg 158w,
+/static/8950d03bd1d6189ff091012d12807192/a6688/chat.jpg 315w,
+/static/8950d03bd1d6189ff091012d12807192/828fb/chat.jpg 630w,
+/static/8950d03bd1d6189ff091012d12807192/a6d32/chat.jpg 652w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+下半部黄的是大喇叭，中间是心情喇叭。&lt;/li&gt;
+&lt;li&gt;论坛：所有游戏都有的论坛，论坛入口都很好记形如：&lt;a href=&quot;http://bbs.8yx.com/&quot;&gt;http://bbs.8yx.com&lt;/a&gt;
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49.36708860759494%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAACEUlEQVQoz0WRW2/TQBCF8/+RaKvyxFtQSykUqVAQErSqRE3SNLGdW+3E8fqa+J44NyflpsPsOi0PRyPvzp4537iifj6GdnmK+ocqaq/30Hp3WOrsEM1dbZwe4PbN/pO+Vp/j8tUevlT3IZ0ciPt69Rmuz49RiSwVeu0M90oNducGGZORmK0npUJyWcWdDL13B6PXgNKUYHZ+IDLuMGMtMKajsogNNC9ewBsooskz2mBaC0a3AXeoirNlYgPbBH9WIX6TNvkYDzMPiXuP8aiNPGJAESLJUzJMXEgfzzGQJejyDXxDha01RXUHMhy9hYB1kXoaitQmIxeL2MYiNDBhHWHI++djDWEaoZL6Q3x/fyQeD9s1+CMV3lDGxCwbQ6uHdWphlTBsyewh97DOHKxiRjQKAqtLb9pYBgOEGTf0dHw7eokRoWmUkCeySWOzI5LpikRoGv6uApGOoy5TB8toRH1NkZKHmXr9MuEssiBfXdAOZZGIo8VOH5HdE4Z8T3lgYE7aTB38pITF1CV8a0ejEIGNbcrgRxNU8pChd/VJGIodUgOfOOrWKfUtloTGcYVh9t9wk9liHXzoPDKxSUy4gU8/JfUgvT2BodYwIMVOmWg2GQqTzNfEGf/mZhx5RchrGmIRkdlviP4iHpWG66mPImNY0E74o4Imb3YqHkV4vD7ucEsJxQ+alZWv4tfUxiQO8A89iMYvXqxmlgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;论坛&quot;
+        title=&quot;论坛&quot;
+        src=&quot;/static/f595f8afb9c7e1f7cf8dd51eaab2c6ac/f058b/bbs.png&quot;
+        srcset=&quot;/static/f595f8afb9c7e1f7cf8dd51eaab2c6ac/c26ae/bbs.png 158w,
+/static/f595f8afb9c7e1f7cf8dd51eaab2c6ac/6bdcf/bbs.png 315w,
+/static/f595f8afb9c7e1f7cf8dd51eaab2c6ac/f058b/bbs.png 630w,
+/static/f595f8afb9c7e1f7cf8dd51eaab2c6ac/146da/bbs.png 943w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;客服：盛大的客服很早就转移到成都来了，主要通过论坛和电话和玩家沟通。邮件的方式倒是非常少。客服是三班倒，保证任何时刻都有人回答论坛的问题以及接听玩家电话。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;运营方式&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;周末活动：每周末都会做提升在线的活动
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/b6ca4f2e71e2c67f14bdedf1fa8409d7/cab8c/active.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 104.43037974683544%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAYAAABG1c6oAAAACXBIWXMAAAsTAAALEwEAmpwYAAACFklEQVQ4y42U6ZKbMBCE/f4vlkpim/sQN15j4TjvMOkeiY2zsYEfKlGU+Oie6dGhrIxESSJRmugexJFkZSnXaZJ5nsVuLJ5p2kZyU0rXD3Io8ECIAtNU4iyVUxiKaWqZ73e5Wbu6CK1wliK6vgcQD2ESSwwYod+PR2m61imwXNbvr5YD1k0jhTHSD14hgWeo/Pbzh6o9hYEkee4sK3BlEUjLi0JTVWqVQIJPUah/Yg03YV+BVFgCSLtBHMsxCOQMIFX24/hZwy3LbdcJOQO+OdA7FWZlIUdYpd04z+RyverhPU2hwgJpUcslgEmWaWETgEIo5d8ej9+qcPbReLtwpkUTK3yvCpnDGEAqZA5ZxxC7qWv5gEp+sJlDACnCd9lbLgoFLcC6bRW42H7VkMVyg7MlBAyjBzLMfEGQhhrPvx4Pn0X7viHPNVxymPtga/2ws9spMuhi85zDdSA57LZOCiFURyjzyCxONyv31dh8UVh5hXo5cIaxQn856CiiUaryrW373+i52FSuhlyMD3fOdIomTdNtF5BdNoCOl9HlkBDGZqkjJ4by/07KerC1yzopT102daXKzlEEdTn+dtl/H6IZTIbWkJcDrfIFwWxK23fakM0p8ZPyD5DXl1NYqzLOcwill4/9s0zLRoM9OiCt6uh5ywHqOKjl+2fhXy7rVGqXl9Fbrm92lfHhyBHOfY9CLpZouRz+AB4K7ycEQoO+AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;活动&quot;
+        title=&quot;活动&quot;
+        src=&quot;/static/b6ca4f2e71e2c67f14bdedf1fa8409d7/f058b/active.png&quot;
+        srcset=&quot;/static/b6ca4f2e71e2c67f14bdedf1fa8409d7/c26ae/active.png 158w,
+/static/b6ca4f2e71e2c67f14bdedf1fa8409d7/6bdcf/active.png 315w,
+/static/b6ca4f2e71e2c67f14bdedf1fa8409d7/f058b/active.png 630w,
+/static/b6ca4f2e71e2c67f14bdedf1fa8409d7/cab8c/active.png 744w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;节日活动：不放过任何节日，除了情人节、圣诞节、元旦、春节、国庆、五一，还有七夕、端午、感恩节、教师节等，甚至还有双十一
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/49f8a8251135c80ab37aaf25c46e212e/b6e34/holiday.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 83.54430379746836%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEfklEQVQ4yx2T2VOTZxTGv8v+Db3uTf+FzvSmF44znTrttHWmtVWntVpHKC7oyFiqCLi0QLVsSkTZRJQ9C4EAWQiERAiQD5J8CRCyfVkIhIRVqc6v7/Timfedc857luc5r7Ru7sYe9VM1bODBqBGLT+b6gJ5Gq5lAfJHwoot97wybLouAjcyYibzTSnZ0kLdpH28zQQ5UGf+slYBFi7QXcCInA1QP9vHcbqbDauPRSD+Pjb1My6MkbePk7VY29TqywyaSLd1sjppZ738FHAq84y1Z7D4P/ngIKTGtJai6mJoZZDfrJhAa5n1mnnzcxXbMSfplA5H2aqLPH5DQNrOmuUtC18SWsw81MEbeO8Detp9JsxbDqzak8ORLUWWNdMRNOrnAQXyOWNRNcmOJWEomnp7j3f6SiPELxHl/EORNzsNG1MZyQzWZrlaibgP1DyvxjfSIhLZWDvcXmPGMsahYicgmHO4xpjxmHLKF2YVxDpLTHMRcZLorUYNPeZ+bJx0YRD77IysffYyp9hZ/3LvNiK4LSZnSwK6DhKwjLTA/N8TkjJEFcR4mR3mnmsmnBsiWHOH1hxJGz1G2vVoi5iZ89wvxnz6Goq8jYH2GracJKWRp5DBnw7ukY8lrIOg3kA0Z2Y8Ms68a+TcjFF19zP74B0R6jrLoekjI1o4qlFatetRZM9EZK+sLRrxiAsk7Wgc7FrbjQ+wmR8iFe9lSWnmj6skvd4j7U/ai/eTDbSLOzGL9KezVvwjfAptBma2Ql9S8leS0WL+2UqQF0z12gs3klGdsL7ex5dOw7qklIzeKqrVEJ8vYXHokfJ3klU4cpUeYqrsshNrjTSrGTjzI5qqTbLAfp/4+0tzLc0THi1k2FKJO/s5816+8fniClOMmqq2UVeN5ohNXSLpus6ItYKL8JBP1FSQcOpQJK2F7D7K+m6WeRhqunxEcDl9B6T+DYviNYF8xK7UXCHYXEbWUsGa8iN9wmVBzEbHe64SHiohoCwmO3GRWU8Bs+VW8nddEEzd43VKMsakIaXP6NmHzDQJ68fCf88S++ZS0CFCdd/HqilC6L7FW8CWJgq+ImMpYEUUUwyUizRdJHP+E5JOLpGcriBhKydhuIple/Yliuia2/1vsjRXEO06x7rzKmu0uqbEf8LScZf7JLXIGQYOnXox+h1jfF7ha7hNp/Yn48Bmi0zWojkpBTTnSp8dO4ugrY3e2ipD5GbHxKuIG0fX4HTacdwSPtagT7aSdNaQs9Wy4H5OZLCdibydjbyBsFbG6CpGsioi4S/WVV4m7NELJ50RdfxPUlrF67msShceFyu0CGiLOapYHKwid+pxkyc9kvJ1syBrWph+gdJawevwz0pWFJOc1SDuKge2pBtJTT0lNCRG6LrBYc45sz/dsLL0g7elCNZ3E11mEt+o0+aHzZJU+YX9BYuQ7wbHg/68T5M3FZAMDSF2PqjD2NJDx6diV64hNdhK29LLjbmBrWUduRRR014jRXojv1sWOp4ncqpG8sGfFjoas3cStHWzLT/63/wcEO0Sc/DnylAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;节日&quot;
+        title=&quot;节日&quot;
+        src=&quot;/static/49f8a8251135c80ab37aaf25c46e212e/f058b/holiday.png&quot;
+        srcset=&quot;/static/49f8a8251135c80ab37aaf25c46e212e/c26ae/holiday.png 158w,
+/static/49f8a8251135c80ab37aaf25c46e212e/6bdcf/holiday.png 315w,
+/static/49f8a8251135c80ab37aaf25c46e212e/f058b/holiday.png 630w,
+/static/49f8a8251135c80ab37aaf25c46e212e/40601/holiday.png 945w,
+/static/49f8a8251135c80ab37aaf25c46e212e/b6e34/holiday.png 1103w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;武馆争霸：定期举办各个武馆（公会）之间的比赛&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;盛大的运营有一定技术水平，功夫小子的数据分析工具和商城上下架工具都是运营自己写的。&lt;/li&gt;
+&lt;li&gt;运营主管要求所有运营每天必须要打几个小时游戏，因此运营基本都是 KK 的玩家，同时也对游戏有很深的了解。&lt;/li&gt;
+&lt;li&gt;由于研发在成都、运营在上海，又是属于盛大这个大公司，实际上研发对玩家的响应速度并不快。压力也不大。&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Pixar的哲学和方法]]></title><description><![CDATA[哲学 Story is king 最小的代价决定是否继续走下一步。 方法 idea script story board 2d 90 min movie 3d 90 min movie]]></description><link>https://onlyzf.com/2014/2014-03-27-pixar/</link><guid isPermaLink="false">https://onlyzf.com/2014/2014-03-27-pixar/</guid><pubDate>Thu, 27 Mar 2014 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;哲学&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Story is king&lt;/li&gt;
+&lt;li&gt;最小的代价决定是否继续走下一步。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;方法&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;idea&lt;/li&gt;
+&lt;li&gt;script&lt;/li&gt;
+&lt;li&gt;story board&lt;/li&gt;
+&lt;li&gt;2d 90 min movie&lt;/li&gt;
+&lt;li&gt;3d 90 min movie&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[项目管理思考]]></title><description><![CDATA[…]]></description><link>https://onlyzf.com/2013/2013-11-30-pm/</link><guid isPermaLink="false">https://onlyzf.com/2013/2013-11-30-pm/</guid><pubDate>Sat, 30 Nov 2013 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;相对的动静两条线&lt;/p&gt;
+&lt;h2&gt;静为骨架&lt;/h2&gt;
+&lt;h3&gt;目标&lt;/h3&gt;
+&lt;p&gt;这个是最最重要的，但往往被忽略或者传达不清晰&lt;/p&gt;
+&lt;h3&gt;节点&lt;/h3&gt;
+&lt;p&gt;很好理解，就是啥时候要&lt;/p&gt;
+&lt;h3&gt;充分授权&lt;/h3&gt;
+&lt;p&gt;理想的项目管理应该只跟结果，不在乎过程，因此应该充分信任执行人。这一点看不懂技术的反倒适合。&lt;/p&gt;
+&lt;h2&gt;动为血肉直接影响执行力&lt;/h2&gt;
+&lt;h3&gt;需求变更管理&lt;/h3&gt;
+&lt;p&gt;消费者产品这一点很重要，互联网产品能做到很不错的需求变更管理，如果传统行业也能提速，是否会有颠覆？&lt;/p&gt;
+&lt;h3&gt;资源调配&lt;/h3&gt;
+&lt;p&gt;项目管理角度来看可能是几个小组之间的协调，执行人来看可能是任务优先级的变更，往往和需求变更有很大关系。&lt;/p&gt;
+&lt;p&gt;需求不变的项目不多见，对项目管理要求就低的多。&lt;/p&gt;
+&lt;h3&gt;是否需要每天向执行人了解进度情况&lt;/h3&gt;
+&lt;p&gt;基于充分授权的思路应该是不用，只需要在节点前适当了解即可。然而出于某些不信任（其实不应该有不信任，管理者不信任）因素或者资源需求经常变化的项目可能需要经常了解。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[【转】从Internet说起——王小波]]></title><description><![CDATA[我的电脑还没连网，也想过要和 Internet…]]></description><link>https://onlyzf.com/2010/2010-09-16-internet/</link><guid isPermaLink="false">https://onlyzf.com/2010/2010-09-16-internet/</guid><pubDate>Thu, 16 Sep 2010 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;我的电脑还没连网，也想过要和 Internet 连上。据说，网上黄毒泛滥，还有些反动的东西在传播，这些说法把我吓住了。前些时候有人建议对网络加以限制，我很赞成。说实在的，哪能容许信息自由的传播。但假如我对这件事还有点了解，我要说：除了一剪子剪掉，没有什么限制的方法。那东西太快，太邪门了。现代社会信息爆炸，想要审查太困难，不如禁止方便。假如我作生意，或者搞科技，没有网络会有些困难。但我何必为商人、工程师们操心？在信息高速网上，海量的信息在流动。但是我，一个爬格子的，不知道它们也能行。所以，把 Internet 剪掉罢，省得我听了心烦。&lt;/p&gt;
+&lt;p&gt;Internet 是传输信息的工具。还有处理信息的工具，就是各种个人电脑。你想想看，没有电脑，有网也接不上。再说，磁盘、光盘也足以贩黄。必须禁掉电脑，这才是治本。这回我可有点舍不得——大约十年前，我就买了一台个人电脑。到现在换到了第五台。花钱不说，还下了很多工夫，现在用的软件都是我自己写的。我用它写文章，做科学工作：算题，做统计——顺便说一句，用电脑来作统计是种幸福，没有电脑，统计工作是种巨大的痛苦。&lt;/p&gt;
+&lt;p&gt;但是它不学好，贩起黄毒来了，这可是它自己作死，别人救不了它。看在十年老交情上，我为它说几句好话：早期的电脑是无害的。那种空调机似的庞然大物算起题来嘎嘎做响，没有能力演示黄毒。后来的 486、586 才是有罪的：这些机器硬件能力突飞猛进，既能干好事，也能干坏事，把它禁了吧……但现在要买过时的电脑，不一定能买到。为此，可以要求 IBM 给我们重开生产线，制造早期的 PC 机。洋鬼子听了瞪眼，说：你们是不是有毛病？回答应该是：我们没毛病，你才有毛病——但要防止他把我们的商务代表送进疯人院。当然，如果决定了禁掉一切电脑，我也能对付。我可以用纸笔写作，要算统计时就打算盘。不会打算盘的可以拣冰棍棍儿计数——满地拣棍儿是有点难看，但是——谢天谢地，我现在很少作统计了。&lt;/p&gt;
+&lt;p&gt;除了电脑，电影电视也在散布不良信息。在这方面，我的态度是坚定的：我赞成严加管理。首先，外国的影视作品与国情不符，应该通通禁掉。其次，国内的影视从业人员良莠不齐，做出的作品也多有不好的……我是写小说的，与影视无缘，只不过是挣点小钱。王朔、冯小刚，还有大批的影星们，学历都不如我，搞出的东西我也看不入眼。但他们可都发大财了。应该严格审查——话又说回来，把 Internet 上的通讯逐贞看过才放行，这是办不到的；一百二十集的连续剧从头看到尾也不大容易。倒不如通通禁掉算了。&lt;/p&gt;
+&lt;p&gt;文化大革命十年，只看八个样板戏不也活过来了嘛。我可不像年轻人，声、光、电、影一样都少不了。我有本书看看就行了。说来说去，我把流行音乐漏掉了。这种乌七八糟的东西，应该首先禁掉。年轻人没有事，可以多搞些体育锻炼，既陶冶了性情，又锻炼了身体……这样禁来禁去，总有一天禁到我身上。我的小说内容健康，但让我逐行说明每一句都是良好的信息，我也做不到。再说，到那时我已经吓傻了，哪有精神给自己辩护。电影电视都能禁，为什么不能禁小说？我们爱读书，还有不识字的人呢，他们准赞成禁书。好吧，我不写作了，到车站上去扛大包。我的身体很好，能当搬运工。别的作家未必扛得动大包……我赞成对生活空间加以压缩，只要压不到我；但压来压去，结果却出乎我的想像。&lt;/p&gt;
+&lt;p&gt;海明威在《钟为谁鸣》说过这个意思：所有的人是一个整体，别人的不幸就是你的不幸。所以，不要问丧钟是为谁而鸣——它就是为你而鸣。但这个想法我觉得陌生，我就盼着别人倒霉。五十多年前，有个德国的新教牧师说：起初，他们抓共产党员，我不说话，因为我不是工会会员；后来，他们抓犹太人，我不说话，因为我是亚利安人。後来他们抓天主教徒，我不说话，因为我是新教徒……最后他们来抓我，已经没人能为我说话了。众所周知，这里不是纳粹德国，我也不是新教牧师。所以，这些话我也不想记住。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[关于机器人框架的设计]]></title><description><![CDATA[新设计的机器人框架的思路是这样的： 一共两个线程，UI 线程，逻辑线程； UI 线程为主线程，可能从 WinMain 开始执行； 逻辑线程为驻线程创建的独立线程，运行 Dispatcher 的 Update； UI 线程持有逻辑线程的句柄，当执行 UI…]]></description><link>https://onlyzf.com/2007/2007-12-07-robot/</link><guid isPermaLink="false">https://onlyzf.com/2007/2007-12-07-robot/</guid><pubDate>Fri, 07 Dec 2007 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;新设计的机器人框架的思路是这样的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一共两个线程，UI 线程，逻辑线程；&lt;/li&gt;
+&lt;li&gt;UI 线程为主线程，可能从 WinMain 开始执行；&lt;/li&gt;
+&lt;li&gt;逻辑线程为驻线程创建的独立线程，运行 Dispatcher 的 Update；&lt;/li&gt;
+&lt;li&gt;UI 线程持有逻辑线程的句柄，当执行 UI 操作时，通过该句柄向逻辑线程发送消息；&lt;/li&gt;
+&lt;li&gt;逻辑线程收到消息后，通过 Transformer 转换为逻辑内部消息然后转发给子对象 RobotManager；&lt;/li&gt;
+&lt;li&gt;RobotManager 再转发此消息至对应的子对象 Robot（Robot 持有对应的 UI 句柄）；&lt;/li&gt;
+&lt;li&gt;每个 Robot 中有一个消息队列，消息过来后先存入此队列中，待 Update 时再分派给 Robot 所有的 Task 执行。&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[vector和list的性能比较]]></title><description><![CDATA[Routine Name       Time with Children  Hit Count list::insert       109305010           100000 vector::insert     5643518264          10000…]]></description><link>https://onlyzf.com/2007/2007-08-22-vector-vs-list/</link><guid isPermaLink="false">https://onlyzf.com/2007/2007-08-22-vector-vs-list/</guid><pubDate>Wed, 22 Aug 2007 00:00:00 GMT</pubDate><content:encoded>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Routine Name     &lt;/th&gt;
+&lt;th&gt; Time with Children &lt;/th&gt;
+&lt;th&gt;Hit Count&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;list::insert     &lt;/td&gt;
+&lt;td&gt; 109305010          &lt;/td&gt;
+&lt;td&gt;100000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vector::insert   &lt;/td&gt;
+&lt;td&gt; 5643518264         &lt;/td&gt;
+&lt;td&gt;100000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;list::insert     &lt;/td&gt;
+&lt;td&gt; 106637             &lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vector::insert   &lt;/td&gt;
+&lt;td&gt; 103485             &lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;list::erase      &lt;/td&gt;
+&lt;td&gt; 51526581           &lt;/td&gt;
+&lt;td&gt;100000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vector::erase    &lt;/td&gt;
+&lt;td&gt; 4967632494         &lt;/td&gt;
+&lt;td&gt;100000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;list::erase      &lt;/td&gt;
+&lt;td&gt; 39934              &lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vector::erase    &lt;/td&gt;
+&lt;td&gt; 19352              &lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;list::erase      &lt;/td&gt;
+&lt;td&gt; 162914             &lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vector::erase    &lt;/td&gt;
+&lt;td&gt; 149252             &lt;/td&gt;
+&lt;td&gt;400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;list::erase      &lt;/td&gt;
+&lt;td&gt; 209188             &lt;/td&gt;
+&lt;td&gt;500&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vector::erase    &lt;/td&gt;
+&lt;td&gt; 212181             &lt;/td&gt;
+&lt;td&gt;500&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;这是我拿 AQTime 做的一份性能测试，主要用于比较 vector 和 list 的性能，时间的单位是时钟周期。
+测试环境：CPU Core Duo T2300 双核，编译器 vc 8.0(vs2005)。&lt;/p&gt;
+&lt;p&gt;两种数据结构的性能差异主要集中在 insert 和 erase 操作上，所以只比较了这两种操作。写法如下：&lt;/p&gt;
+&lt;p&gt;1、vector 的插入和删除操作的都是中间的元素&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;cpp&quot;&gt;&lt;pre class=&quot;language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;vector&lt;span class=&quot;token operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;vector&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; vector&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+vector&lt;span class=&quot;token operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;erase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;vector&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; vector&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;2、list 插入和删除都是头部的元素&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;cpp&quot;&gt;&lt;pre class=&quot;language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;list&lt;span class=&quot;token operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;list&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+list&lt;span class=&quot;token operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;erase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;list&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结论：从性能测试中可以看出，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 100 个元素以内 vector 的 insert 性能比 list 高&lt;/li&gt;
+&lt;li&gt;500 个元素以内 vector 的 erase 性能也比 list 高&lt;/li&gt;
+&lt;li&gt;加上 list 的空间占用本来就比 vector 要高的多（使用内部类型的时候）、并且 vector 可以随机访问&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以在一般的项目里 vector 是当仁不让的首选，请大家以后尽量使用 vector。&lt;/p&gt;
+&lt;p&gt;PS：此测试虽然有一定的平台、编译器、stl 实现等依赖性，但是同样具有普遍性。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[近日工作]]></title><description><![CDATA[这几天终于可以趁着机器人需求比较丰富的时候重构一下整个机器人了。大的东西没有变，但是基于 timer 性能的缘故，把 stopwatch 从 timer 里面移出来，否则每个周期的大部分时间都被 stopwatch 占去了，很划不来。另外，对于比较新的需求增加了几个行为，i…]]></description><link>https://onlyzf.com/2007/2007-08-22-journal/</link><guid isPermaLink="false">https://onlyzf.com/2007/2007-08-22-journal/</guid><pubDate>Wed, 22 Aug 2007 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;这几天终于可以趁着机器人需求比较丰富的时候重构一下整个机器人了。大的东西没有变，但是基于 timer 性能的缘故，把 stopwatch 从 timer 里面移出来，否则每个周期的大部分时间都被 stopwatch 占去了，很划不来。另外，对于比较新的需求增加了几个行为，i 重构速度很快，说明框架的扩展能力不错，比较满意。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[计划用ACE写一个服务器]]></title><description><![CDATA[既然已经有现成的很成熟的 ACE 库了，就不要搞什么完成端口模型需要耗费大量时间的网络编程了。在 ACE 的基础上写服务器应该不错。 考虑到扩展性，打算分成两层，一层基本服务，直接使用 ACE…]]></description><link>https://onlyzf.com/2006/2006-05-26-ace/</link><guid isPermaLink="false">https://onlyzf.com/2006/2006-05-26-ace/</guid><pubDate>Fri, 26 May 2006 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;既然已经有现成的很成熟的 &lt;a href=&quot;https://www.dre.vanderbilt.edu/~schmidt/ACE.html&quot;&gt;ACE&lt;/a&gt; 库了，就不要搞什么完成端口模型需要耗费大量时间的网络编程了。在 ACE 的基础上写服务器应该不错。&lt;/p&gt;
+&lt;p&gt;考虑到扩展性，打算分成两层，一层基本服务，直接使用 ACE 编程，主要是制定自己的传输协议和一些基本的比如加密之类的工作，还有希望能做到类似于的 Apache 插件的模式；另一层，主要是两个插件，验证插件和游戏插件，分别对应网游的验证服务器和游戏服务器，一个服务器可以同时启动几个插件，不同的游戏插件可以对应不同的游戏。这是初步的设想，也许不切实际。&lt;/p&gt;
+&lt;p&gt;不过既然 ACE 支持分布式计算，我想一个服务器跑几个游戏也不是不可能。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[终于明白了为什么新写的A*算法会快那么多]]></title><description><![CDATA[经过了几天的测试，排除了几个小 Bug，现在的算法已经是很稳定了。性能大概是以前的三倍左右，最终的结果是只用上了设置状态的优化方法，其他方法都没用到。 之前会快 20 倍是因为新算法忘了做 clear，加上以后就是现在这个样子，大概是以前…]]></description><link>https://onlyzf.com/2006/2006-04-17-astar/</link><guid isPermaLink="false">https://onlyzf.com/2006/2006-04-17-astar/</guid><pubDate>Mon, 17 Apr 2006 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;经过了几天的测试，排除了几个小 Bug，现在的算法已经是很稳定了。性能大概是以前的三倍左右，最终的结果是只用上了设置状态的优化方法，其他方法都没用到。&lt;/p&gt;
+&lt;p&gt;之前会快 20 倍是因为新算法忘了做 clear，加上以后就是现在这个样子，大概是以前 3 倍的速度。以前的算法之所以慢主要是使用标准模板库里的 map 容器，这个容器在 clear 时的速度非常慢，不得已还是改回 vector，clear 的速度很快。&lt;/p&gt;
+&lt;p&gt;然后由于节点结构里使用了状态标志直接表示是否开放或者关闭或者未处理，就可以省去一个关闭表（开放表不能省，因为要从开放表里选出 f 最小的节点，直接使用标准库里的 min_element 算法就挺快的了。&lt;/p&gt;
+&lt;p&gt;因为是 vector，如果排序的话性能下降比较多，但是用 list 容器 clear 的速度更慢，目前只有使用 vector，除非以后自己写一个排序性能好，clear 速度也快的容器替代），算是比较满意了。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[A*的优化]]></title><description><![CDATA[根据《人工智能游戏编程真言》的提示，分别尝试了几种优化方式，比如： 在节点上加标志 开放表和关闭表改用 Hash 表（不过如果采用在节点加标志的方法，好像 Hash 表就没有意义了，直接访问该节点标志判断处于哪种状态还快些。而且 Hash…]]></description><link>https://onlyzf.com/2006/2006-04-11-astar/</link><guid isPermaLink="false">https://onlyzf.com/2006/2006-04-11-astar/</guid><pubDate>Tue, 11 Apr 2006 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;根据《人工智能游戏编程真言》的提示，分别尝试了几种优化方式，比如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在节点上加标志&lt;/li&gt;
+&lt;li&gt;开放表和关闭表改用 Hash 表（不过如果采用在节点加标志的方法，好像 Hash 表就没有意义了，直接访问该节点标志判断处于哪种状态还快些。而且 Hash 表的哈希函数也是比较难选的，如果选不好性能还要下降）、&lt;/li&gt;
+&lt;li&gt;开放表改用链表（主要是加快插入和删除的速度，开放表主要是这类操作，关闭表主要是插入和搜索操作）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这三种方法，但是效果都不是很理想，性能基本上没什么提升，不得已改用模板来重新写 A*，结果大出意外，居然提高了 20 倍，还是不能理解怎么会这么快？？&lt;/p&gt;</content:encoded></item><item><title><![CDATA[模板有那么快么？？]]></title><description><![CDATA[前几天用 C++模板重写了一遍 A*算法，实现的内容和非模板的算法一模一样，做了一下性能测试居然比非模板算法快 20 倍。太不可思议了，不能理解，看来看去两个算法都是一样的呀，难道真的是模板造成的？？据说模板的效率主要和编译器有关系，我用的编译器是 VC…]]></description><link>https://onlyzf.com/2006/2006-04-11-cpp-template/</link><guid isPermaLink="false">https://onlyzf.com/2006/2006-04-11-cpp-template/</guid><pubDate>Tue, 11 Apr 2006 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;前几天用 C++模板重写了一遍 A*算法，实现的内容和非模板的算法一模一样，做了一下性能测试居然比非模板算法快 20 倍。太不可思议了，不能理解，看来看去两个算法都是一样的呀，难道真的是模板造成的？？据说模板的效率主要和编译器有关系，我用的编译器是 VC8，不知道其他编译器会不会有这么快？&lt;/p&gt;</content:encoded></item><item><title><![CDATA[【转】谈论木桶理论新论]]></title><description><![CDATA[…]]></description><link>https://onlyzf.com/2006/2006-04-06-buckets-effect/</link><guid isPermaLink="false">https://onlyzf.com/2006/2006-04-06-buckets-effect/</guid><pubDate>Thu, 06 Apr 2006 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;今天和同事谈到，到底是产品重要，还是营销重要。同事引用了木桶理论，认为哪个都不能缺，哪块板短了都不行。但我认为，产品不是木板，那是桶底啊！桶底是漏的，其他木板再长有什么用？&lt;/p&gt;
+&lt;p&gt;为什么说木板是桶底？因为其他任何东西都可以缺的。其他的东西缺了，多少还有点利润，唯独产品不能缺。没有产品你卖什么？你们把 nothing 卖给顾客吗？哪怕你有能力把梳子卖给和尚，那也得有梳子吧！不能用手在空中画个梳子就问人家要钱了。当然有人会说了，如果木桶缺了任何一块板，不是一样一点水也放不下吗？当然不是，缺一块木板还能把木桶斜过来装水呢！虽然比原来水少多了，但还是有的。&lt;/p&gt;
+&lt;p&gt;ps.连传销都知道，总得传销一个产品的。有产品还能叫传销，甚至能美化成直销，没有产品就是纯老鼠会。&lt;/p&gt;
+&lt;p&gt;木桶新论 1：产品是桶底，什么都可以缺，唯独不能缺产品。最差的产品就是没有产品了。也许还有人说，我可以卖服务。广义的来说，服务也是产品。如果有一种很好的产品——比如，用了以后可以延长寿命 100 年，相信没有任何营销也会被踏破门槛。&lt;/p&gt;
+&lt;p&gt;木桶新论 2：产品是桶底，其他的东西是木板，哪个重要？当大家的桶底面积一样大的时候，木板重要；当大家的木板一样长的时候，桶底的面积重要；当大家的木板一样长，桶底的面积也一样的时候，桶的质量重要；当木板、桶底面积和桶的质量都一样的时候，时间重要；如果连时间都一样，那就等着价格战吧！&lt;/p&gt;
+&lt;p&gt;木桶新论 3：木桶的一根板短了一节不用害怕，只要你还有长的那一节，把木桶斜过来不是一样可以放更多的水吗？如果为了补短的那一节木板，而锯掉长的那节木板，你就要精确算一算了——水到底是装多了还是装少了。长木板往往是你的核心竞争力，不能为了补短木板轻易锯断。&lt;/p&gt;
+&lt;p&gt;木桶新论 4：木桶的质量好坏在于木板之间有没有缝，有多大的缝。结合的越紧密地木板，质量也就越好。但是世界上没有无缝的木桶，更没有完美的桶底。木桶总是要漏水的，关键看进水的速度和漏水的速度哪个快。小学里不是经常做这样的无聊题目吗——一个多大的水池，以多少速度进水，多少速度出水，求多少时间水池装满水或放完水。当然，木桶的题目没有那么简单。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[关于单件模式（Singleton）]]></title><description><![CDATA[《设计模式》上关于单件的定义和实现如下： 由于 Instance…]]></description><link>https://onlyzf.com/2006/2006-04-06-singleton/</link><guid isPermaLink="false">https://onlyzf.com/2006/2006-04-06-singleton/</guid><pubDate>Thu, 06 Apr 2006 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;《设计模式》上关于单件的定义和实现如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;cpp&quot;&gt;&lt;pre class=&quot;language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; Singleton&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Instance&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;protected&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;static&lt;/span&gt; Singleton&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; _instance&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+Singleton&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; Singleton&lt;span class=&quot;token operator&quot;&gt;::&lt;/span&gt;_instance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+Singleton&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Instance&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;_instance &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        _instance &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; Singleton&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; _instance&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;由于 Instance()使用惰性初始化，它的返回值直到第一次访问时才创建和保存。但是这种方式创建的对象没有被删除，也就是说不能执行析构函数，会造成内存泄漏。该用什么方法来解决呢？？&lt;/p&gt;
+&lt;p&gt;是不是需要一个单件工厂来创建和管理所有的这些单件？但是这样又造成了不必要的复杂性。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[体验结对]]></title><description><![CDATA[在学习敏捷的时候听到结对编程这个概念，昨天和 water 实践了一下，确实有比较好的效果，就好像手把手的教你，而且一个人编程，另一个人可以查错，还可以思考很多问题，很好的方式。但是不知道效率如何。起码 water 的速度是很快的，我有点儿跟不上他。]]></description><link>https://onlyzf.com/2005/2005-05-09-try-pairs/</link><guid isPermaLink="false">https://onlyzf.com/2005/2005-05-09-try-pairs/</guid><pubDate>Mon, 09 May 2005 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;在学习敏捷的时候听到结对编程这个概念，昨天和 water 实践了一下，确实有比较好的效果，就好像手把手的教你，而且一个人编程，另一个人可以查错，还可以思考很多问题，很好的方式。但是不知道效率如何。起码 water 的速度是很快的，我有点儿跟不上他。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[工作心得]]></title><description><![CDATA[有一个笔记本放在面前，随时记录想法。 中午最好能趴 10 分钟，效果很好。但是不能在床上睡。]]></description><link>https://onlyzf.com/2005/2005-04-26-working-ideas/</link><guid isPermaLink="false">https://onlyzf.com/2005/2005-04-26-working-ideas/</guid><pubDate>Tue, 26 Apr 2005 00:00:00 GMT</pubDate><content:encoded>&lt;ul&gt;
+&lt;li&gt;有一个笔记本放在面前，随时记录想法。&lt;/li&gt;
+&lt;li&gt;中午最好能趴 10 分钟，效果很好。但是不能在床上睡。&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>
