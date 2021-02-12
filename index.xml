@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fan&#39;s life</title>
+    <link>https://onlyzf.com/</link>
+    <description>Recent content on Fan&#39;s life</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 14 Dec 2020 14:01:00 +0000</lastBuildDate><atom:link href="https://onlyzf.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我的游戏前半生</title>
+      <link>https://onlyzf.com/post/2020/game_half_lifetime/</link>
+      <pubDate>Mon, 14 Dec 2020 14:01:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2020/game_half_lifetime/</guid>
+      <description>这篇文章充斥着大量的个人回忆，错漏难免，没有深度、没有干货，请看官见谅。 当我们讨论游戏程序的时候我们在讨论什么？ 游戏应用——Game Appl</description>
+    </item>
+    
+    <item>
+      <title>Structure of the Python Repository</title>
+      <link>https://onlyzf.com/post/snippets/py_struct/</link>
+      <pubDate>Thu, 05 Nov 2020 06:30:59 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/py_struct/</guid>
+      <description>1    Sample Repository 1 2 3 4 5 6 7 8 9 10 11  README.rst LICENSE setup.py requirements.txt sample/__init__.py sample/core.py sample/helpers.py docs/conf.py docs/index.rst tests/test_basic.py tests/test_advanced.py   The Actual Module Location ./sample/ or ./sample.py Your module package is the core focus of the repository. It should not be tucked away:
+1  ./sample/   If your module consists of only a single file, you can place it directly in the root of your repository:</description>
+    </item>
+    
+    <item>
+      <title>Defining Main Functions in Python</title>
+      <link>https://onlyzf.com/post/snippets/py_main/</link>
+      <pubDate>Wed, 28 Aug 2019 17:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/py_main/</guid>
+      <description>from Defining Main Functions in Python
+Summary of Python Main Function Best Practices Here are four key best practices about main() in Python that you just saw:
+Put code that takes a long time to run or has other effects on the computer in a function or class, so you can control exactly when that code is executed.
+Use the different values of __name__ to determine the context and change the behavior of your code with a conditional statement.</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——时光侦探</title>
+      <link>https://onlyzf.com/post/2019/time/</link>
+      <pubDate>Sun, 18 Aug 2019 11:33:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/time/</guid>
+      <description>B 当我们有单个任务要做的时候，情况还比较简单；当我们有很多任务要做时，计划可以很好地帮助我们清除地知道各种任务及它们需要的时间，严格按照计划</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——单车的隐患</title>
+      <link>https://onlyzf.com/post/2019/bicycle/</link>
+      <pubDate>Sat, 17 Aug 2019 20:48:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/bicycle/</guid>
+      <description>B 这次我们完成了自创挑战，是把停在盲道上和乱停乱放的自行车摆好。随着共享单车的普及，越来越多的人习惯了这项新的交通工具，可是一个隐患也随之诞</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——曾经的梦想</title>
+      <link>https://onlyzf.com/post/2019/dream/</link>
+      <pubDate>Fri, 16 Aug 2019 20:59:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/dream/</guid>
+      <description>W 曾经的梦想：采访目标：我最亲爱的妈妈。妈妈出生在天津，随着祖国的一声号召——支援大西北，跟着我的姥姥姥爷义无反顾地去了祖国的边疆。由于当时</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——向死而生</title>
+      <link>https://onlyzf.com/post/2019/death/</link>
+      <pubDate>Fri, 16 Aug 2019 15:51:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/death/</guid>
+      <description>F 如果我明天就要死去，我希望能不影响任何人悄悄的离开，不用有任何的葬礼，也不用专门通知大家。在我的朋友圈写一句“2019 年 8 月 17 日 Fan 离世”。</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——垃圾卫士</title>
+      <link>https://onlyzf.com/post/2019/trash/</link>
+      <pubDate>Thu, 15 Aug 2019 18:52:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/trash/</guid>
+      <description>B 我们周围的垃圾分类，虽然已经开始实施了，但是做到的很不到位，我们小区没有分类的垃圾桶。周围有很多个小区，但是只有一个小区有几个垃圾分类的垃</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——存在的意义</title>
+      <link>https://onlyzf.com/post/2019/meaning_of_life/</link>
+      <pubDate>Thu, 15 Aug 2019 18:52:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/meaning_of_life/</guid>
+      <description>B 这次我们做的任务叫“存在的意义”，要采访 5 位路人问他们三个问题，结果只采访到一位本地居住的老奶奶，说明现在很多老人都害怕被骗。 恰巧采访到了</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——日行一善</title>
+      <link>https://onlyzf.com/post/2019/do_good/</link>
+      <pubDate>Wed, 14 Aug 2019 23:25:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/do_good/</guid>
+      <description>BB 世界上有很多人需要我们伸出援助之手，世界上有很多问题需要我们去改进，每天做一件善事，使我的世界变得更加美好。 我做的第一件事是收拾洗手台旁，</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——长辈的黑客生活</title>
+      <link>https://onlyzf.com/post/2019/geeklife/</link>
+      <pubDate>Tue, 13 Aug 2019 19:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/geeklife/</guid>
+      <description>B 今天我完成了“长辈的生活黑客”，教了姥姥如何回看电视节目，在我跟她说了主要的方法和强调了要注意的技巧后，姥姥终于学会了。 这时候，姥爷走过来</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——盲人与哑巴</title>
+      <link>https://onlyzf.com/post/2019/blind_dumb/</link>
+      <pubDate>Tue, 13 Aug 2019 18:52:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/blind_dumb/</guid>
+      <description>WW 盲人与哑巴感想：接到任务前，从来没考虑过自己如果是这种情况，将会遇到什么困难。觉得这个任务很有意义，我们团队三人不约而同的选择了它。孩子扮</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——迟到的感谢</title>
+      <link>https://onlyzf.com/post/2019/thanks/</link>
+      <pubDate>Tue, 13 Aug 2019 18:45:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/thanks/</guid>
+      <description>WW 迟到的感谢感想：我们的社会能如此和谐，少不了各行各业的社会服务者。我们团队边走边找目标，很快发现了警察、交通指挥员、快递员、公交司机、河道</description>
+    </item>
+    
+    <item>
+      <title>城市创变者挑战赛——成都70年</title>
+      <link>https://onlyzf.com/post/2019/cd70/</link>
+      <pubDate>Mon, 12 Aug 2019 19:25:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/cd70/</guid>
+      <description>WW 成都七十年感想：今年是建国 70 周年，我是一个把成都作为第二故乡的朋友，来到成都已经 21 周年，来到了这座“来了，就走不脱的城市”。虽然不及 70 年那</description>
+    </item>
+    
+    <item>
+      <title>《SRE Google运维解密》</title>
+      <link>https://onlyzf.com/post/2019/sre/</link>
+      <pubDate>Sat, 13 Jul 2019 08:53:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/sre/</guid>
+      <description>SRE 方法论 确保长期关注研发工作 Google 将 SRE 团队的运维工作限制在 50%以内。 SRE 处理运维工作的一项准则是：在每 8-12 小时的 on-call 轮值期间最多只处理两个紧急事件。</description>
+    </item>
+    
+    <item>
+      <title>容器及编排</title>
+      <link>https://onlyzf.com/post/snippets/container/</link>
+      <pubDate>Mon, 17 Jun 2019 19:07:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/container/</guid>
+      <description>docker enable debug in container 1 docker run --cap-add=SYS_PTRACE --security-opt seccomp=unconfined</description>
+    </item>
+    
+    <item>
+      <title>《Docker —— 从入门到实践》</title>
+      <link>https://onlyzf.com/post/2019/docker/</link>
+      <pubDate>Sun, 05 May 2019 09:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2019/docker/</guid>
+      <description>Docker 项目的目标是实现轻量级的操作系统虚拟化解决方案。 Docker 的基础是 Linux 容器（LXC）等技术。 在 LXC 的基础上 Docker 进行了进一步的封装，让用户不需要去关心容器</description>
+    </item>
+    
+    <item>
+      <title>Game Development</title>
+      <link>https://onlyzf.com/post/2018/2018-10-30-game-development/</link>
+      <pubDate>Tue, 30 Oct 2018 06:58:22 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2018/2018-10-30-game-development/</guid>
+      <description>应聘 招聘应聘的重点是在于双方需求的匹配 了解清楚招聘方的需求————需要什么样技能的人、额外要求的能力还有什么，自己是否能满足这些要求 想清楚自</description>
+    </item>
+    
+    <item>
+      <title>macOS</title>
+      <link>https://onlyzf.com/post/snippets/macos/</link>
+      <pubDate>Sat, 20 Oct 2018 07:22:02 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/macos/</guid>
+      <description>Flushing your DNS cache on Mac OS X 1  sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache   Show listen ports 1  lsof -nP -iTCP | grep LISTEN   Bluetooth Devices Not Connecting to OSX Solution:
+ Delete com.apple.Bluetooth.plist. This file is found at HD/Library/Preferences. Turn off Bluetooth on your Mac. This is done by clicking the Bluetooth icon in the menu bar and selecting ‘Turn Bluetooth Off’.</description>
+    </item>
+    
+    <item>
+      <title>DNS</title>
+      <link>https://onlyzf.com/post/snippets/dns/</link>
+      <pubDate>Sat, 20 Oct 2018 07:01:12 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/dns/</guid>
+      <description>How to Check Domain’s Nameservers 1 2  nslookup -type=ns yourdomain.tld dig ns yourdomain.tld   How to check DNS record 1  dig yourdomain.tld +nostats +nocomments +nocmd   chinadns 1 2  curl &amp;#39;http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest&amp;#39; | grep ipv4 | grep CN | awk -F\| &amp;#39;{ printf(&amp;#34;%s/%d\n&amp;#34;, $4, 32-log($5)/log(2)) }&amp;#39; &amp;gt; chnroute.txt chinadns -c chnroute.txt -s 223.5.5.5,119.29.29.29,208.67.222.222:443,8.8.8.8   </description>
+    </item>
+    
+    <item>
+      <title>可分享的主题</title>
+      <link>https://onlyzf.com/post/2018/topic/</link>
+      <pubDate>Sat, 20 Oct 2018 05:58:41 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2018/topic/</guid>
+      <description>设计模式、游戏开发中的实践 系统架构设计师指引 云计算概念、分布式系统、高可用系统 https://www.coursera.org/learn/cloud-computing https://coolshell.cn/articles/10910.html https://coolshell.cn/articles/17459.html https://coolshell.cn/articles/17416.html https://docs.oracle.com/cd/A91202_01/901_doc/rac.901/a89867/pshavdtl.htm 程序员的软实力 HTTP, HTTP/2, HTTPS, Web Services, RESTful, SOA, Microservices MVC, MVP, MVVM, The Clean Architecture https://github.com/googlesamples/android-architecture https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html 性能测</description>
+    </item>
+    
+    <item>
+      <title>极简Supervisor</title>
+      <link>https://onlyzf.com/post/snippets/supervisor/</link>
+      <pubDate>Fri, 19 Oct 2018 08:22:49 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/supervisor/</guid>
+      <description>Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems. Supervisor 是比较简单的创建守护进程的工具，支持 linux 和 macOS 这些类 UNIX 系统。 它的优势在于比较轻量、不需要 root 权限、配置</description>
+    </item>
+    
+    <item>
+      <title>Git snippets</title>
+      <link>https://onlyzf.com/post/snippets/git/</link>
+      <pubDate>Sat, 13 Oct 2018 07:11:09 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SSH config</title>
+      <link>https://onlyzf.com/post/snippets/ssh/</link>
+      <pubDate>Sat, 13 Oct 2018 06:30:59 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/ssh/</guid>
+      <description>~/.ssh/config 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  Host $SSHD_HOST User $USER IdentityFile $PRIVATE_KEY Host * # Directs ssh to additionally check the host IP address in the known_hosts file. CheckHostIP no Compression yes # Specifies whether the connection to the authentication agent will be forwarded to the remote machine. ForwardAgent yes # Specifies if ssh should never automatically add host keys to the ~/.</description>
+    </item>
+    
+    <item>
+      <title>Subversion snippets</title>
+      <link>https://onlyzf.com/post/snippets/svn/</link>
+      <pubDate>Sat, 13 Oct 2018 13:21:02 +0800</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/svn/</guid>
+      <description>Create a new directory under version control 1  svn mkdir -m &amp;#34;Making a new dir.&amp;#34; http://svn.red-bean.com/repos/newdir   </description>
+    </item>
+    
+    <item>
+      <title>GCC</title>
+      <link>https://onlyzf.com/post/snippets/cc/</link>
+      <pubDate>Sun, 01 Apr 2018 01:52:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/cc/</guid>
+      <description>1    Compiler Options We strongly recommend compiling with at least the following warning options:
+1  -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror   Recent versions of gcc also support an option -fsanitize=address which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.
+Valgrind Run valgrind with --track-origins=yes to determine the source of the error.</description>
+    </item>
+    
+    <item>
+      <title>TED&#39;s secret to great public speaking</title>
+      <link>https://onlyzf.com/post/2017/2017-05-09-how-to-speech/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2017/2017-05-09-how-to-speech/</guid>
+      <description>  Focus on one major idea.
+  Give people a reason to care.
+  Build your idea with familiar concepts.
+  Make your idea worth sharing.
+  </description>
+    </item>
+    
+    <item>
+      <title>Linux开发经验教训——来自《Linux 内核开发报告2016版》</title>
+      <link>https://onlyzf.com/post/2016/2016-09-19-linux/</link>
+      <pubDate>Mon, 19 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2016/2016-09-19-linux/</guid>
+      <description>长达 25 年的经验教训一：快速发布，短发布周期很重要 长达 25 年的经验教训二：流程的扩展性需要分布式层级状的开发模式，全靠 Linus 一个会死人，职责分工明确</description>
+    </item>
+    
+    <item>
+      <title>功夫小子运营</title>
+      <link>https://onlyzf.com/post/2015/2015-03-04-kk/</link>
+      <pubDate>Wed, 04 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2015/2015-03-04-kk/</guid>
+      <description>简介 功夫小子是一款多人格斗竞技游戏，无成长，游戏中可切换武器，强调武器平衡及个人技术 开发：盛大成都研发 运营：盛大上海（后转入成都锦天） 上线时</description>
+    </item>
+    
+    <item>
+      <title>Pixar的哲学和方法</title>
+      <link>https://onlyzf.com/post/2014/2014-03-27-pixar/</link>
+      <pubDate>Thu, 27 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2014/2014-03-27-pixar/</guid>
+      <description>哲学 Story is king 最小的代价决定是否继续走下一步。 方法 idea script story board 2d 90 min movie 3d 90 min movie</description>
+    </item>
+    
+    <item>
+      <title>项目管理思考</title>
+      <link>https://onlyzf.com/post/2013/2013-11-30-pm/</link>
+      <pubDate>Sat, 30 Nov 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2013/2013-11-30-pm/</guid>
+      <description>相对的动静两条线 静为骨架 目标 这个是最最重要的，但往往被忽略或者传达不清晰 节点 很好理解，就是啥时候要 充分授权 理想的项目管理应该只跟结果，不在乎</description>
+    </item>
+    
+    <item>
+      <title>【转】从Internet说起——王小波</title>
+      <link>https://onlyzf.com/post/2010/2010-09-16-internet/</link>
+      <pubDate>Thu, 16 Sep 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2010/2010-09-16-internet/</guid>
+      <description>我的电脑还没连网，也想过要和 Internet 连上。据说，网上黄毒泛滥，还有些反动的东西在传播，这些说法把我吓住了。前些时候有人建议对网络加以限制，我很赞成</description>
+    </item>
+    
+    <item>
+      <title>关于机器人框架的设计</title>
+      <link>https://onlyzf.com/post/2007/2007-12-07-robot/</link>
+      <pubDate>Fri, 07 Dec 2007 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2007/2007-12-07-robot/</guid>
+      <description>新设计的机器人框架的思路是这样的： 一共两个线程，UI 线程，逻辑线程； UI 线程为主线程，可能从 WinMain 开始执行； 逻辑线程为驻线程创建的独立线程，运行 Dispatcher</description>
+    </item>
+    
+    <item>
+      <title>vector和list的性能比较</title>
+      <link>https://onlyzf.com/post/2007/2007-08-22-vector-vs-list/</link>
+      <pubDate>Wed, 22 Aug 2007 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2007/2007-08-22-vector-vs-list/</guid>
+      <description>Routine Name Time with Children Hit Count list::insert 109305010 100000 vector::insert 5643518264 100000 list::insert 106637 100 vector::insert 103485 100 list::erase 51526581 100000 vector::erase 4967632494 100000 list::erase 39934 100 vector::erase 19352 100 list::erase 162914 400 vector::erase 149252 400 list::erase 209188 500 vector::erase 212181 500 这是我拿 AQTime 做的一份性能测试，主要用于比较 vector 和 list 的性能，</description>
+    </item>
+    
+    <item>
+      <title>近日工作</title>
+      <link>https://onlyzf.com/post/2007/2007-08-22-journal/</link>
+      <pubDate>Wed, 22 Aug 2007 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2007/2007-08-22-journal/</guid>
+      <description>这几天终于可以趁着机器人需求比较丰富的时候重构一下整个机器人了。大的东西没有变，但是基于 timer 性能的缘故，把 stopwatch 从 timer 里面移出来，否则每个周期的大部</description>
+    </item>
+    
+    <item>
+      <title>计划用ACE写一个服务器</title>
+      <link>https://onlyzf.com/post/2006/2006-05-26-ace/</link>
+      <pubDate>Fri, 26 May 2006 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2006/2006-05-26-ace/</guid>
+      <description>既然已经有现成的很成熟的 ACE 库了，就不要搞什么完成端口模型需要耗费大量时间的网络编程了。在 ACE 的基础上写服务器应该不错。 考虑到扩展性，打算分成两</description>
+    </item>
+    
+    <item>
+      <title>终于明白了为什么新写的A*算法会快那么多</title>
+      <link>https://onlyzf.com/post/2006/2006-04-17-astar/</link>
+      <pubDate>Mon, 17 Apr 2006 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2006/2006-04-17-astar/</guid>
+      <description>经过了几天的测试，排除了几个小 Bug，现在的算法已经是很稳定了。性能大概是以前的三倍左右，最终的结果是只用上了设置状态的优化方法，其他方法都</description>
+    </item>
+    
+    <item>
+      <title>A*的优化</title>
+      <link>https://onlyzf.com/post/2006/2006-04-11-astar/</link>
+      <pubDate>Tue, 11 Apr 2006 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2006/2006-04-11-astar/</guid>
+      <description>根据《人工智能游戏编程真言》的提示，分别尝试了几种优化方式，比如： 在节点上加标志 开放表和关闭表改用 Hash 表（不过如果采用在节点加标志的方法，好像</description>
+    </item>
+    
+    <item>
+      <title>模板有那么快么？？</title>
+      <link>https://onlyzf.com/post/2006/2006-04-11-cpp-template/</link>
+      <pubDate>Tue, 11 Apr 2006 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2006/2006-04-11-cpp-template/</guid>
+      <description>前几天用 C++模板重写了一遍 A*算法，实现的内容和非模板的算法一模一样，做了一下性能测试居然比非模板算法快 20 倍。太不可思议了，不能理解，看来</description>
+    </item>
+    
+    <item>
+      <title>【转】谈论木桶理论新论</title>
+      <link>https://onlyzf.com/post/2006/2006-04-06-buckets-effect/</link>
+      <pubDate>Thu, 06 Apr 2006 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2006/2006-04-06-buckets-effect/</guid>
+      <description>今天和同事谈到，到底是产品重要，还是营销重要。同事引用了木桶理论，认为哪个都不能缺，哪块板短了都不行。但我认为，产品不是木板，那是桶底啊！桶</description>
+    </item>
+    
+    <item>
+      <title>关于单件模式（Singleton）</title>
+      <link>https://onlyzf.com/post/2006/2006-04-06-singleton/</link>
+      <pubDate>Thu, 06 Apr 2006 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2006/2006-04-06-singleton/</guid>
+      <description>《设计模式》上关于单件的定义和实现如下： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 class Singleton { public: static Singleton* Instance(); protected: Singleton(); private: static Singleton* _instance; } Singleton* Singleton::_instance = 0; Singleton* Singleton::Instance() { if (_instance == 0); _instance = new Singleton; return _instance; } 由于 I</description>
+    </item>
+    
+    <item>
+      <title>体验结对</title>
+      <link>https://onlyzf.com/post/2005/2005-05-09-try-pairs/</link>
+      <pubDate>Mon, 09 May 2005 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2005/2005-05-09-try-pairs/</guid>
+      <description>在学习敏捷的时候听到结对编程这个概念，昨天和 water 实践了一下，确实有比较好的效果，就好像手把手的教你，而且一个人编程，另一个人可以查错，还可以思</description>
+    </item>
+    
+    <item>
+      <title>工作心得</title>
+      <link>https://onlyzf.com/post/2005/2005-04-26-working-ideas/</link>
+      <pubDate>Tue, 26 Apr 2005 00:00:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/2005/2005-04-26-working-ideas/</guid>
+      <description>有一个笔记本放在面前，随时记录想法。 中午最好能趴 10 分钟，效果很好。但是不能在床上睡。</description>
+    </item>
+    
+  </channel>
+</rss>

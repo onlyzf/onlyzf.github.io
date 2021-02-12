@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>GCC - Fan&#39;s life</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Fan" /><meta name="description" content="1    Compiler Options We strongly recommend compiling with at least the following warning options:
+1  -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror   Recent versions of gcc also support an option -fsanitize=address which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.
+Valgrind Run valgrind with --track-origins=yes to determine the source of the error." />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://onlyzf.com/post/snippets/cc/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="GCC" />
+<meta property="og:description" content="1    Compiler Options We strongly recommend compiling with at least the following warning options:
+1  -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror   Recent versions of gcc also support an option -fsanitize=address which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.
+Valgrind Run valgrind with --track-origins=yes to determine the source of the error." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onlyzf.com/post/snippets/cc/" />
+<meta property="article:published_time" content="2018-04-01T01:52:00+00:00" />
+<meta property="article:modified_time" content="2021-02-12T20:11:05+08:00" />
+<meta itemprop="name" content="GCC">
+<meta itemprop="description" content="1    Compiler Options We strongly recommend compiling with at least the following warning options:
+1  -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror   Recent versions of gcc also support an option -fsanitize=address which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.
+Valgrind Run valgrind with --track-origins=yes to determine the source of the error.">
+<meta itemprop="datePublished" content="2018-04-01T01:52:00+00:00" />
+<meta itemprop="dateModified" content="2021-02-12T20:11:05+08:00" />
+<meta itemprop="wordCount" content="2275">
+
+
+
+<meta itemprop="keywords" content="domain," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GCC"/>
+<meta name="twitter:description" content="1    Compiler Options We strongly recommend compiling with at least the following warning options:
+1  -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror   Recent versions of gcc also support an option -fsanitize=address which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.
+Valgrind Run valgrind with --track-origins=yes to determine the source of the error."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Fan&#39;s life</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Fan&#39;s life</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">GCC</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-04-01 </span>
+        
+          <span class="more-meta"> 约 2275 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#compiler-options">Compiler Options</a></li>
+        <li><a href="#valgrind">Valgrind</a></li>
+        <li><a href="#practical-tips-for-designing-test-cases">Practical Tips for Designing Test Cases</a></li>
+        <li><a href="#debugging">Debugging</a>
+          <ul>
+            <li><a href="#observe-a-phenomenon">Observe a Phenomenon</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-toc" data-lang="toc">
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="compiler-options">Compiler Options</h2>
+<p>We strongly recommend compiling with at least the following warning options:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">-Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror
+</code></pre></td></tr></table>
+</div>
+</div><p>Recent versions of gcc also support an option <code>-fsanitize=address</code> which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.</p>
+<h2 id="valgrind">Valgrind</h2>
+<p>Run valgrind with <code>--track-origins=yes</code> to determine the source of the error.</p>
+<h2 id="practical-tips-for-designing-test-cases">Practical Tips for Designing Test Cases</h2>
+<p>Writing good tests cases requires a lot of thought: you need to think about a wide variety of things that can go wrong. Here are some suggestions to guide your thinking, as well as important lessons. First, some thoughts for testing error cases:</p>
+<ul>
+<li>Make sure your tests cover every error case. Think about all the inputs that the program cannot handle, i.e., ones where you would expect to receive an error message. If the program requires a number, give it “xyz”, which is not a valid number. An even better test case might be “123xyz” which starts out as a number but isn’t entirely a number. How the program should handle this depends on the requirements of the program, but you want to make sure it handles it correctly.</li>
+<li>Be sure to test “too many” as well as “too few”. If a program requires exactly N things, test it with at least one case greater than N and at least one case with fewer than N. For example, if a program requires a line of input with exactly 10 characters, test it with 9 and with 11.</li>
+<li>Any given test case can only test one “error message and exit” condition. This means that if you want to test two different error conditions, you need two different test cases: one for each error condition. Suppose that our program requires a three letter string of lower-case letters. We might be tempted to test with “aBcD” to test two things at once, but this will only test one (and believing you tested both is problematic!) To see why this rule exists, think about the algorithm to check for these errors:</li>
+</ul>
+<h2 id="debugging">Debugging</h2>
+<p>The Scientific Method</p>
+<p><img src="cc/debugging.png" alt="debugging"></p>
+<h3 id="observe-a-phenomenon">Observe a Phenomenon</h3>
+<p>The figure above shows a flow-chart of the scientific method. All science starts with observing some phenomenon. In the natural sciences this might be noticing that objects fall towards the ground when not supported by anything, realizing that finches in certain of the Galápagos Islands have different characteristics from other finches, or that the water level rises when you get into the bathtub.</p>
+<p>In programming, our observation of phenomena relates to the behavior of our programs on certain inputs (“My program gives the wrong answer when I give it an input of 42!”). These observations typically arise from our test cases, but may happen under other circumstances (for example, the end user reports a problem that we did not discover in testing).</p>
+<p>Ask a Question
+Once you have observed a phenomena, the next step in the scientific method is to ask a question. Asking a good question here is crucial to the success of the rest of our scientific endeavor. While a broad question such as “What is wrong with my program and how do I fix it?” may seem appealing, it may be quite difficult to answer. Instead, we should aim for more focused questions: “On which line of code does my program crash?” or “Why does my program call myFunction with x=3 and y=-42?”.</p>
+<p>Answering one question often leads to an observation that leads to another question—restarting the scientific process all over again. Discovering what is wrong in this iterative fashion is perfectly fine, and in fact a great way to proceed. You start by asking “Which line does my program crash on?” then when you answer that, you ask “Why does it crash on this line?” the answer to that then leads you to ask “How is x=3 and y=-42?” which in turn leads you to ask another question, and so on. Eventually, your chain of questions and answers leads you to the discovery of the problem, even if it somewhat far removed from the visible symptom.</p>
+<p>Gather Information, Apply Expert Knowledge
+Many people will say that forming a hypothesis is the next step of the scientific method. If you can form a hypothesis immediately, that is great. However, forming a good hypothesis is difficult, and forming one right away is often not possible.</p>
+<p>The next step of the scientific method is actually to gather information and combine it with your expert knowledge. Going back to our example of visiting the doctor, the doctor gathers information by examining the patient, and combines it with her expert knowledge—years of training on symptoms of diseases and how the body works—to form a hypothesis.</p>
+<p>In the case of debugging, you need to gather information about what is happening in your program, and combine this with your own expert knowledge on programming. Your expert knowledge comes in two parts here. One is your knowledge of programming in general—the rules for how to execute code by hand that we learned in previously (and will continue learning as we introduce more topics), and your domain knowledge of the particular program you are writing—the expected behaviors of each part of it.</p>
+<p>Your expert knowledge will grow with practice in programming, and the domain for which you are writing programs. However, gathering information effectively is a skill of its own. The information gathering aspect of debugging is often conflated with the entirety of debugging—if you ask someone how they debug, they will often explain to you what techniques they use to gather information.</p>
+<p>The simplest way to gather information is to insert print statements (in C, calls to printf) to display the values of various variables at various points in the program. The resulting output can give you information about the control flow of the program (which statements were executed, and in what order—as shown by what order your print statements print their output), and, of course the values of the variables that you print.</p>
+<p>Gathering information by printing has the advantages that it is simple and requires no other knowledge or experience. However, it has several disadvantages as well. One is that changing what you print out requires recompiling and re-running your program. While this disadvantage may seem small, if your bug takes 15 minutes to manifest, restarting the program for each new piece of information you discover that you want can be quite time consuming. Another disadvantage is that the output may be overwhelming (i.e., thousands of lines of output to sift through) if your program executes for even a modest time before experiencing the problem. A third disadvantage is that it cannot replicate or replace many features that debuggers offer.</p>
+<p>Another approach to information gathering is to use a debugger—a tool specifically designed to aid programmers in the debugging process. The debugger is in fact primarily aimed at this piece of the debugging process—gathering information (sadly, it does not offer you hypotheses or expert knowledge). One widely used debugger is gdb, which we cover in detail in the future. We strongly recommend that you learn it, and if you intend to become a serious programmer, become an expert in it. We will mention generally what you can do with it here, but leave the details until later as gdb has features which we relate to topics that we have not learned yet.</p>
+<p>For now, we will discuss the high-level points of a debugger. When you run your program inside the debugger, you can give the debugger a variety of commands to control the execution of your program, and get information from it. Note that Emacs understands how to interact with gdb and using them together makes the entire process go much more smoothly.</p>
+<p>For now, we will discuss the high-level points of a debugger. When you run your program inside the debugger, you can give the debugger a variety of commands to control the execution of your program, and get information from it. Note that Emacs understands how to interact with gdb and using them together makes the entire process go much more smoothly.</p>
+<p>When you run your program inside of a debugger, it will run as normal until either (a) it exits (b) it crashes (c) it encounters a breakpoint (or watchpoint) that you have set. A breakpoint is set on a particular line of code, and instructs the debugger to stop the execution of your program whenever the execution arrow is on it. Breakpoints can be conditional—meaning you can specify that you only want to stop on some particular line when a conditional expression you specify is true. Watchpoints specify that you want to stop the program when a particular “box” changes.</p>
+<p>Once your program is stopped, you can examine the state of the program by printing the values of expressions. The debugger will evaluate the expression, and print the result for you—giving you information about the state of the program. Most often, you will want to print the values of variables to see what is going on, though you may print much more complex expressions if you wish.</p>
+<p>After printing some information, you will often want to continue executing in some fashion—either running until the debugger would stop naturally (as described above), or maybe just executing one more statement, then stopping. The debugger gives you the ability to choose either one. If you want to execute one statement at a time, and the current statement involves a function call, you have two options. You can either step over the call (asking the debugger to evaluate the entire function call, and stop on the next line of the current function), or you can step into the function call (asking the debugger to follow the execution arrow inside the function and let you explore what is happening inside it).</p>
+<p>This approach to gathering information is more flexible than print statements—if you encounter one oddity, which suggests other things you need to explore, you can print them immediately. By contrast, if you print the value of a variable with a print statement, adding more print statements to investigate other variables requires recompiling and re-running the program.</p>
+<p>The previous paragraph alludes to a common occurrence in the debugging process: recursive observations—gaining some information (e.g., seeing the value you printed for one variable) leads you to want some other information (e.g., to print some other variable). Often when you are investigating one phenomenon (“My program crashes when I enter 3…”), you observe some other phenomenon (“y is 0 on line 42..”) which itself leads to a question meriting investigation (“How did that happen?”). The investigation of this second phenomenon proceeds according to the scientific method. In such a case, you are recursively applying the scientific method. We will learn about recursion as a programming technique later, but for now it suffices to say that recursion is when an algorithm (in this case, the scientific method) has a step which calls for you to apply the same algorithm to “smaller” (by some metric) inputs. Here, investigating the second observation may immediately solve your problem, may give you useful information to allow you to proceed, or may prove to be a red-herring (something that was actually fine, but just surprised you—in which case, you just continue gathering information for your original question).</p>
+<p>Form a Hypothesis
+The whole point of gathering all of this information is to help you form a hypothesis. Sometimes, you may be able to form a hypothesis right away—typically for problems that are simple relative to your experience level. However, forming a good hypothesis is generally hard, and requires significant information gathering.</p>
+<p>Forming a good hypothesis is the key to proceeding effectively. A vague hypothesis is hard to test, and not so useful in identifying the problem. As an extreme example, the hypothesis “My program is broken” is easily verified, but rather useless. The hypothesis “My program is dividing by 0 on line 47 for certain inputs” is more useful, but could be improved. Even better would be “My program is dividing by 0 on line 47 if y is odd and z is a perfect square.” This (contrived) hypothesis is specific and clear—giving it two important characteristics for debugging.</p>
+<p>The first characteristic of a good hypothesis that this exhibits is that it is testable. For a hypothesis to be testable, it must make specific predictions about the behavior of the program: when I give the program inputs that meet (condition), I will observe (behavior). For such a hypothesis, you can execute test cases to either refute this hypothesis (e.g., if the program’s behavior does not match the predictions that the hypothesis makes) or to become confident enough in our hypothesis that we accept it. The contrived hypothesis we presented at the end of the previous paragraph is quite testable: we specify a certain category of inputs (y is odd and z is a perfect square) and exactly what behavior we expect to observe (division by 0 on line 47).</p>
+<p>The second characteristic of a good hypothesis for debugging is that it is actionable—if we convince ourselves that it is true, it provides us with an indication of either how to fix the error in our code, or what the next steps towards it are. In the case of our contrived hypothesis, confirmation would likely suggest a special case of the algorithm which we did not consider. The fact that our hypothesis is specific (with regards to what types of inputs trigger the error) identifies the corner cases for us, guiding us to the path to fixing the problem.</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Fan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-02-12
+        <a href="/commit/c82f6b0e96af69b1fe36a198c36c85f14078892f" title="use hugo and themes/even">(c82f6b0)</a>
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/domain/">domain</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/snippets/svn/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Subversion snippets</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2017/2017-05-09-how-to-speech/">
+            <span class="next-text nav-default">TED&#39;s secret to great public speaking</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/onlyzf" class="iconfont icon-github" title="github"></a>
+  <a href="https://onlyzf.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2005 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

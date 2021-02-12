@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>devops on Fan&#39;s life</title>
+    <link>https://onlyzf.com/tags/devops/</link>
+    <description>Recent content in devops on Fan&#39;s life</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 19 Oct 2018 08:22:49 +0000</lastBuildDate><atom:link href="https://onlyzf.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>极简Supervisor</title>
+      <link>https://onlyzf.com/post/snippets/supervisor/</link>
+      <pubDate>Fri, 19 Oct 2018 08:22:49 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/supervisor/</guid>
+      <description>Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems. Supervisor 是比较简单的创建守护进程的工具，支持 linux 和 macOS 这些类 UNIX 系统。 它的优势在于比较轻量、不需要 root 权限、配置</description>
+    </item>
+    
+  </channel>
+</rss>

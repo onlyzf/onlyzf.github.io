@@ -1,2 +1,2 @@
 User-agent: *
-Disallow:
+Sitemap: https://onlyzf.com/sitemap.xml

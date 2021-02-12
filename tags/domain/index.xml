@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>domain on Fan&#39;s life</title>
+    <link>https://onlyzf.com/tags/domain/</link>
+    <description>Recent content in domain on Fan&#39;s life</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 20 Oct 2018 07:01:12 +0000</lastBuildDate><atom:link href="https://onlyzf.com/tags/domain/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DNS</title>
+      <link>https://onlyzf.com/post/snippets/dns/</link>
+      <pubDate>Sat, 20 Oct 2018 07:01:12 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/dns/</guid>
+      <description>How to Check Domain’s Nameservers 1 2  nslookup -type=ns yourdomain.tld dig ns yourdomain.tld   How to check DNS record 1  dig yourdomain.tld +nostats +nocomments +nocmd   chinadns 1 2  curl &amp;#39;http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest&amp;#39; | grep ipv4 | grep CN | awk -F\| &amp;#39;{ printf(&amp;#34;%s/%d\n&amp;#34;, $4, 32-log($5)/log(2)) }&amp;#39; &amp;gt; chnroute.txt chinadns -c chnroute.txt -s 223.5.5.5,119.29.29.29,208.67.222.222:443,8.8.8.8   </description>
+    </item>
+    
+    <item>
+      <title>GCC</title>
+      <link>https://onlyzf.com/post/snippets/cc/</link>
+      <pubDate>Sun, 01 Apr 2018 01:52:00 +0000</pubDate>
+      
+      <guid>https://onlyzf.com/post/snippets/cc/</guid>
+      <description>1    Compiler Options We strongly recommend compiling with at least the following warning options:
+1  -Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror   Recent versions of gcc also support an option -fsanitize=address which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle.
+Valgrind Run valgrind with --track-origins=yes to determine the source of the error.</description>
+    </item>
+    
+  </channel>
+</rss>

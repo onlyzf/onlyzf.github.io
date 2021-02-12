@@ -1,6 +1,401 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.58a1ac912fb3578e570e.css" id="gatsby-global-css">@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:100;src:local("Montserrat Thin "),local("Montserrat-Thin"),url(/static/montserrat-latin-100-191cc9f50f3b76b9617cb383f19acb7d.woff2) format("woff2"),url(/static/montserrat-latin-100-370318464551d5f25b0f0a78f374faac.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:100;src:local("Montserrat Thin italic"),local("Montserrat-Thinitalic"),url(/static/montserrat-latin-100italic-bdeaeb79db315697bd173a55b097dc18.woff2) format("woff2"),url(/static/montserrat-latin-100italic-ecf7d49386e8f265878e735db34a7c4b.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:200;src:local("Montserrat Extra Light "),local("Montserrat-Extra Light"),url(/static/montserrat-latin-200-85d5ef9db7f2dc6979172a4a3b2c57cb.woff2) format("woff2"),url(/static/montserrat-latin-200-1fc98e126a3d152549240e6244d7e669.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:200;src:local("Montserrat Extra Light italic"),local("Montserrat-Extra Lightitalic"),url(/static/montserrat-latin-200italic-49095760a498d024fe1a85a078850df9.woff2) format("woff2"),url(/static/montserrat-latin-200italic-fe46cf8b9462c820457d3bf537e4057f.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:300;src:local("Montserrat Light "),local("Montserrat-Light"),url(/static/montserrat-latin-300-7c3daf12b706645b5d3710f863a4da04.woff2) format("woff2"),url(/static/montserrat-latin-300-8dc95fab9cf98d02ca8d76e97d3dff60.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:300;src:local("Montserrat Light italic"),local("Montserrat-Lightitalic"),url(/static/montserrat-latin-300italic-f20b178ca2024a5eac8e42e6649db86c.woff2) format("woff2"),url(/static/montserrat-latin-300italic-3fe16939288856e8e828fa2661bf2354.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:400;src:local("Montserrat Regular "),local("Montserrat-Regular"),url(/static/montserrat-latin-400-bc3aa95dca08f5fee5291e34959c27bc.woff2) format("woff2"),url(/static/montserrat-latin-400-8102c4838f9e3d08dad644290a9cb701.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:400;src:local("Montserrat Regular italic"),local("Montserrat-Regularitalic"),url(/static/montserrat-latin-400italic-5cad650422a7184467af5a4d17b264c4.woff2) format("woff2"),url(/static/montserrat-latin-400italic-d191f22af3bb50902b99ac577f81a322.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500;src:local("Montserrat Medium "),local("Montserrat-Medium"),url(/static/montserrat-latin-500-92d16e458625f4d2c8940f6bdca0ff09.woff2) format("woff2"),url(/static/montserrat-latin-500-8b763220218ffc11c57c84ddb80e7b26.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:500;src:local("Montserrat Medium italic"),local("Montserrat-Mediumitalic"),url(/static/montserrat-latin-500italic-47bfcca6b69d6a9acca7a8bff17193e2.woff2) format("woff2"),url(/static/montserrat-latin-500italic-72c01f753c3940c0b9cb6bf2389caddf.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600;src:local("Montserrat SemiBold "),local("Montserrat-SemiBold"),url(/static/montserrat-latin-600-6fb1b5623e528e27c18658fecf5ee0ee.woff2) format("woff2"),url(/static/montserrat-latin-600-7c839d15a6f54e7025ba8c0c4b333e8f.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:600;src:local("Montserrat SemiBold italic"),local("Montserrat-SemiBolditalic"),url(/static/montserrat-latin-600italic-60789af1c9338ed1a9546722ec54b4f7.woff2) format("woff2"),url(/static/montserrat-latin-600italic-f3d4de8d0afb19e777c79032ce828e3d.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:700;src:local("Montserrat Bold "),local("Montserrat-Bold"),url(/static/montserrat-latin-700-39d93cf678c740f9f6b2b1cfde34bee3.woff2) format("woff2"),url(/static/montserrat-latin-700-80f10bd382f0df1cd650fec59f3c9394.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:700;src:local("Montserrat Bold italic"),local("Montserrat-Bolditalic"),url(/static/montserrat-latin-700italic-ba136d97b14e82284dd595e257f11c47.woff2) format("woff2"),url(/static/montserrat-latin-700italic-8c98142b425630821139c24bd1698700.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold "),local("Montserrat-ExtraBold"),url(/static/montserrat-latin-800-b7018be9ed6cd94da8b6675b3a468c3b.woff2) format("woff2"),url(/static/montserrat-latin-800-9a9befcf50d64f9d2d19d8b1d1984add.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:800;src:local("Montserrat ExtraBold italic"),local("Montserrat-ExtraBolditalic"),url(/static/montserrat-latin-800italic-540ffdd223d1a9ad3d4e678e1a23372e.woff2) format("woff2"),url(/static/montserrat-latin-800italic-897086f99f4e1f45e6b1e9368527d0bc.woff) format("woff")}@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:900;src:local("Montserrat Black "),local("Montserrat-Black"),url(/static/montserrat-latin-900-58cd789700850375b834e8b6776002eb.woff2) format("woff2"),url(/static/montserrat-latin-900-26d42c9428780e545a540bbb50c84bce.woff) format("woff")}@font-face{font-family:Montserrat;font-style:italic;font-display:swap;font-weight:900;src:local("Montserrat Black italic"),local("Montserrat-Blackitalic"),url(/static/montserrat-latin-900italic-451157bc8861fe54f523b3669a3def71.woff2) format("woff2"),url(/static/montserrat-latin-900italic-a8ec4957e1c24f5793305763ad9845b3.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:300;src:local("Merriweather Light "),local("Merriweather-Light"),url(/static/merriweather-latin-300-b1158cfcd4aacb9d8fb61625e37af46a.woff2) format("woff2"),url(/static/merriweather-latin-300-cc7de05e166e90320d7d896e0f72a19d.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:300;src:local("Merriweather Light italic"),local("Merriweather-Lightitalic"),url(/static/merriweather-latin-300italic-8fe52a48089d6ebe46db0b8e7cc66263.woff2) format("woff2"),url(/static/merriweather-latin-300italic-e1331f5397c2a673f9d3765138debdb5.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:400;src:local("Merriweather Regular "),local("Merriweather-Regular"),url(/static/merriweather-latin-400-8276fdb72ae8f4714d4e6eba704cc39f.woff2) format("woff2"),url(/static/merriweather-latin-400-69f09800f4f6479d06e44eba837df872.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:400;src:local("Merriweather Regular italic"),local("Merriweather-Regularitalic"),url(/static/merriweather-latin-400italic-3a9be9ea9f7aa4af6de7307df21d9fc0.woff2) format("woff2"),url(/static/merriweather-latin-400italic-d76079ed7541a433a54f79316de086e9.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:700;src:local("Merriweather Bold "),local("Merriweather-Bold"),url(/static/merriweather-latin-700-fa534be7ffa380e39a7f6e03bf9a5e03.woff2) format("woff2"),url(/static/merriweather-latin-700-ba56ea84b8084b7ff9677f50d3cd81bd.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:700;src:local("Merriweather Bold italic"),local("Merriweather-Bolditalic"),url(/static/merriweather-latin-700italic-1ef5edaaa20ae53ea50399884c5e48c6.woff2) format("woff2"),url(/static/merriweather-latin-700italic-534bc9e7ce93c73d73426e46acd78092.woff) format("woff")}@font-face{font-family:Merriweather;font-style:normal;font-display:swap;font-weight:900;src:local("Merriweather Black "),local("Merriweather-Black"),url(/static/merriweather-latin-900-7528fb70e8a4a82c7305e72ff43ac25f.woff2) format("woff2"),url(/static/merriweather-latin-900-3799b6e2f5ed3fcccf9d7a708d7419fa.woff) format("woff")}@font-face{font-family:Merriweather;font-style:italic;font-display:swap;font-weight:900;src:local("Merriweather Black italic"),local("Merriweather-Blackitalic"),url(/static/merriweather-latin-900italic-e1b4d2aaa78e12ad84aaf8a56321e4c2.woff2) format("woff2"),url(/static/merriweather-latin-900italic-2ae22f731b3424e8dbb4b37f7ca6e708.woff) format("woff")}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Fan&#39;s life</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden]{display:none}:root{--maxWidth-none:"none";--maxWidth-xs:20rem;--maxWidth-sm:24rem;--maxWidth-md:28rem;--maxWidth-lg:32rem;--maxWidth-xl:36rem;--maxWidth-2xl:42rem;--maxWidth-3xl:48rem;--maxWidth-4xl:56rem;--maxWidth-full:"100%";--maxWidth-wrapper:var(--maxWidth-2xl);--spacing-px:"1px";--spacing-0:0;--spacing-1:0.25rem;--spacing-2:0.5rem;--spacing-3:0.75rem;--spacing-4:1rem;--spacing-5:1.25rem;--spacing-6:1.5rem;--spacing-8:2rem;--spacing-10:2.5rem;--spacing-12:3rem;--spacing-16:4rem;--spacing-20:5rem;--spacing-24:6rem;--spacing-32:8rem;--fontFamily-sans:Montserrat,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--fontFamily-serif:"Merriweather","Georgia",Cambria,"Times New Roman",Times,serif;--font-body:var(--fontFamily-serif);--font-heading:var(--fontFamily-sans);--fontWeight-normal:400;--fontWeight-medium:500;--fontWeight-semibold:600;--fontWeight-bold:700;--fontWeight-extrabold:800;--fontWeight-black:900;--fontSize-root:16px;--lineHeight-none:1;--lineHeight-tight:1.1;--lineHeight-normal:1.5;--lineHeight-relaxed:1.625;--fontSize-0:0.833rem;--fontSize-1:1rem;--fontSize-2:1.2rem;--fontSize-3:1.44rem;--fontSize-4:1.728rem;--fontSize-5:2.074rem;--fontSize-6:2.488rem;--fontSize-7:2.986rem;--color-primary:#005b99;--color-text:#2e353f;--color-text-light:#4f5969;--color-heading:#1a202c;--color-heading-black:#000;--color-accent:#d1dce5}*,:after,:before{box-sizing:border-box}html{line-height:var(--lineHeight-normal);font-size:var(--fontSize-root);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{font-family:var(--font-body);font-size:var(--fontSize-1);color:var(--color-text)}footer{padding:var(--spacing-6) var(--spacing-0)}hr{background:var(--color-accent);height:1px;border:0}h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);margin-top:var(--spacing-12);margin-bottom:var(--spacing-6);line-height:var(--lineHeight-tight);letter-spacing:-.025em}h2,h3,h4,h5,h6{font-weight:var(--fontWeight-bold);color:var(--color-heading)}h1{font-weight:var(--fontWeight-black);font-size:var(--fontSize-6);color:var(--color-heading-black)}h2{font-size:var(--fontSize-5)}h3{font-size:var(--fontSize-4)}h4{font-size:var(--fontSize-3)}h5{font-size:var(--fontSize-2)}h6{font-size:var(--fontSize-1)}h1>a,h2>a,h3>a,h4>a,h5>a,h6>a{color:inherit;text-decoration:none}p{line-height:var(--lineHeight-relaxed);--baseline-multiplier:0.179;--x-height-multiplier:0.35;margin:var(--spacing-0) var(--spacing-0) var(--spacing-8) var(--spacing-0)}ol,p,ul{padding:var(--spacing-0)}ol,ul{margin-left:var(--spacing-0);margin-right:var(--spacing-0);margin-bottom:var(--spacing-8);list-style-position:outside;list-style-image:none}ol li,ul li{padding-left:var(--spacing-0)}li>p,ol li,ul li{margin-bottom:calc(var(--spacing-8)/2)}li :last-child{margin-bottom:var(--spacing-0)}li>ul{margin-left:var(--spacing-8);margin-top:calc(var(--spacing-8)/2)}blockquote{color:var(--color-text-light);margin-left:calc(var(--spacing-6)*-1);margin-right:var(--spacing-8);padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-6);border-left:var(--spacing-1) solid var(--color-primary);font-size:var(--fontSize-2);font-style:italic;margin-bottom:var(--spacing-8)}blockquote>:last-child{margin-bottom:var(--spacing-0)}blockquote>ol,blockquote>ul{list-style-position:inside}table{width:100%;margin-bottom:var(--spacing-8);border-collapse:collapse;border-spacing:.25rem}table thead tr th{border-bottom:1px solid var(--color-accent)}a{color:var(--color-primary)}a:focus,a:hover{text-decoration:none}.global-wrapper{margin:var(--spacing-0) auto;max-width:var(--maxWidth-wrapper);padding:var(--spacing-10) var(--spacing-5)}.global-wrapper[data-is-root-path=true] .bio{margin-bottom:var(--spacing-20)}.global-header{margin-bottom:var(--spacing-12)}.main-heading{font-size:var(--fontSize-7);margin:0}.post-list-item{margin-bottom:var(--spacing-8);margin-top:var(--spacing-8)}.post-list-item p{margin-bottom:var(--spacing-0)}.post-list-item h2{font-size:var(--fontSize-4);color:var(--color-primary);margin-bottom:var(--spacing-2);margin-top:var(--spacing-0)}.post-list-item header{margin-bottom:var(--spacing-4)}.header-link-home{font-weight:var(--fontWeight-bold);font-family:var(--font-heading);text-decoration:none;font-size:var(--fontSize-2)}.bio{display:flex;margin-bottom:var(--spacing-16)}.bio-avatar,.bio p{margin-bottom:var(--spacing-0)}.bio-avatar{margin-right:var(--spacing-4);min-width:50px;border-radius:100%}.blog-post header h1{margin:var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0)}.blog-post header p{font-size:var(--fontSize-2);font-family:var(--font-heading)}.blog-post-nav ul{margin:var(--spacing-0)}.gatsby-highlight{margin-bottom:var(--spacing-8)}@media (max-width:42rem){blockquote{padding:var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);margin-left:var(--spacing-0)}ol,ul{list-style-position:inside}}code[class*=language-],pre[class*=language-]{color:#000;background:none;text-shadow:0 1px #fff;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-]::selection,code[class*=language-] ::selection,pre[class*=language-]::selection,pre[class*=language-] ::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f2f0}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}</style><meta name="generator" content="Gatsby 2.29.0"/><link rel="icon" href="/favicon-32x32.png?v=4a9773549091c227cd2eb82ccd9c5e3a" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#663399"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=4a9773549091c227cd2eb82ccd9c5e3a"/><title data-react-helmet="true">All posts | Fan&#x27;s life</title><meta data-react-helmet="true" name="description" content="衰退程序员的人生"/><meta data-react-helmet="true" property="og:title" content="All posts"/><meta data-react-helmet="true" property="og:description" content="衰退程序员的人生"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content=""/><meta data-react-helmet="true" name="twitter:title" content="All posts"/><meta data-react-helmet="true" name="twitter:description" content="衰退程序员的人生"/><link as="script" rel="preload" href="/webpack-runtime-6d5fdbb5f47ce3532ede.js"/><link as="script" rel="preload" href="/styles-755093da0c07f4b49226.js"/><link as="script" rel="preload" href="/framework-8e528b732ab2eaadb7b7.js"/><link as="script" rel="preload" href="/app-e19d4871ada7ef5996f3.js"/><link as="script" rel="preload" href="/commons-d9dafa7b739cb27f2739.js"/><link as="script" rel="preload" href="/cd7d5f864fc9e15ed8adef086269b0aeff617554-75c92c15aeb103cdec46.js"/><link as="script" rel="preload" href="/component---src-pages-index-js-1f392d533eeed4de8d16.js"/><link as="fetch" rel="preload" href="/page-data/index/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/2841359383.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/916993862.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="global-wrapper" data-is-root-path="true"><header class="global-header"><h1 class="main-heading"><a aria-current="page" class="" href="/">Fan&#x27;s life</a></h1></header><main><div class="bio"><p>Written by <strong>Fan</strong> <!-- --> <a href="https://twitter.com/"></a></p></div><ol style="list-style:none"><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2020/game_half_lifetime/game_half_lifetime/"><span itemProp="headline">我的游戏前半生</span></a></h2><small>December 14, 2020</small></header><section><p itemProp="description">游戏 程序</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/py_struct/"><span itemProp="headline">Structure of the Python Repository</span></a></h2><small>November 05, 2020</small></header><section><p itemProp="description">Sample Repository The Actual Module Location ./sample/ or ./sample.py Your module package is the core focus of the repository. It should not…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/py_main/"><span itemProp="headline">Defining Main Functions in Python</span></a></h2><small>August 28, 2019</small></header><section><p itemProp="description">Summary of Python Main Function Best Practices!</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/time/"><span itemProp="headline">城市创变者挑战赛——时光侦探</span></a></h2><small>August 18, 2019</small></header><section><p itemProp="description">你是否常常觉得明明一整天什么也没做，时间却不经意地来到午夜十二点了呢? 有人说，7年是人生一个轮回。你是否尝试过将每一天浪费的时间，叠加到7年呢？如果你每天都花2小时刷微信朋友圈，7年所花费的就是 2(hr)X365(天)X7(年)=5110小时，这样的数字是否很惊人呢? 现在请你扮演时光侦探，找出是谁偷走了你的时间吧!</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/bicycle/"><span itemProp="headline">城市创变者挑战赛——单车的隐患</span></a></h2><small>August 17, 2019</small></header><section><p itemProp="description">请找到一个待解决的社会或社区问题，发挥你的创造力，设计一个解决或改进现状的方案，并实施它，收集反馈。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/dream/"><span itemProp="headline">城市创变者挑战赛——曾经的梦想</span></a></h2><small>August 16, 2019</small></header><section><p itemProp="description">每个人都有自己的梦想，却不是每个人都有机会实现它。而对于梦想的遗憾，可能会影响我们与家人的关系。 请以记者的身份，采访你的父亲或母亲，了解他们没有实现的梦想。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/death/"><span itemProp="headline">城市创变者挑战赛——向死而生</span></a></h2><small>August 16, 2019</small></header><section><p itemProp="description">人们很少主动思考死亡，直到有一天死神突然降临，才追悔莫及。 假如明天你就要死去，请给自己策划一场葬礼，写下你对自己人生的评价，和在葬礼上想跟家人或朋友说的话，分享给他们，倾听他们的想法。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/meaning_of_life/"><span itemProp="headline">城市创变者挑战赛——存在的意义</span></a></h2><small>August 15, 2019</small></header><section><p itemProp="description">人的一生，总是在不断重新认识自己，找寻人生的使命与价值 。 请找到至少五位路人，问他们这三个问题： 1. 你的人生使命和价值是什么？ 2. 你认为自己能为身边人带来什么影响？ 3. 你想为成都带来什么影响？</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/trash/"><span itemProp="headline">城市创变者挑战赛——垃圾卫士</span></a></h2><small>August 15, 2019</small></header><section><p itemProp="description">人类每天会产生大量的垃圾，如果这些垃圾不经分类而被处理，会造成严重的环境污染和资源浪费。 请先了解一下垃圾不分类的危害，以及成都的垃圾分类政策。 去街上或社区溜一圈，记下乱扔垃圾或不恰当使用垃圾箱的情况。 请找到一个人流量大的垃圾箱（可以是景点附近的，也可以是社区里的），发挥你的想象力，向前来使用这个垃圾箱的人有效传达成都垃圾分类的政策吧！</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/do_good/"><span itemProp="headline">城市创变者挑战赛——日行一善</span></a></h2><small>August 14, 2019</small></header><section><p itemProp="description">改变世界不是一个人做很多，而是每个人都做一点点。只要你愿意付出行动，主动做善事，用你的真心去感化身边人，这个世界就会因你而变得不一样。 请尝试连续3天，每天做一件小善事，用视频记录，回家后写下日记，记录这件善事和自己的感想。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/geeklife/"><span itemProp="headline">城市创变者挑战赛——长辈的黑客生活</span></a></h2><small>August 13, 2019</small></header><section><p itemProp="description">随着全球科技的快速发展，现代人的生活被快速的改变和颠覆。我们习惯了周围事物的频繁更新，享受着科技进步给我们生活带来的好处。然而对于我们的一些长辈来说，接受新鲜事物却不是那么“理所当然”。 请找到一位你的长辈，采访TA日常生活中有哪些不便，并用现代科技的手段帮助他解决问题。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/blind_dumb/"><span itemProp="headline">城市创变者挑战赛——盲人与哑巴</span></a></h2><small>August 13, 2019</small></header><section><p itemProp="description">请尝试一人扮演盲人（带眼罩），一人扮演哑巴，一人扮演守护者，用这样的模式共度1.5个小时（每30分钟互换一次角色，每个人需要体验3个角色） 请前往浣花溪公园寻宝（具体内容天使导师当天通知），在这个过程中完成走盲道、坐公交、买水果、吃饭等活动。 请守护者记录下挑战过程中你们发现的对残障人友好和不友好的设施或服务。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/thanks/"><span itemProp="headline">城市创变者挑战赛——迟到的感谢</span></a></h2><small>August 13, 2019</small></header><section><p itemProp="description">我们的社会能够正常运转，依赖于许多默默为我们付出的人，如警察、清洁工、公交司机等。 请找到5个为城市正常运转默默付出的职业，用你的方式，对从事这样职业的人表示感谢吧！</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/cd70/"><span itemProp="headline">城市创变者挑战赛——成都70年</span></a></h2><small>August 12, 2019</small></header><section><p itemProp="description">培根说：“读史使人明智”。定期回顾过去，能够帮助我们更好的展望未来。 今年是建国70周年纪念，在过去70年中，我们的生活发生了翻天覆地的变化。这些变化给我们什么启示？ 请锁定一个成都的目标，可以是一个人、一件物品、一栋房子或是一个机构，挖掘和采访这个目标过去70年的变化。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/sre/"><span itemProp="headline">《SRE Google运维解密》</span></a></h2><small>July 13, 2019</small></header><section><p itemProp="description">《SRE Google 运维解密》读书笔记</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/container/"><span itemProp="headline">容器及编排</span></a></h2><small>June 17, 2019</small></header><section><p itemProp="description">docker enable debug in container</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2019/docker/"><span itemProp="headline">《Docker —— 从入门到实践》</span></a></h2><small>May 05, 2019</small></header><section><p itemProp="description">《Docker —— 从入门到实践》读书笔记</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2018/2018-10-30-game-development/"><span itemProp="headline">Game Development</span></a></h2><small>October 30, 2018</small></header><section><p itemProp="description">…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2018/topic/"><span itemProp="headline">可分享的主题</span></a></h2><small>October 20, 2018</small></header><section><p itemProp="description">设计模式、游戏开发中的实践 系统架构设计师指引 云计算概念、分布式系统、高可用系统 https://www.coursera.org/learn/cloud-computing https://coolshell.cn/articles/10910.html https…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/macOS/"><span itemProp="headline">macOS</span></a></h2><small>October 20, 2018</small></header><section><p itemProp="description">Flushing your DNS cache on Mac OS X Show listen ports Bluetooth Devices Not Connecting to OSX Solution: Delete com.apple.Bluetooth.plist…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/dns/"><span itemProp="headline">DNS</span></a></h2><small>October 20, 2018</small></header><section><p itemProp="description">How to Check Domain’s Nameservers How to check DNS record chinadns</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/supervisor/"><span itemProp="headline">极简Supervisor</span></a></h2><small>October 19, 2018</small></header><section><p itemProp="description">Supervisor is a client/server system that allows its users to monitor and control a number of processes on UNIX-like operating systems…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/git/"><span itemProp="headline">Git snippets</span></a></h2><small>October 13, 2018</small></header><section><p itemProp="description"></p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/ssh/"><span itemProp="headline">SSH config</span></a></h2><small>October 13, 2018</small></header><section><p itemProp="description">~/.ssh/config</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/svn/"><span itemProp="headline">Subversion snippets</span></a></h2><small>October 13, 2018</small></header><section><p itemProp="description">Create a new directory under version control</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/spring-config-server/"><span itemProp="headline">Spring Config Server</span></a></h2><small>June 13, 2018</small></header><section><p itemProp="description"></p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/snippets/cc/"><span itemProp="headline">GCC</span></a></h2><small>April 01, 2018</small></header><section><p itemProp="description">Compiler Options We strongly recommend compiling with at least the following warning options: Recent versions of gcc also support an option…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2017/2017-05-09-how-to-speech/"><span itemProp="headline">TED&#x27;s secret to great public speaking</span></a></h2><small>May 09, 2017</small></header><section><p itemProp="description">Focus on one major idea. Give people a reason to care. Build your idea with familiar concepts. Make your idea worth sharing.</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2016/2016-09-19-linux/"><span itemProp="headline">Linux开发经验教训——来自《Linux 内核开发报告2016版》</span></a></h2><small>September 19, 2016</small></header><section><p itemProp="description">长达 25 年的经验教训一：快速发布，短发布周期很重要 长达 25 年的经验教训二：流程的扩展性需要分布式层级状的开发模式，全靠 Linus 一个会死人，职责分工明确才能提高效率 长达 25 年的经验教训三：工具很重要，迁移到 BitKeeper…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2015/2015-03-04-kk/"><span itemProp="headline">功夫小子运营</span></a></h2><small>March 04, 2015</small></header><section><p itemProp="description">简介 功夫小子 是一款多人格斗竞技游戏，无成长，游戏中可切换武器，强调武器平衡及个人技术
- 
- 开发：盛大成都研发 运营：盛大上海（后转入成都锦天） 上线时间：2007 年 运营状态：alive…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2014/2014-03-27-pixar/"><span itemProp="headline">Pixar的哲学和方法</span></a></h2><small>March 27, 2014</small></header><section><p itemProp="description">哲学 Story is king 最小的代价决定是否继续走下一步。 方法 idea script story board 2d 90 min movie 3d 90 min movie</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2013/2013-11-30-pm/"><span itemProp="headline">项目管理思考</span></a></h2><small>November 30, 2013</small></header><section><p itemProp="description">…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2010/2010-09-16-internet/"><span itemProp="headline">【转】从Internet说起——王小波</span></a></h2><small>September 16, 2010</small></header><section><p itemProp="description">我的电脑还没连网，也想过要和 Internet…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2007/2007-12-07-robot/"><span itemProp="headline">关于机器人框架的设计</span></a></h2><small>December 07, 2007</small></header><section><p itemProp="description">新设计的机器人框架的思路是这样的： 一共两个线程，UI 线程，逻辑线程； UI 线程为主线程，可能从 WinMain 开始执行； 逻辑线程为驻线程创建的独立线程，运行 Dispatcher 的 Update； UI 线程持有逻辑线程的句柄，当执行 UI…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2007/2007-08-22-journal/"><span itemProp="headline">近日工作</span></a></h2><small>August 22, 2007</small></header><section><p itemProp="description">这几天终于可以趁着机器人需求比较丰富的时候重构一下整个机器人了。大的东西没有变，但是基于 timer 性能的缘故，把 stopwatch 从 timer 里面移出来，否则每个周期的大部分时间都被 stopwatch 占去了，很划不来。另外，对于比较新的需求增加了几个行为，i…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2007/2007-08-22-vector-vs-list/"><span itemProp="headline">vector和list的性能比较</span></a></h2><small>August 22, 2007</small></header><section><p itemProp="description">Routine Name       Time with Children  Hit Count list::insert       109305010           100000 vector::insert     5643518264          10000…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2006/2006-05-26-ace/"><span itemProp="headline">计划用ACE写一个服务器</span></a></h2><small>May 26, 2006</small></header><section><p itemProp="description">既然已经有现成的很成熟的  ACE  库了，就不要搞什么完成端口模型需要耗费大量时间的网络编程了。在 ACE 的基础上写服务器应该不错。 考虑到扩展性，打算分成两层，一层基本服务，直接使用 ACE…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2006/2006-04-17-astar/"><span itemProp="headline">终于明白了为什么新写的A*算法会快那么多</span></a></h2><small>April 17, 2006</small></header><section><p itemProp="description">经过了几天的测试，排除了几个小 Bug，现在的算法已经是很稳定了。性能大概是以前的三倍左右，最终的结果是只用上了设置状态的优化方法，其他方法都没用到。 之前会快 20 倍是因为新算法忘了做 clear，加上以后就是现在这个样子，大概是以前…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2006/2006-04-11-astar/"><span itemProp="headline">A*的优化</span></a></h2><small>April 11, 2006</small></header><section><p itemProp="description">根据《人工智能游戏编程真言》的提示，分别尝试了几种优化方式，比如： 在节点上加标志 开放表和关闭表改用 Hash 表（不过如果采用在节点加标志的方法，好像 Hash 表就没有意义了，直接访问该节点标志判断处于哪种状态还快些。而且 Hash…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2006/2006-04-11-cpp-template/"><span itemProp="headline">模板有那么快么？？</span></a></h2><small>April 11, 2006</small></header><section><p itemProp="description">前几天用 C++模板重写了一遍 A * 算法，实现的内容和非模板的算法一模一样，做了一下性能测试居然比非模板算法快 20 倍。太不可思议了，不能理解，看来看去两个算法都是一样的呀，难道真的是模板造成的？？据说模板的效率主要和编译器有关系，我用的编译器是 VC…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2006/2006-04-06-singleton/"><span itemProp="headline">关于单件模式（Singleton）</span></a></h2><small>April 06, 2006</small></header><section><p itemProp="description">《设计模式》上关于单件的定义和实现如下： 由于 Instance…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2006/2006-04-06-buckets-effect/"><span itemProp="headline">【转】谈论木桶理论新论</span></a></h2><small>April 06, 2006</small></header><section><p itemProp="description">…</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2005/2005-05-09-try-pairs/"><span itemProp="headline">体验结对</span></a></h2><small>May 09, 2005</small></header><section><p itemProp="description">在学习敏捷的时候听到结对编程这个概念，昨天和 water 实践了一下，确实有比较好的效果，就好像手把手的教你，而且一个人编程，另一个人可以查错，还可以思考很多问题，很好的方式。但是不知道效率如何。起码 water 的速度是很快的，我有点儿跟不上他。</p></section></article></li><li><article class="post-list-item" itemscope="" itemType="http://schema.org/Article"><header><h2><a itemProp="url" href="/2005/2005-04-26-working-ideas/"><span itemProp="headline">工作心得</span></a></h2><small>April 26, 2005</small></header><section><p itemProp="description">有一个笔记本放在面前，随时记录想法。 中午最好能趴 10 分钟，效果很好。但是不能在床上睡。</p></section></article></li></ol></main><footer>© <!-- -->2020<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.com">Gatsby</a></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-78cdc6a84a6e659c51c0.js"],"app":["/app-e19d4871ada7ef5996f3.js"],"component---src-pages-404-js":["/component---src-pages-404-js-994c3193491059bf8b6b.js"],"component---src-pages-index-js":["/component---src-pages-index-js-1f392d533eeed4de8d16.js"],"component---src-pages-using-typescript-tsx":["/component---src-pages-using-typescript-tsx-811c8e0cf309df5e3046.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-1927fccad856060e6152.js"]};/*]]>*/</script><script src="/polyfill-78cdc6a84a6e659c51c0.js" nomodule=""></script><script src="/component---src-pages-index-js-1f392d533eeed4de8d16.js" async=""></script><script src="/cd7d5f864fc9e15ed8adef086269b0aeff617554-75c92c15aeb103cdec46.js" async=""></script><script src="/commons-d9dafa7b739cb27f2739.js" async=""></script><script src="/app-e19d4871ada7ef5996f3.js" async=""></script><script src="/framework-8e528b732ab2eaadb7b7.js" async=""></script><script src="/styles-755093da0c07f4b49226.js" async=""></script><script src="/webpack-runtime-6d5fdbb5f47ce3532ede.js" async=""></script></body></html>
+<meta name="author" content="Fan" /><meta name="description" content="Fan&#39;s life" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://onlyzf.com/" />
+  <link href="https://onlyzf.com/index.xml" rel="alternate" type="application/rss+xml" title="Fan&#39;s life" />
+  <link href="https://onlyzf.com/index.xml" rel="feed" type="application/rss+xml" title="Fan&#39;s life" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Fan&#39;s life" />
+<meta property="og:description" content="Fan&#39;s life" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://onlyzf.com/" />
+<meta property="og:updated_time" content="2021-02-12T21:43:16+08:00" />
+<meta itemprop="name" content="Fan&#39;s life">
+<meta itemprop="description" content="Fan&#39;s life">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Fan&#39;s life"/>
+<meta name="twitter:description" content="Fan&#39;s life"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Fan&#39;s life</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Fan&#39;s life</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/game_half_lifetime/">我的游戏前半生</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-12-14 </span>
+      
+        <span class="more-meta"> 约 3143 字 </span>
+        <span class="more-meta"> 预计阅读 7 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      这篇文章充斥着大量的个人回忆，错漏难免，没有深度、没有干货，请看官见谅。 当我们讨论游戏程序的时候我们在讨论什么？ 游戏应用——Game Appl
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/game_half_lifetime/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/snippets/py_struct/">Structure of the Python Repository</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-05 </span>
+      
+        <span class="more-meta"> 约 309 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      1    Sample Repository 1 2 3 4 5 6 7 8 9 10 11  README.rst LICENSE setup.py requirements.txt sample/__init__.py sample/core.py sample/helpers.py docs/conf.py docs/index.rst tests/test_basic.py tests/test_advanced.py   The Actual Module Location ./sample/ or ./sample.py Your module package is the core focus of the repository. It should not be tucked away:
+1  ./sample/   If your module consists of only a single file, you can place it directly in the root of your repository:
+    </div>
+    <div class="read-more">
+      <a href="/post/snippets/py_struct/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/snippets/py_main/">Defining Main Functions in Python</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-28 </span>
+      
+        <span class="more-meta"> 约 228 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      from Defining Main Functions in Python
+Summary of Python Main Function Best Practices Here are four key best practices about main() in Python that you just saw:
+Put code that takes a long time to run or has other effects on the computer in a function or class, so you can control exactly when that code is executed.
+Use the different values of __name__ to determine the context and change the behavior of your code with a conditional statement.
+    </div>
+    <div class="read-more">
+      <a href="/post/snippets/py_main/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/time/">城市创变者挑战赛——时光侦探</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-18 </span>
+      
+        <span class="more-meta"> 约 317 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      B 当我们有单个任务要做的时候，情况还比较简单；当我们有很多任务要做时，计划可以很好地帮助我们清除地知道各种任务及它们需要的时间，严格按照计划
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/time/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/bicycle/">城市创变者挑战赛——单车的隐患</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-17 </span>
+      
+        <span class="more-meta"> 约 726 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      B 这次我们完成了自创挑战，是把停在盲道上和乱停乱放的自行车摆好。随着共享单车的普及，越来越多的人习惯了这项新的交通工具，可是一个隐患也随之诞
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/bicycle/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/dream/">城市创变者挑战赛——曾经的梦想</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-16 </span>
+      
+        <span class="more-meta"> 约 212 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      W 曾经的梦想：采访目标：我最亲爱的妈妈。妈妈出生在天津，随着祖国的一声号召——支援大西北，跟着我的姥姥姥爷义无反顾地去了祖国的边疆。由于当时
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/dream/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/death/">城市创变者挑战赛——向死而生</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-16 </span>
+      
+        <span class="more-meta"> 约 515 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      F 如果我明天就要死去，我希望能不影响任何人悄悄的离开，不用有任何的葬礼，也不用专门通知大家。在我的朋友圈写一句“2019 年 8 月 17 日 Fan 离世”。
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/death/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/trash/">城市创变者挑战赛——垃圾卫士</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-15 </span>
+      
+        <span class="more-meta"> 约 735 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      B 我们周围的垃圾分类，虽然已经开始实施了，但是做到的很不到位，我们小区没有分类的垃圾桶。周围有很多个小区，但是只有一个小区有几个垃圾分类的垃
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/trash/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/meaning_of_life/">城市创变者挑战赛——存在的意义</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-15 </span>
+      
+        <span class="more-meta"> 约 603 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      B 这次我们做的任务叫“存在的意义”，要采访 5 位路人问他们三个问题，结果只采访到一位本地居住的老奶奶，说明现在很多老人都害怕被骗。 恰巧采访到了
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/meaning_of_life/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2019/do_good/">城市创变者挑战赛——日行一善</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-08-14 </span>
+      
+        <span class="more-meta"> 约 266 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      BB 世界上有很多人需要我们伸出援助之手，世界上有很多问题需要我们去改进，每天做一件善事，使我的世界变得更加美好。 我做的第一件事是收拾洗手台旁，
+    </div>
+    <div class="read-more">
+      <a href="/post/2019/do_good/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    
+    <a class="next" href="/page/2/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+  </nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/onlyzf" class="iconfont icon-github" title="github"></a>
+  <a href="https://onlyzf.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2005 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Fan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
